@@ -447,7 +447,8 @@ function smogonAnalysis(pokemonName) {
 }
 
 function sortmons(a, b) {
-	return parseInt(a.split("[")[1].split("]")[0]) - parseInt(b.split("[")[1].split("]")[0])
+	console.log(a, b)
+	//return parseInt(a.split("[")[1].split("]")[0]) - parseInt(b.split("[")[1].split("]")[0])
 }
 
 // auto-update set details on select
@@ -456,7 +457,9 @@ $(".set-selector").change(function () {
 	var fullSetName = $(this).val();
 	if ($(this).hasClass('opposing')) {
 		topPokemonIcon(fullSetName, $("#p2mon")[0])
-		CURRENT_TRAINER_POKS = get_trainer_poks(fullSetName)
+		var true_name = fullSetName.split("(")[1].split("\n")[0].trim()
+		window.CURRENT_TRAINER = SETDEX_RB[CURRENT_INDEX_TRAINER].trn+')'
+		CURRENT_TRAINER_POKS = SETDEX_RB[CURRENT_INDEX_TRAINER].mons;
 		var next_poks = CURRENT_TRAINER_POKS.sort(sortmons)
 
 		var trpok_html = ""
@@ -1040,6 +1043,7 @@ var SETDEX = [
 	typeof SETDEX_SM === 'undefined' ? {} : SETDEX_SM,
 	typeof SETDEX_SS === 'undefined' ? {} : SETDEX_SS,
 	typeof SETDEX_SV === 'undefined' ? {} : SETDEX_SV,
+	typeof SETDEX_RB === 'undefined' ? {} : SETDEX_RB,
 ];
 var RANDDEX = [
 	{},
@@ -1054,8 +1058,6 @@ var RANDDEX = [
 	typeof GEN9RANDOMBATTLE === 'undefined' ? {} : GEN9RANDOMBATTLE,
 ];
 var gen, genWasChanged, notation, pokedex, setdex, randdex, typeChart, moves, abilities, items, calcHP, calcStat, GENERATION;
-
-TR_NAMES = get_trainer_names()
 
 $(".gen").change(function () {
 	/*eslint-disable */
@@ -1402,20 +1404,6 @@ function loadCustomList(id) {
 	});
 }
 
-function get_trainer_names() {
-	var all_poks = SETDEX_SS
-	var trainer_names = []
-
-	for (const [pok_name, poks] of Object.entries(all_poks)) {
-		var pok_tr_names = Object.keys(poks)
-		for (i in pok_tr_names) {
-			var index = (poks[pok_tr_names[i]]["index"])
-			var trainer_name = pok_tr_names[i]
-			trainer_names.push(`[${index}]${pok_name} (${trainer_name})`)
-		}
-	}
-	return trainer_names
-}
 function addBoxed(poke, boxNode) {
 	if (document.getElementById(`${poke.name}${poke.nameProp}`)) {
 		//nothing to do it already exist
@@ -1446,17 +1434,6 @@ function getSrcImgPokemon(poke) {
 	}
 }
 
-function get_trainer_poks(trainer_name) {
-	var true_name = trainer_name.split("(")[1].split("\n")[0].trim()
-	window.CURRENT_TRAINER = true_name.substring(0, true_name.length -1);
-	var matches = []
-	for (i in TR_NAMES) {
-		if (TR_NAMES[i].includes(true_name)) {
-			matches.push(TR_NAMES[i])
-		}
-	}
-	return matches
-}
 
 function topPokemonIcon(fullname, node) {
 	var mon = { name: fullname.split(" (")[0] };
@@ -1494,21 +1471,13 @@ function selectFirstMon() {
 }
 
 function selectTrainer(value) {
+	window.CURRENT_INDEX_TRAINER = value
 	localStorage.setItem("lasttimetrainer", value);
-	all_poks = SETDEX_SS
-	for (const [pok_name, poks] of Object.entries(all_poks)) {
-		var pok_tr_names = Object.keys(poks)
-		for (i in pok_tr_names) {
-			var index = (poks[pok_tr_names[i]]["index"])
-			if (index == value) {
-				var set = `${pok_name} (${pok_tr_names[i]})`;
-				$('.opposing').val(set);
-				$('.opposing').change();
-				$('.opposing .select2-chosen').text(set);
-			}
-
-		}
-	}
+	let trainer = SETDEX_RB[value];
+	var set = `${trainer.mons[0].species} (${trainer.trn})`
+	$('.opposing').val(set);
+	$('.opposing').change();
+	$('.opposing .select2-chosen').text(set);
 }
 
 function nextTrainer() {
