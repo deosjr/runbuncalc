@@ -1,0 +1,44 @@
+Run 2 VS Team Aqua Grunts Museum:
+Togedemaru takes ~30% dmg, kills Murkrow with Spark (slow kill)
+Tirtouga comes out (Mud shot). Switch into Nuzleaf, takes 10%
+Fake Out + 2x Razor Leaf should kill, we live even through 1 ancient power boost
+Skrelp comes out, sees kill with Acid. Switch into Togedemaru, take 0%.
+Fast kill with Fake Out + Spark, unless fake out is protected, but water pulse deals max 30% back.
+
+Mareanie is dead to Fake Out + Spark, again unless fake out is protected. Cannot deal damage back though.
+Now either Frillish or Whirlipede come out:
+- vs Whirlipede: switch into Monferno, takes 10% Pin Missile damage. 2 a 3x Flame Wheel should kill.
+Watch for Rocky Helmet, deals 1/6 hp back each time! 3x Flame wheel is 3/6 = 50% HP ! We don't live through that
+He will Poison Tail or Venoshock, so we could switch into Togedemaru here and kill with Spark (which _does_ make contact!)
+- vs Frillish: Togedemaru one-shots with Spark, so probably Whirlipede comes out first. Can cycle through a water type to bait Shock Wave first
+
+3 slots backup:
+- Buizel, water type to bait Shock Wave. Has a prio move to kill Whirlipede if needed, and Sonic Boom
+- Staryu, water type with high speed vs Tirtouga
+- Remoraid, another water type, with psybeam for Skrelp?
+
+Actual fight:
+Togedemaru eats a crit from Murkrow, so we steer using Remoraid to kill Skrelp.
+Buizel indeed finishes off Whirlipede with Aqua Jet, after it got locked into Rollout
+
+Run 2 VS Battle Girl Jocelyn:
+Monferno Low Sweeps Kecleon twice, with anti-para berry to be sure.
+Expect Golett next. Lopunny takes Shadow Punch (or maybe Mega Punch), then Lumineon takes Drain Punch and Water Pulses x2.
+Pignite is hard countered by Fletchinder, and Hakamo-o does nothing vs Lopunny
+- backup Remoraid to revenge-kill Golett or Pignite, and Buizel with Fake Out + Aqua Jet
+
+Actual fight:
+Monferno takes no damage because Kecleon goes for Thunder Wave (Player mon is faster than AI mon, but slower than AI mon after paralysis (1/4 speed), +8)
+Golett goes exactly as planned, Hakamo-o is next. Gets Iron Defense off, takes one Covet, then Dragon Tails dragging out Buizel.
+Switch back to Lopunny, Covet again, Dragon Tail brings out Remoraid, who kills with Psybeam.
+Pignite takes Bubble Beam then Flame Charges(!), increasing speed, now outspeeding Remoraid.
+Switch to Buizel finishes things off. First run to get to Brawly!
+
+Run 2 VS Leader Brawly:
+Dottler destroys Kubfu, Reflect into Psybeam (twice if reflect gets brick break-ed). Dottler also potentially kills Poliwhirl with Light Screen
+Brings out Combusken/Hitmontop/Scraggy, I think Combusken (since Reflect lowers rest's attack a lot)
+Monferno matches up well vs Lopunny, but also kinda ok vs Combusken with Reflect up. Low Sweep can keep Speed Boost in check (though it procs the turn it enters, making it faster)
+How about Buizel vs Combusken? Fake Out + Water Pulse + Aqua Jet, means we take one hit on the switch and one during Water Pulse. Crit will kill us, but otherwise works great.
+Buizel also baits Poliwhirl's HP Grass.
+Luxio with Intimidate matches up very well vs Poliwhirl. Nuzzle + Spark = kill.
+Hitmontop with Pursuit is very very dangerous here!
