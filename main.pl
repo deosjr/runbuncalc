@@ -16,7 +16,11 @@ box(Box) :-
 
 % opponent names are in single quotes as atoms
 opponent(Name, OppTeam) :-
-    findall(P-T, pok(_, Name, P, T), OppTeam).
+    findall(P-T, pok(_, Name, P, T), Team),
+    predsort(byIndex, Team, OppTeam).
+
+byIndex(<, _-T1, _-T2) :- T1.index < T2.index.
+byIndex(>, _-T1, _-T2) :- T1.index > T2.index.
 
 run :-
     %Opponent = 'Youngster Calvin',
@@ -32,13 +36,13 @@ run :-
     forall(member(OppName-Opp, OppTeam), (
         forall(member(PokName-Pok, Box), (
             dict_to_json(Pok, AtkOptions),
-            list_to_json(Opp, DefOptions),
+            dict_to_json(Opp, DefOptions),
             last(Pok.moves, Move),
             calculate(PokName, AtkOptions, OppName, DefOptions, Move, Data),
             PokSpeed = Data.attacker.rawStats.spe,
             OppSpeed = Data.defender.rawStats.spe,
-            damageRolls_dict(PokName-Pok, OppName-Opp, PokDamage),
-            damageRolls_list(OppName-Opp, PokName-Pok, OppDamage),
+            damageRolls(PokName-Pok, OppName-Opp, PokDamage),
+            damageRolls(OppName-Opp, PokName-Pok, OppDamage),
             format('~w (spe: ~d) VS ~w (spe: ~d)\n', [PokName,PokSpeed,OppName,OppSpeed]),
             format('~w\n', [PokDamage]),
             format('~w\n', [OppDamage])
@@ -47,14 +51,9 @@ run :-
 
 damageRolls_dict(Name-Pokemon, OppName-OppPokemon, Data) :-
     dict_to_json(Pokemon, AtkOptions),
-    list_to_json(OppPokemon, DefOptions),
-    maplist(damageRoll(Name-AtkOptions, OppName-DefOptions), Pokemon.moves, Data).
-    
-damageRolls_list(Name-Pokemon, OppName-OppPokemon, Data) :-
-    list_to_json(Pokemon, AtkOptions),
     dict_to_json(OppPokemon, DefOptions),
     maplist(damageRoll(Name-AtkOptions, OppName-DefOptions), Pokemon.moves, Data).
-
+    
 damageRoll(Name-AtkOptions, OppName-DefOptions, Move, Range) :-
     calculate(Name, AtkOptions, OppName, DefOptions, Move, Data),
     %writeln(Data.damage),
@@ -73,12 +72,15 @@ damageRoll(Name-AtkOptions, OppName-DefOptions, Move, Range) :-
 
 assertTrainerPokemon :-
     open("gen8.json", read, Stream),
+    % cant use json_read_dict because Vivillion has multiple 'Bug Maniac Jeffrey' keys...
     json_read(Stream, json(JSON)),
     forall(member(Pokemon=json(Trainers), JSON),
         forall(member(Trainer=json(T), Trainers),
             (
                 member(index=I, T),
-                assertz(pok(I, Trainer, Pokemon, T))
+                atom_json_term(A, json(T), []),
+                atom_json_dict(A, D, []),
+                assertz(pok(I, Trainer, Pokemon, D))
             )
         )
     ).
@@ -104,13 +106,13 @@ calculate(Attacker, AttackerOptions, Defender, DefenderOptions, Move, Out) :-
     http_get('http://localhost:3000/calculate', Out, [method(get), post(json(Data)), json_object(dict)]).
 
 dict_to_json(Dict, Out) :-
-    [HP, Atk, Def, SpA, SpD, Spe] = Dict.ivs,
-    Out = json([level=Dict.level, nature=Dict.nature, ivs=json([hp=HP, atk=Atk, def=Def, spa=SpA, spd=SpD, spe=Spe])]).
-
-list_to_json(List, Out) :-
-    member(level=L, List),
-    member(nature=N, List),
-    Out = json([level=L, nature=N, ivs=json([hp=31,atk=31,def=31,spa=31,spd=31,spe=31])]).
+    ( get_dict(ivs, Dict, IVs) ->
+        [HP, Atk, Def, SpA, SpD, Spe] = IVs,
+        IVsJSON = json([hp=HP, atk=Atk, def=Def, spa=SpA, spd=SpD, spe=Spe])
+    ;
+        IVsJSON = json([hp=31, atk=31, def=31, spa=31, spd=31, spe=31])
+    ),
+    Out = json([level=Dict.level, nature=Dict.nature, ivs=IVsJSON]).
 
 parse_export([P|T]) -->
     parse_export_pokemon(P),
