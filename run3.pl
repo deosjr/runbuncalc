@@ -56,4 +56,18 @@ test(traithlete_mikey, [nondet]) :-
 
 % Fisherman Darian: Turtwig just smashes through Magikarps, even though Bounce manages to paralyze.
 
+% Lady Cindy: no exciting matchups. Team is male according to calc, but so are my important pokemon for this fight, so Attract should be fine.
+    % Lead Growlithe into Minccino, Skrelp deals with Jigglypuff, and Shellos with Phanpy. All but the last have anti-para berries.
+    % Actual: Growlithe 2-shots Minccino with a crit and is left paralysed even after berry.
+    % Stay in vs Jigglypuff and get attracted(!), but Flame Wheel anyways. Skrelp kills with Acid. Shellos cleans up Phanpy regardless of attraction.
+
+% Team Aqua Grunt Petalburg Woods:
+    % Lead Turtwig and Absorb Carvanha to death. If we flinch too often, sac Surskit to regain momentum.
+    % I expect Exeggcute next, switch into Growlithe with anti-para berry. Kill with Flame Wheel. Steer via Salandit if needed.
+    % Salandit is great vs Croagunk, Shellos with anti-poison berry is backup, or Skrelp.
+    % Actual: Turtwig is left badly poisoned after killing Carvanha. Croagunk comes out next (maybe it thinks Belch can hit?)
+    % I take the fakeout and growl once before switching to Salandit. Ember three times then switch to Growlithe.
+    % Growlithe kills but is poisoned and low on HP. Switch to Salandit via Shellos (takes a Confusion and baits Bullet Seed but gets Leech Seed)
+    % I need to risk an Ember now, but Exeggcute highrolls and kills Salandit. Growlithe dies too. The run is dead.
+
 :- end_tests(run3).

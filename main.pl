@@ -23,10 +23,11 @@ byIndex(<, T1, T2) :- T1.index < T2.index.
 byIndex(>, T1, T2) :- T1.index > T2.index.
 
 run :-
-    Opponent = 'Youngster Calvin',
+    %Opponent = 'Youngster Calvin',
     %Opponent = 'Bug Catcher Rick',
     %Opponent = 'Youngster Allen',
-    %Opponent = 'Team Aqua Grunt Petalburg Woods',
+    %Opponent = 'Lady Cindy',
+    Opponent = 'Team Aqua Grunt Petalburg Woods',
     %Opponent = 'Camper Gavi',
     %Opponent = 'Battle Girl Jocelyn',
     opponent(Opponent, OppTeam),
@@ -43,7 +44,11 @@ run :-
             damageRolls(Opp, Pok, OppDamage),
             format('~w (spe: ~d) VS ~w (spe: ~d)\n', [Pok.name,PokSpeed,Opp.name,OppSpeed]),
             format('~w\n', [PokDamage]),
-            format('~w\n', [OppDamage])
+            format('~w\n', [OppDamage]),
+            include(fast_kill(Pok, Opp), Pok.moves, PokFastKills),
+            format('Fast kills: ~w\n', [PokFastKills]),
+            dead_to_crit(Pok, Opp, MovesThatCritKill),
+            format('Dead to crit: ~w\n', [MovesThatCritKill])
         ))
     )).
 
