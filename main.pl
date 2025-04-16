@@ -23,12 +23,12 @@ byIndex(<, _-T1, _-T2) :- T1.index < T2.index.
 byIndex(>, _-T1, _-T2) :- T1.index > T2.index.
 
 run :-
-    %Opponent = 'Youngster Calvin',
+    Opponent = 'Youngster Calvin',
     %Opponent = 'Bug Catcher Rick',
     %Opponent = 'Youngster Allen',
     %Opponent = 'Team Aqua Grunt Petalburg Woods',
     %Opponent = 'Camper Gavi',
-    Opponent = 'Battle Girl Jocelyn',
+    %Opponent = 'Battle Girl Jocelyn',
     opponent(Opponent, OppTeam),
     writeln(OppTeam),
     box(Box),
@@ -120,14 +120,17 @@ parse_export([P|T]) -->
     parse_export(T).
 parse_export([P]) --> parse_export_pokemon(P), blanks, eos.
 
-parse_export_pokemon(#{name:N, item:I, ability:A, level:L, nature:Nat, ivs:[HP, Atk, Def, SpA, SpD, Spe], moves:Moves}) -->
+parse_export_pokemon(Pokemon) -->
     parse_name_item(N, I),
     "Ability: ", string_without("\n", Ability), "\n",
     "Level: ", integer(L), "\n",
     nonblanks(Nature), " Nature\n",
     "IVs: ", integer(HP), " HP / ", integer(Atk), " Atk / ", integer(Def), " Def / ", integer(SpA), " SpA / ", integer(SpD), " SpD / ", integer(Spe), " Spe\n",
     parse_moves(Moves),
-    {string_codes(A, Ability), string_codes(Nat, Nature)}.
+    {string_codes(A, Ability), string_codes(Nat, Nature),
+    (I==none ->
+        Pokemon = #{name:N, ability:A, level:L, nature:Nat, ivs:[HP, Atk, Def, SpA, SpD, Spe], moves:Moves};
+        Pokemon = #{name:N, item:I, ability:A, level:L, nature:Nat, ivs:[HP, Atk, Def, SpA, SpD, Spe], moves:Moves})}.
 
 parse_name_item(N, none) --> string_without("@\n", Name), {string_codes(N, Name)}, "\n".
 parse_name_item(N, I) --> parse_name(N), parse_item(I).

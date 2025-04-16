@@ -1,150 +1,57 @@
-Monferno
+Lillipup
 Ability: Vital Spirit
-Level: 21
-Modest Nature
-IVs: 31 HP / 8 Atk / 31 Def / 14 SpA / 9 SpD / 31 Spe
-- Fire Spin
-- Flame Wheel
-- Low Sweep
-- Mach Punch
-
-Lopunny
-Ability: Limber
-Level: 21
-Lonely Nature
-IVs: 30 HP / 26 Atk / 3 Def / 24 SpA / 29 SpD / 25 Spe
-- Quick Attack
-- Dizzy Punch
-- Covet
-- Baby-Doll Eyes
-
-Lumineon
-Ability: Water Veil
-Level: 21
-Adamant Nature
-IVs: 14 HP / 3 Atk / 3 Def / 30 SpA / 19 SpD / 2 Spe
-- Pound
-- Water Gun
-- Air Cutter
-- Water Pulse
-
-Buizel @ Oran Berry
-Ability: Water Veil
-Level: 21
-Impish Nature
-IVs: 19 HP / 8 Atk / 26 Def / 19 SpA / 24 SpD / 10 Spe
-- Aqua Jet
-- Secret Power
-- Fake Out
-- Water Pulse
-
-Fletchinder @ Oran Berry
-Ability: Flame Body
-Level: 21
-Bold Nature
-IVs: 7 HP / 16 Atk / 18 Def / 8 SpA / 23 SpD / 19 Spe
+Level: 12
+Hasty Nature
+IVs: 25 HP / 9 Atk / 26 Def / 14 SpA / 14 SpD / 30 Spe
+- Leer
 - Tackle
-- Flame Charge
-- Quick Attack
-- Aerial Ace
-
-Luxio
-Ability: Intimidate
-Level: 21
-Careful Nature
-IVs: 26 HP / 15 Atk / 27 Def / 10 SpA / 5 SpD / 8 Spe
-- Bite
-- Nuzzle
 - Baby-Doll Eyes
-- Spark
+- Bite
 
-Dottler
-Ability: Compound Eyes
-Level: 21
-Quirky Nature
-IVs: 28 HP / 26 Atk / 16 Def / 11 SpA / 4 SpD / 11 Spe
-- Struggle Bug
-- Reflect
-- Light Screen
-- Psybeam
+Turtwig
+Ability: Shell Armor
+Level: 12
+Relaxed Nature
+IVs: 28 HP / 31 Atk / 26 Def / 31 SpA / 15 SpD / 31 Spe
+- Bite
+- Growl
+- Absorb
+- Confide
 
-Remoraid @ Oran Berry
-Ability: Hustle
-Level: 21
-Quiet Nature
-IVs: 10 HP / 12 Atk / 27 Def / 25 SpA / 27 SpD / 25 Spe
-- Bubble Beam
-- Lock-On
-- Psybeam
-- Aurora Beam
-
-Staryu @ Oran Berry
-Ability: Natural Cure
-Level: 21
-Lonely Nature
-IVs: 9 HP / 29 Atk / 11 Def / 27 SpA / 6 SpD / 15 Spe
-- Water Pulse
-- Rapid Spin
-- Psybeam
-- Confuse Ray
-
-Nuzleaf @ Oran Berry
-Ability: Chlorophyll
-Level: 21
-Lonely Nature
-IVs: 8 HP / 22 Atk / 23 Def / 9 SpA / 20 SpD / 3 Spe
-- Feint Attack
-- Nature Power
-- Fake Out
-- Razor Leaf
-
-Togedemaru @ Oran Berry
-Ability: Iron Barbs
-Level: 21
-Quiet Nature
-IVs: 6 HP / 30 Atk / 2 Def / 15 SpA / 30 SpD / 10 Spe
-- Fake Out
-- Nuzzle
-- Metal Claw
-- Spark
+Growlithe
+Ability: Intimidate
+Level: 12
+Naive Nature
+IVs: 2 HP / 20 Atk / 6 Def / 5 SpA / 12 SpD / 0 Spe
+- Ember
+- Bite
+- Covet
+- Flame Wheel
 
 Surskit
 Ability: Swift Swim
-Level: 21
-Jolly Nature
-IVs: 16 HP / 14 Atk / 20 Def / 28 SpA / 14 SpD / 18 Spe
+Level: 12
+Naive Nature
+IVs: 19 HP / 21 Atk / 10 Def / 1 SpA / 10 SpD / 19 Spe
 - Bubble
 - Quick Attack
-- Struggle Bug
+- Sweet Scent
 - Bubble Beam
 
-Houndour @ Oran Berry
-Ability: Early Bird
-Level: 21
-Hardy Nature
-IVs: 0 HP / 25 Atk / 22 Def / 1 SpA / 15 SpD / 24 Spe
-- Fire Fang
-- Flame Burst
-- Smog
-- Bite
+Abra
+Ability: Synchronize
+Level: 12
+Naive Nature
+IVs: 7 HP / 9 Atk / 12 Def / 5 SpA / 19 SpD / 4 Spe
+- Kinesis
 
-Chewtle @ Oran Berry
-Ability: Strong Jaw
-Level: 21
-Hardy Nature
-IVs: 25 HP / 12 Atk / 19 Def / 19 SpA / 6 SpD / 1 Spe
-- Headbutt
-- Water Pulse
-- Bite
-- Ice Fang
-
-Makuhita @ Oran Berry
-Ability: Guts
-Level: 21
-Impish Nature
-IVs: 27 HP / 25 Atk / 15 Def / 23 SpA / 30 SpD / 0 Spe
-- Tackle
-- Payback
-- Fake Out
-- Force Palm
+Skrelp
+Ability: Poison Point
+Level: 12
+Rash Nature
+IVs: 0 HP / 6 Atk / 20 Def / 21 SpA / 17 SpD / 22 Spe
+- Water Gun
+- Smokescreen
+- Feint Attack
+- Acid
 
