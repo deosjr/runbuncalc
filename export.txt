@@ -1,77 +1,97 @@
-Piplup @ Oran Berry
-Ability: Clear Body
-Level: 12
-Careful Nature
-IVs: 31 HP / 16 Atk / 31 Def / 20 SpA / 14 SpD / 31 Spe
-- Pound
-- Growl
-- Bubble
-- Pluck
-
-Lotad
-Ability: Rain Dish
-Level: 12
-Bashful Nature
-IVs: 24 HP / 2 Atk / 25 Def / 30 SpA / 16 SpD / 7 Spe
-- Natural Gift
-- Growl
-- Absorb
-- Bubble
-
-Zigzagoon-Galar @ Oran Berry
-Ability: Gluttony
-Level: 12
-Calm Nature
-IVs: 24 HP / 8 Atk / 4 Def / 29 SpA / 0 SpD / 30 Spe
-- Tackle
-- Baby-Doll Eyes
-- Rock Smash
-- Snarl
-
-Shellos
-Ability: Sand Force
-Level: 12
-Jolly Nature
-IVs: 20 HP / 4 Atk / 11 Def / 19 SpA / 16 SpD / 9 Spe
-- Mud-Slap
-- Mud Sport
-- Water Pulse
-- Mud Shot
-
-Fletchling
-Ability: Keen Eye
-Level: 12
+Fletchinder @ Pecha Berry
+Ability: Flame Body
+Level: 17
 Docile Nature
 IVs: 29 HP / 27 Atk / 23 Def / 9 SpA / 26 SpD / 26 Spe
-- Tackle
+- Flame Charge
 - Growl
 - Quick Attack
 - Aerial Ace
 
-Sizzlipede
-Ability: Flame Body
-Level: 12
-Quirky Nature
-IVs: 16 HP / 13 Atk / 24 Def / 30 SpA / 16 SpD / 15 Spe
-- Ember
-- Smokescreen
-- Wrap
-- Bug Bite
+Prinplup @ Pecha Berry
+Ability: Clear Body
+Level: 17
+Careful Nature
+IVs: 31 HP / 16 Atk / 31 Def / 20 SpA / 14 SpD / 31 Spe
+- Metal Claw
+- Growl
+- Bubble Beam
+- Pluck
 
-Abra @ Oran Berry
-Ability: Synchronize
-Level: 12
-Quiet Nature
-IVs: 20 HP / 18 Atk / 7 Def / 5 SpA / 31 SpD / 30 Spe
-- Kinesis
+Shellos @ Oran Berry
+Ability: Sand Force
+Level: 17
+Jolly Nature
+IVs: 20 HP / 4 Atk / 11 Def / 19 SpA / 16 SpD / 9 Spe
+- Mud-Slap
+- Hidden Power Ghost
+- Water Pulse
+- Mud Shot
+
+Lombre
+Ability: Rain Dish
+Level: 17
+Bashful Nature
+IVs: 24 HP / 2 Atk / 25 Def / 30 SpA / 16 SpD / 7 Spe
+- Natural Gift
+- Fake Out
+- Mega Drain
+- Bubble
 
 Exeggcute
 Ability: Chlorophyll
-Level: 12
+Level: 17
 Jolly Nature
 IVs: 18 HP / 5 Atk / 7 Def / 6 SpA / 10 SpD / 17 Spe
 - Bullet Seed
 - Confusion
-- Hypnosis
+- Sleep Powder
 - Stun Spore
 
+Timburr
+Ability: Guts
+Level: 17
+Hardy Nature
+IVs: 13 HP / 10 Atk / 18 Def / 27 SpA / 3 SpD / 22 Spe
+- Pound
+- Rock Throw
+- Focus Energy
+- Low Kick
+
+Sizzlipede
+Ability: Flame Body
+Level: 17
+Quirky Nature
+IVs: 16 HP / 13 Atk / 24 Def / 30 SpA / 16 SpD / 15 Spe
+- Ember
+- Smokescreen
+- Bite
+- Bug Bite
+
+Zigzagoon-Galar @ Oran Berry
+Ability: Gluttony
+Level: 17
+Calm Nature
+IVs: 24 HP / 8 Atk / 4 Def / 29 SpA / 0 SpD / 30 Spe
+- Headbutt
+- Pin Missile
+- Rock Smash
+- Snarl
+
+Kadabra @ Oran Berry
+Ability: Synchronize
+Level: 17
+Quiet Nature
+IVs: 20 HP / 18 Atk / 7 Def / 5 SpA / 31 SpD / 30 Spe
+- Kinesis
+- Confusion
+
+Spheal
+Ability: Thick Fat
+Level: 17
+Relaxed Nature
+IVs: 1 HP / 4 Atk / 2 Def / 26 SpA / 26 SpD / 16 Spe
+- Charm
+- Brine
+- Powder Snow
+- Rollout
