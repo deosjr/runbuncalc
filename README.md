@@ -1,5 +1,12 @@
 # Pokémon Damage Calculator
 
+Fork of Run&Bun calculator, in order to search through entire lines with Prolog.
+Uses the original calculator as an oracle hosted on a local server.
+
+To run, use `node server.js`, then run `swipl -q -l main.pl` in another terminal.
+
+## Old README:
+
 ![Test Status](https://github.com/smogon/damage-calc/workflows/Tests/badge.svg)
 [![npm version](https://img.shields.io/npm/v/@smogon/calc.svg)](https://www.npmjs.com/package/@smogon/calc)&nbsp;
 

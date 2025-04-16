@@ -8,18 +8,26 @@
 :- dynamic pok/4.
 :- table calculate/4.
 
+:- initialization(assertTrainerPokemon).
+:- initialization(assertExportedPokemon).
+
+box(Box) :-
+    findall(P-T, pok(-1, you, P, T), Box).
+
+% opponent names are in single quotes as atoms
+opponent(Name, OppTeam) :-
+    findall(P-T, pok(_, Name, P, T), OppTeam).
+
 run :-
-    assertTrainerPokemon,
-    assertExportedPokemon,
     %Opponent = 'Youngster Calvin',
     %Opponent = 'Bug Catcher Rick',
     %Opponent = 'Youngster Allen',
     %Opponent = 'Team Aqua Grunt Petalburg Woods',
     %Opponent = 'Camper Gavi',
     Opponent = 'Battle Girl Jocelyn',
-    findall(P-T, pok(_, Opponent, P, T), OppTeam),
+    opponent(Opponent, OppTeam),
     writeln(OppTeam),
-    findall(P-T, pok(-1, you, P, T), Box),
+    box(Box),
     writeln(Box),
     forall(member(OppName-Opp, OppTeam), (
         forall(member(PokName-Pok, Box), (
