@@ -12,15 +12,15 @@
 :- initialization(assertExportedPokemon).
 
 box(Box) :-
-    findall(P-T, pok(-1, you, P, T), Box).
+    findall(P, pok(-1, you, _, P), Box).
 
 % opponent names are in single quotes as atoms
 opponent(Name, OppTeam) :-
-    findall(P-T, pok(_, Name, P, T), Team),
+    findall(P, pok(_, Name, _, P), Team),
     predsort(byIndex, Team, OppTeam).
 
-byIndex(<, _-T1, _-T2) :- T1.index < T2.index.
-byIndex(>, _-T1, _-T2) :- T1.index > T2.index.
+byIndex(<, T1, T2) :- T1.index < T2.index.
+byIndex(>, T1, T2) :- T1.index > T2.index.
 
 run :-
     Opponent = 'Youngster Calvin',
@@ -33,29 +33,25 @@ run :-
     writeln(OppTeam),
     box(Box),
     writeln(Box),
-    forall(member(OppName-Opp, OppTeam), (
-        forall(member(PokName-Pok, Box), (
-            dict_to_json(Pok, AtkOptions),
-            dict_to_json(Opp, DefOptions),
+    forall(member(Opp, OppTeam), (
+        forall(member(Pok, Box), (
             last(Pok.moves, Move),
-            calculate(PokName, AtkOptions, OppName, DefOptions, Move, Data),
+            calculate(Pok, Opp, Move, Data),
             PokSpeed = Data.attacker.rawStats.spe,
             OppSpeed = Data.defender.rawStats.spe,
-            damageRolls(PokName-Pok, OppName-Opp, PokDamage),
-            damageRolls(OppName-Opp, PokName-Pok, OppDamage),
-            format('~w (spe: ~d) VS ~w (spe: ~d)\n', [PokName,PokSpeed,OppName,OppSpeed]),
+            damageRolls(Pok, Opp, PokDamage),
+            damageRolls(Opp, Pok, OppDamage),
+            format('~w (spe: ~d) VS ~w (spe: ~d)\n', [Pok.name,PokSpeed,Opp.name,OppSpeed]),
             format('~w\n', [PokDamage]),
             format('~w\n', [OppDamage])
         ))
     )).
 
-damageRolls(Name-Pokemon, OppName-OppPokemon, Data) :-
-    dict_to_json(Pokemon, AtkOptions),
-    dict_to_json(OppPokemon, DefOptions),
-    maplist(damageRoll(Name-AtkOptions, OppName-DefOptions), Pokemon.moves, Data).
+damageRolls(Attacker, Defender, Data) :-
+    maplist(damageRoll(Attacker, Defender), Attacker.moves, Data).
     
-damageRoll(Name-AtkOptions, OppName-DefOptions, Move, Range) :-
-    calculate(Name, AtkOptions, OppName, DefOptions, Move, Data),
+damageRoll(Attacker, Defender, Move, Range) :-
+    calculate(Attacker, Defender, Move, Data),
     %writeln(Data.damage),
     % nature is included in rawStats
     DefenderMaxHP = Data.defender.rawStats.hp,
@@ -80,7 +76,8 @@ assertTrainerPokemon :-
                 member(index=I, T),
                 atom_json_term(A, json(T), []),
                 atom_json_dict(A, D, []),
-                assertz(pok(I, Trainer, Pokemon, D))
+                WithName = D.put(#{name:Pokemon}),
+                assertz(pok(I, Trainer, Pokemon, WithName))
             )
         )
     ).
@@ -94,13 +91,13 @@ assertExportedPokemon :-
         )
     ).
 
-calculate(Attacker, AttackerOptions, Defender, DefenderOptions, Move, Out) :-
+calculate(Attacker, Defender, Move, Out) :-
     Data = json([
         gen=8,
-        attackingPokemon=Attacker,
-        attackingPokemonOptions=AttackerOptions,
-        defendingPokemon=Defender,
-        defendingPokemonOptions=DefenderOptions,
+        attackingPokemon=Attacker.name,
+        attackingPokemonOptions=Attacker,
+        defendingPokemon=Defender.name,
+        defendingPokemonOptions=Defender,
         moveName=Move
     ]),
     http_get('http://localhost:3000/calculate', Out, [method(get), post(json(Data)), json_object(dict)]).
@@ -113,6 +110,12 @@ dict_to_json(Dict, Out) :-
         IVsJSON = json([hp=31, atk=31, def=31, spa=31, spd=31, spe=31])
     ),
     Out = json([level=Dict.level, nature=Dict.nature, ivs=IVsJSON]).
+
+fast_kill(Attacker, Defender, MoveName) :-
+    calculate(Attacker, Defender, MoveName, Data),
+    Data.attacker.rawStats.spe > Data.defender.rawStats.spe,
+    damageRoll(Attacker, Defender, MoveName, MoveName-[LowRollPercent|_]),
+    LowRollPercent >= 100.
 
 parse_export([P|T]) -->
     parse_export_pokemon(P),

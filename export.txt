@@ -1,12 +1,12 @@
-Lillipup
-Ability: Vital Spirit
+Skrelp
+Ability: Poison Point
 Level: 12
-Hasty Nature
-IVs: 25 HP / 9 Atk / 26 Def / 14 SpA / 14 SpD / 30 Spe
-- Leer
-- Tackle
-- Baby-Doll Eyes
-- Bite
+Rash Nature
+IVs: 0 HP / 6 Atk / 20 Def / 21 SpA / 17 SpD / 22 Spe
+- Water Gun
+- Smokescreen
+- Feint Attack
+- Acid
 
 Turtwig
 Ability: Shell Armor
@@ -17,6 +17,36 @@ IVs: 28 HP / 31 Atk / 26 Def / 31 SpA / 15 SpD / 31 Spe
 - Growl
 - Absorb
 - Confide
+
+Lillipup
+Ability: Vital Spirit
+Level: 12
+Hasty Nature
+IVs: 25 HP / 9 Atk / 26 Def / 14 SpA / 14 SpD / 30 Spe
+- Leer
+- Tackle
+- Baby-Doll Eyes
+- Bite
+
+Shellos
+Ability: Sand Force
+Level: 12
+Relaxed Nature
+IVs: 15 HP / 30 Atk / 27 Def / 23 SpA / 21 SpD / 26 Spe
+- Mud-Slap
+- Mud Sport
+- Water Pulse
+- Mud Shot
+
+Salandit
+Ability: Corrosion
+Level: 12
+Quirky Nature
+IVs: 9 HP / 23 Atk / 23 Def / 8 SpA / 23 SpD / 21 Spe
+- Scratch
+- Smog
+- Ember
+- Sweet Scent
 
 Growlithe
 Ability: Intimidate
@@ -44,14 +74,4 @@ Level: 12
 Naive Nature
 IVs: 7 HP / 9 Atk / 12 Def / 5 SpA / 19 SpD / 4 Spe
 - Kinesis
-
-Skrelp
-Ability: Poison Point
-Level: 12
-Rash Nature
-IVs: 0 HP / 6 Atk / 20 Def / 21 SpA / 17 SpD / 22 Spe
-- Water Gun
-- Smokescreen
-- Feint Attack
-- Acid
 
