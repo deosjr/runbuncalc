@@ -23,11 +23,11 @@ byIndex(<, T1, T2) :- T1.index < T2.index.
 byIndex(>, T1, T2) :- T1.index > T2.index.
 
 run :-
-    %Opponent = 'Youngster Calvin',
+    Opponent = 'Youngster Calvin',
     %Opponent = 'Bug Catcher Rick',
     %Opponent = 'Youngster Allen',
     %Opponent = 'Lady Cindy',
-    Opponent = 'Team Aqua Grunt Petalburg Woods',
+    %Opponent = 'Team Aqua Grunt Petalburg Woods',
     %Opponent = 'Camper Gavi',
     %Opponent = 'Battle Girl Jocelyn',
     opponent(Opponent, OppTeam),

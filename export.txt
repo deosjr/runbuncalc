@@ -1,77 +1,77 @@
-Skrelp
-Ability: Poison Point
+Piplup @ Oran Berry
+Ability: Clear Body
 Level: 12
-Rash Nature
-IVs: 0 HP / 6 Atk / 20 Def / 21 SpA / 17 SpD / 22 Spe
-- Water Gun
-- Smokescreen
-- Feint Attack
-- Acid
+Careful Nature
+IVs: 31 HP / 16 Atk / 31 Def / 20 SpA / 14 SpD / 31 Spe
+- Pound
+- Growl
+- Bubble
+- Pluck
 
-Turtwig
-Ability: Shell Armor
+Lotad
+Ability: Rain Dish
 Level: 12
-Relaxed Nature
-IVs: 28 HP / 31 Atk / 26 Def / 31 SpA / 15 SpD / 31 Spe
-- Bite
+Bashful Nature
+IVs: 24 HP / 2 Atk / 25 Def / 30 SpA / 16 SpD / 7 Spe
+- Natural Gift
 - Growl
 - Absorb
-- Confide
+- Bubble
 
-Lillipup
-Ability: Vital Spirit
+Zigzagoon-Galar @ Oran Berry
+Ability: Gluttony
 Level: 12
-Hasty Nature
-IVs: 25 HP / 9 Atk / 26 Def / 14 SpA / 14 SpD / 30 Spe
-- Leer
+Calm Nature
+IVs: 24 HP / 8 Atk / 4 Def / 29 SpA / 0 SpD / 30 Spe
 - Tackle
 - Baby-Doll Eyes
-- Bite
+- Rock Smash
+- Snarl
 
 Shellos
 Ability: Sand Force
 Level: 12
-Relaxed Nature
-IVs: 15 HP / 30 Atk / 27 Def / 23 SpA / 21 SpD / 26 Spe
+Jolly Nature
+IVs: 20 HP / 4 Atk / 11 Def / 19 SpA / 16 SpD / 9 Spe
 - Mud-Slap
 - Mud Sport
 - Water Pulse
 - Mud Shot
 
-Salandit
-Ability: Corrosion
+Fletchling
+Ability: Keen Eye
+Level: 12
+Docile Nature
+IVs: 29 HP / 27 Atk / 23 Def / 9 SpA / 26 SpD / 26 Spe
+- Tackle
+- Growl
+- Quick Attack
+- Aerial Ace
+
+Sizzlipede
+Ability: Flame Body
 Level: 12
 Quirky Nature
-IVs: 9 HP / 23 Atk / 23 Def / 8 SpA / 23 SpD / 21 Spe
-- Scratch
-- Smog
+IVs: 16 HP / 13 Atk / 24 Def / 30 SpA / 16 SpD / 15 Spe
 - Ember
-- Sweet Scent
+- Smokescreen
+- Wrap
+- Bug Bite
 
-Growlithe
-Ability: Intimidate
-Level: 12
-Naive Nature
-IVs: 2 HP / 20 Atk / 6 Def / 5 SpA / 12 SpD / 0 Spe
-- Ember
-- Bite
-- Covet
-- Flame Wheel
-
-Surskit
-Ability: Swift Swim
-Level: 12
-Naive Nature
-IVs: 19 HP / 21 Atk / 10 Def / 1 SpA / 10 SpD / 19 Spe
-- Bubble
-- Quick Attack
-- Sweet Scent
-- Bubble Beam
-
-Abra
+Abra @ Oran Berry
 Ability: Synchronize
 Level: 12
-Naive Nature
-IVs: 7 HP / 9 Atk / 12 Def / 5 SpA / 19 SpD / 4 Spe
+Quiet Nature
+IVs: 20 HP / 18 Atk / 7 Def / 5 SpA / 31 SpD / 30 Spe
 - Kinesis
+
+Exeggcute
+Ability: Chlorophyll
+Level: 12
+Jolly Nature
+IVs: 18 HP / 5 Atk / 7 Def / 6 SpA / 10 SpD / 17 Spe
+- Bullet Seed
+- Confusion
+- Hypnosis
+- Stun Spore
 
