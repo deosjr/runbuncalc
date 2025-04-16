@@ -49,7 +49,7 @@ run :-
         ))
     )).
 
-damageRolls_dict(Name-Pokemon, OppName-OppPokemon, Data) :-
+damageRolls(Name-Pokemon, OppName-OppPokemon, Data) :-
     dict_to_json(Pokemon, AtkOptions),
     dict_to_json(OppPokemon, DefOptions),
     maplist(damageRoll(Name-AtkOptions, OppName-DefOptions), Pokemon.moves, Data).

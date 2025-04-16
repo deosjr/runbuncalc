@@ -39,6 +39,36 @@ Dottler destroys Kubfu, Reflect into Psybeam (twice if reflect gets brick break-
 Brings out Combusken/Hitmontop/Scraggy, I think Combusken (since Reflect lowers rest's attack a lot)
 Monferno matches up well vs Lopunny, but also kinda ok vs Combusken with Reflect up. Low Sweep can keep Speed Boost in check (though it procs the turn it enters, making it faster)
 How about Buizel vs Combusken? Fake Out + Water Pulse + Aqua Jet, means we take one hit on the switch and one during Water Pulse. Crit will kill us, but otherwise works great.
-Buizel also baits Poliwhirl's HP Grass.
+Only works because of Reflect!! Buizel also baits Poliwhirl's HP Grass.
 Luxio with Intimidate matches up very well vs Poliwhirl. Nuzzle + Spark = kill.
 Hitmontop with Pursuit is very very dangerous here!
+We can somewhat switch safely into Hitmontop with Lumineon if Reflect is up again..
+Monferno is OK vs Scraggy. Fletchinder is the best revenge kill vs Hitmontop after a sac/pursuit trap (still not great)
+Honestly, Dottler would be great vs Hitmontop too, after Reflect.
+Fletchinder can take Kubfu? Does that bait Poliwhirl?
+Lopunny can deal with Scraggy.
+
+Okay so let's try Dottler reflect into Buizel vs Combusken, into Luxio vs Poliwhirl, and take Monferno, Fletchinder and Lopunny in the back.
+I'm tired of calculating ;) if we die, we try the Fletchinder lead line before restarting.
+
+Actual fight:
+Dottler indeed wrecks Kubfu, though I forgot about his healing berry.
+Lopunny is switched in, with 4 turns of reflect remaining.
+Monferno eats a crit Headbutt, ejects Lopunny into Poliwhirl
+Luxio indeed kills Poliwhirl handily. Lopunny is sent out again?! Was expecting Combusken for sure.
+Ah, Retaliate destroys me here. RIP Luxio. Switching Fletchinder in. Kills but gets below 50% hp (was hoping on Aerial Ace + Quick Attack but had to Ace twice)
+Now Combusken finally comes out. Sacced Fletchinder to deal 50% with Ace.
+Buizel Fake Out + Aqua Jet leaves it at 1 HP, but it lives a Thunder Punch. Another Aqua Jet kills.
+Hitmontop comes out. I mind game myself over Pursuit/Mach punch and stay in to Aqua Jet, only to die to Fake Out.
+Monferno dies to Mach Punch. Dottler dies to Pursuit. Lopunny dies to 2x Mach Punch. GG.
+
+Fletchinder lead version (for science):
+Fletchinder destroys Kubfu completely, winning speed ties and burning it with Flame Body.
+Lopunny switches in; Quick Attack triggers Eject Button before it can Retaliate. Poliwhirl comes in.
+Luxio again kills it easily. Lopunny is back. Baby-Doll Eyes reduces its attack, and we live on 4 hp.
+Monferno Low Sweeps it down on half HP. Hitmontop is next. I tank a Fake Out (Mach Punch didn't go first?!)
+I'm just outside of Pursuit range so take a Mach Punch on Dottler. Rock Slide flinches (!) it so it can't get Reflect off..
+Fletchinder crits Aerial Ace then dies to Rock Slide. Lopunny kills Hitmontop but takes a big Mach Punch first.
+Lopunny Dizzy Punches then dies to Double Kick. Buizel lives a Thunder Punch and kills with Water Pulse.
+Now Scraggy is last. We have no switches and die. Luxio wins the speed tie to paralyze it, then dies.
+Monferno gets lucky and Scraggy is paralyzed once, but 2x Low Sweep is just not enough and we die to Rock Tomb. GG.
