@@ -76,7 +76,7 @@ assertTrainerPokemon :-
                 member(index=I, T),
                 atom_json_term(A, json(T), []),
                 atom_json_dict(A, D, []),
-                WithName = D.put(#{name:Pokemon}),
+                WithName = D.put(#{name:Pokemon, ivs:[31,31,31,31,31,31]}),
                 assertz(pok(I, Trainer, Pokemon, WithName))
             )
         )
@@ -92,24 +92,21 @@ assertExportedPokemon :-
     ).
 
 calculate(Attacker, Defender, Move, Out) :-
+    calculate_http(Attacker, Defender, Move, false, Out).
+calculate_with_crit(Attacker, Defender, Move, Out) :-
+    calculate_http(Attacker, Defender, Move, true, Out).
+
+calculate_http(Attacker, Defender, Move, Crit, Out) :-
     Data = json([
         gen=8,
         attackingPokemon=Attacker.name,
         attackingPokemonOptions=Attacker,
         defendingPokemon=Defender.name,
         defendingPokemonOptions=Defender,
-        moveName=Move
+        moveName=Move,
+        crit=Crit
     ]),
     http_get('http://localhost:3000/calculate', Out, [method(get), post(json(Data)), json_object(dict)]).
-
-dict_to_json(Dict, Out) :-
-    ( get_dict(ivs, Dict, IVs) ->
-        [HP, Atk, Def, SpA, SpD, Spe] = IVs,
-        IVsJSON = json([hp=HP, atk=Atk, def=Def, spa=SpA, spd=SpD, spe=Spe])
-    ;
-        IVsJSON = json([hp=31, atk=31, def=31, spa=31, spd=31, spe=31])
-    ),
-    Out = json([level=Dict.level, nature=Dict.nature, ivs=IVsJSON]).
 
 fast_kill(Attacker, Defender, MoveName) :-
     calculate(Attacker, Defender, MoveName, Data),

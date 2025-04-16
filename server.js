@@ -10,6 +10,7 @@ app.use(express.json())
 
 app.get("/calculate",(req, res, next) => {
 	const gen = calc.Generations.get((typeof req.body.gen === 'undefined') ? 9 : req.body.gen);
+	const crit = (typeof req.body.crit === 'undefined') ? false : req.body.crit === "true";
 	let error = "";
 	if(typeof req.body.attackingPokemon === 'undefined')
 		error += "attackingPokemon must exist and have a valid pokemon name\n";
@@ -21,7 +22,7 @@ app.get("/calculate",(req, res, next) => {
 		gen,
 		new calc.Pokemon(gen, req.body.attackingPokemon, req.body.attackingPokemonOptions),
 		new calc.Pokemon(gen, req.body.defendingPokemon, req.body.defendingPokemonOptions),
-		new calc.Move(gen, req.body.moveName),
+		new calc.Move(gen, req.body.moveName, {isCrit: crit}),
 		new calc.Field((typeof req.body.field === 'undefined') ? undefined : req.body.field)
 	);
 	res.json(result);
