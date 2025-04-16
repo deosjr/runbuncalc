@@ -56,8 +56,8 @@ damageRoll(Attacker, Defender, Move, Range) :-
     % nature is included in rawStats
     DefenderMaxHP = Data.defender.rawStats.hp,
     (Data.damage = [Min|_] ->
-        MinPercentage is Min / DefenderMaxHP * 100,
         last(Data.damage, Max),
+        MinPercentage is Min / DefenderMaxHP * 100,
         MaxPercentage is Max / DefenderMaxHP * 100,
         Range = Move-[MinPercentage, MaxPercentage]
         %format('~1f - ~1f\n', [MinPercentage,MaxPercentage])
@@ -65,6 +65,10 @@ damageRoll(Attacker, Defender, Move, Range) :-
         Percentage is Data.damage / DefenderMaxHP * 100,
         Range = Move-[Percentage, Percentage]
     ).
+
+highRoll(Attacker, Defender, Crit, Move, High) :-
+    calculate_http(Attacker, Defender, Move, Crit, Out),
+    ( Out.damage = [_|_] -> last(Out.damage, High) ; High=Out.damage).
 
 assertTrainerPokemon :-
     open("gen8.json", read, Stream),
@@ -114,6 +118,14 @@ fast_kill(Attacker, Defender, MoveName) :-
     damageRoll(Attacker, Defender, MoveName, MoveName-[LowRollPercent|_]),
     LowRollPercent >= 100.
 
+dead_to_crit(Defender, Attacker, MovesThatCritKill) :-
+    last(Attacker.moves, Move1),
+    calculate(Attacker, Defender, Move1, Data),
+    MaxHP = Data.defender.rawStats.hp,
+    maplist(highRoll(Attacker, Defender, true), Attacker.moves, Damages),
+    zip_unzip(Attacker.moves, Damages, Moves),
+    include([_-N]>>(N >= MaxHP), Moves, MovesThatCritKill).
+
 parse_export([P|T]) -->
     parse_export_pokemon(P),
     "\n\n",
@@ -139,3 +151,5 @@ parse_item(I) --> string_without("\n", Item), {string_codes(I, Item)}, "\n".
 parse_move(M) --> "- ", string_without("\n", Move), {string_codes(M, Move)}.
 parse_moves([M]) --> parse_move(M).
 parse_moves([M|T]) --> parse_move(M), "\n", parse_moves(T).
+
+zip_unzip(Names,Values,Zipped) :- maplist([N,V,N-V]>>true,Names,Values,Zipped).

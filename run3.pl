@@ -47,6 +47,13 @@ test(traithlete_mikey, [nondet]) :-
     Turtwig = #{ability:"Shell Armor", ivs:[28, 31, 26, 31, 15, 31], level:12, moves:["Bite", "Growl", "Absorb", "Confide"], name:"Turtwig", nature:"Relaxed"},
     Growlithe = #{ability:"Intimidate", ivs:[3, 20, 6, 5, 12, 0], level:12, moves:["Ember", "Bite", "Covet", "Flame Wheel"], name:"Growlithe", nature:"Naive"},
     opponent('Triathlete Mikey', [Krabby, Clobbopus, Yanma]),
-    assertion(fast_kill(Turtwig, Krabby, "Absorb")). % fails!
+    dead_to_crit(Growlithe, Yanma, MovesThatOHKOGrowlithe),
+    assertion(MovesThatOHKOGrowlithe==[]).
+    % The line: Turtwig kills Krabby with Absorb. Yanma comes out, we switch to Growlithe. It takes 2 Sonic Booms with help of Oran Berry.
+    % It kills Yanma with 2x Flame Wheel. Then Turtwig switches back into Clobbopus and Absorbs it to death.
+    % Actual: we flinch twice on the speed tie to Stomp, but kill Krabby anyways. We hit the Flame Wheel range on Yanma.
+    % Clobbopus Bind+Rock Smash (lowering defense!) is a problem, we switch to Skrelp to finish it off.
+
+% Fisherman Darian: Turtwig just smashes through Magikarps, even though Bounce manages to paralyze.
 
 :- end_tests(run3).
