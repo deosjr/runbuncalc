@@ -95,23 +95,33 @@ test(tuber_hailey, [nondet]) :-
 test(camper_gavi, [nondet]) :-
     Geodude = #{ability:"Magnet Pull", ivs:_{atk:10, def:10, hp:29, spa:21, spd:1, spe:3}, level:17, moves:["Spark", "Smack Down", "Rock Smash", "Bulldoze"], name:"Geodude-Alola", nature:"Careful"},
     Lombre = #{ability:"Rain Dish", ivs:_{atk:2, def:25, hp:24, spa:30, spd:16, spe:7}, level:17, moves:["Natural Gift", "Fake Out", "Mega Drain", "Bubble"], name:"Lombre", nature:"Bashful"},
+    Kadabra = #{ability:"Synchronize", item:"Oran Berry", ivs:_7018{atk:18, def:7, hp:20, spa:5, spd:31, spe:30}, level:17, moves:["Kinesis", "Confusion", "Hidden Power Psychic"], name:"Kadabra", nature:"Quiet"},
     opponent('Camper Gavi', [Bibarel, Ponyta, Eelektrik, Sunflora, Dustox]),
     ai_is_faster(Bibarel, Geodude),
     highest_damage_move(Bibarel, Geodude, "Super Fang"),
     highRoll(Bibarel, Geodude, false, "Super Fang", 22),
     damageRoll(Geodude, Bibarel, "Spark", _-[SparkLow,_]),
     assertion((57.1 < SparkLow, 57.2 > SparkLow)),
-    GeodudeHP = 23, % 45 - 22
-    GeodudeDamaged = Geodude.put(#{curHP:GeodudeHP}),
+    GeodudeDamaged = Geodude.put(#{curHP:23}),  % 45 - 22
     highest_damage_move(Bibarel, GeodudeDamaged, "Aqua Jet"),
     % switch into Lombre to tank Aqua Jet
     % then Fake Out + Mega Drain kills, taking one Pluck
+    % TODO: calc that it is actually dead here
     ai_is_faster(Bibarel, Lombre),
     highest_damage_move(Bibarel, Lombre, "Pluck"),
     LombreDamaged = Lombre.put(#{curHP:25}), % lets say, without crits, its around this value
     post_ko_switch_in(LombreDamaged, [Ponyta, Eelektrik, Sunflora, Dustox], SwitchinsPostBibarel),
     SwitchinsPostBibarel = [SwitchIn1|_],
-    assertion(SwitchIn1 == Dustox). % it is faster and sees a kill with Venoshock
+    assertion(SwitchIn1 == Dustox), % it is faster and sees a kill with Venoshock
     % TODO: calc that Aqua Jet + Pluck BOTH crit still do not kill Lombre (it lives on ~1HP)
+    % Switch to Fletchinder to tank Venoshock, then Aerial Ace twice. Take anti-poison berry for Toxic.
+    % OR switch to Kadabra, do the same. Fletchinder baits Eelektrik, Kadabra baits Ponyta.
+    KadabraDamaged = Kadabra.put(#{curHP:35}),
+    post_ko_switch_in(KadabraDamaged, [Ponyta, Eelektrik, Sunflora], SwitchinsPostDustox),
+    SwitchinsPostDustox = [SwitchIn2|_],
+    assertion(SwitchIn2 == Ponyta).
+    % Prinplup then takes on Ponyta, Plucking its Sitrus Berry and Bubble Beaming it
+    % Fletchinder is a backup, also taking on Sunflora.
+    % If Lombre did not take a crit, it can take on Eelektrik. Kadabra can also help out.
 
 :- end_tests(run4).

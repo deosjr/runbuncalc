@@ -59,7 +59,7 @@ damageRoll(Attacker, Defender, Move, Range) :-
     calculate(Attacker, Defender, Move, Data),
     %writeln(Data.damage),
     % nature is included in rawStats
-    DefenderMaxHP = Data.defender.rawStats.hp,
+    DefenderMaxHP = Data.defender.originalCurHP,
     (Data.damage = [Min|_] ->
         last(Data.damage, Max),
         MinPercentage is Min / DefenderMaxHP * 100,
@@ -182,32 +182,31 @@ moveRangeByHighest(=, _-[_,H1], _-[_,H2]) :- H1 = H2.
 % since we do not know exact HP ahead of time.
 post_ko_switch_in(Player, OppTeam, Switchins) :-
     maplist(switchin_pair(Player), OppTeam, Scores),
-    keysort(Scores, RevCandidates),
-    reverse(RevCandidates, Candidates),
-    Candidates = [_-Highest|_],
-    include([_-S]>>(S==Highest), Candidates, SwitchinsWithScore),
-    maplist([P-S,X]>>(X=P), SwitchinsWithScore, Switchins).
+    keysort(Scores, Candidates),
+    last(Candidates, Highest-_),
+    include([S-_]>>(S==Highest), Candidates, SwitchinsWithScore),
+    maplist([S-P,X]>>(X=P), SwitchinsWithScore, Switchins).
 
-switchin_pair(Player, Opponent, Opponent-Score) :-
+switchin_pair(Player, Opponent, Score-Opponent) :-
     switchin_score(Opponent, Player, Score).
 
 % score of Pokemon switching in when Opponent is already out
 switchin_score(Pokemon, Opponent, 5) :-
-    include(fast_kill_possible(Pokemon, Opponent), Pokemon.moves, [_|_]).
+    include(fast_kill_possible(Pokemon, Opponent), Pokemon.moves, [_|_]), !.
 switchin_score(Pokemon, Opponent, 4) :-
     include(fast_kill_possible(Opponent, Pokemon), Opponent.moves, []),
-    include(slow_kill_possible(Pokemon, Opponent), Pokemon.moves, [_|_]).
+    include(slow_kill_possible(Pokemon, Opponent), Pokemon.moves, [_|_]), !.
 switchin_score(Pokemon, Opponent, 3) :-
     ai_is_faster(Pokemon, Opponent),
-    outdamages(Pokemon, Opponent).
+    outdamages(Pokemon, Opponent), !.
 switchin_score(Pokemon, Opponent, 2) :-
     ai_is_slower(Pokemon, Opponent),
-    outdamages(Pokemon, Opponent).
+    outdamages(Pokemon, Opponent), !.
 switchin_score(Pokemon, Opponent, 1) :-
-    ai_is_faster(Pokemon, Opponent).
+    ai_is_faster(Pokemon, Opponent), !.
 switchin_score(Pokemon, Opponent, 0) :-
     ai_is_slower(Pokemon, Opponent),
-    include(fast_kill_possible(Opponent, Pokemon), Opponent.moves, []).
+    include(fast_kill_possible(Opponent, Pokemon), Opponent.moves, []), !.
 switchin_score(Pokemon, Opponent, -1) :-
     ai_is_slower(Pokemon, Opponent),
     include(fast_kill_possible(Opponent, Pokemon), Opponent.moves, [_|_]).
