@@ -59,4 +59,31 @@ test(bug_catcher_rick, [nondet]) :-
 %test(tuber_lola) :-
     % Prinplup handles Fletchinder, and Herdier possibly too. Otherwise Lombre, Fletchinder, Timburr, Shellos, Exeggcute all tank it.
 
+%test(sailer_edmond) :-
+    % Prinplup plucks Wingulls berry, then Lotad switches into Shock Wave and finishes with Fake Out + Mega Drain.
+    % Buizel comes out and can Pursuit trap, but 2x Mega Drain should live its Sonic Boom
+    % Lotad slow-kills Palpitoad but if we are low we can switch via Fletchinder tanking Sludge and baiting Bubble Beam to another water type
+    % Actual: Wingull crits Air Cutter, leaving Lotad at 38/51 vs Buizel in Rain. Lotads Rain Dish heals it 3hp per turn.
+    % We are roughly 50% hp vs Palpitoad, and Sludge crit would kill. Fletchinder tanks it (it indeed crits!!).
+    % Rain has stopped as we switch back to Prinplup, and it kills with Bubble Beams.
+
+%test(fisherman_bill) :-
+    % gets destroyed by Fletchinder, fast killing all but Scatterbug (which is a range instead, and deals at most 10% back)
+
+%test(tuber_ricky) :-
+    % Things start to get tricky. Lead Spheal into Aipom, to tank Fake Out and Charm it down. If Fake Out crits, Double Hit crit can kill us,
+    % so then we switch into Prinplup. Otherwise, we switch to Fletchinder and Aerial Ace it down. Both lines bait Luxio with Spark.
+    % Switch Lombre into that, and Fake Out + Mega Drain it. Exeggcute is in the back if things go wrong.
+    % Nidorino gets tanked by Prinplup, and if it is even slightly low, a switch to Kadabra will fast kill with Confusion.
+    % Actual: we get Charm off and Fletchinder Aerial Aces through multiple Sand Attacks (which it ignores).
+    % Luxio Howls, we Mega Drain it low, but now crit Spark kills Lombre. Switching through Exeggcute (take Spark, bait Bite) to Fletchinder and Quick Attack kills.
+    % Nidorino Sand Attacks and Aerial Ace again doensnt care.
+
+%test(tuber_hailey) :-
+    % Kadabra fast-kills Mienfoo with Confusion, bringing out Flaaffy (as Nidorina is a range).
+    % It is likely (guaranteed?) to go for speed control with Thunder Wave, so bring anti-para berry and hopefully 2-shot it.
+    % if we do, Kadabra sweeps. If we dont, Lombre finishes Flaaffy and we switch to Prinplup for Nidorina (bring anti-poison)
+    % Actual: Flaaffy lives on 1hp after 2 confusions, so we confusion again but are paralyzed.
+    % Prinplup switches into Nidorina, Bubble Beams it low, then we switch Lombre but get poisoned, so Fletchinder finishes.
+
 :- end_tests(run4).

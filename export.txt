@@ -95,3 +95,13 @@ IVs: 1 HP / 4 Atk / 2 Def / 26 SpA / 26 SpD / 16 Spe
 - Brine
 - Powder Snow
 - Rollout
+
+Clauncher
+Ability: Mega Launcher
+Level: 17
+Lonely Nature
+IVs: 2 HP / 17 Atk / 2 Def / 22 SpA / 18 SpD / 19 Spe
+- Bubble Beam
+- Aqua Jet
+- Aurora Beam
+- Vise Grip
