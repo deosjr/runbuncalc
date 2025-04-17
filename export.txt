@@ -135,3 +135,12 @@ IVs: 29 HP / 10 Atk / 10 Def / 21 SpA / 1 SpD / 3 Spe
 - Smack Down
 - Rock Smash
 - Bulldoze
+
+Tynamo
+Ability: Levitate
+Level: 17
+Careful Nature
+IVs: 19 HP / 17 Atk / 4 Def / 1 SpA / 25 SpD / 22 Spe
+- Thunder Wave
+- Spark
+- Shock Wave

@@ -132,5 +132,21 @@ test(camper_gavi, [nondet]) :-
     % A switch to Kadabra brings it lower and uses up its berry, but Exeggcute is sacced in the end.
     % Fletchinder manages to kill with 2x Flame Charge, which was a range, and is at 27/53 vs Sunflora.
     % It lives a Sludge Bomb, but that poisons and takes it out. First 2 deaths of the run. Kadabra cleans up.
+    % AFTERWARDS: dammit Kadabra learns HP Psychic, but I didnt use it. That wouldve changed things a little..
+
+%test(team_aqua_grunts_museum) :-
+    % lead Geodude, Spark is a range, Night shade is Murkrows highest dmg move.
+    % Kadabra switches in on Skrelp and Lombre on Tirtouga.
+    % Geodude Sparks again vs Mareanie, and Tympole is backup.
+    % Lombre should deal with Frillish and Sizzlipede + Priplup need to take on Whirlipede.
+    % ACTUAL: Geodude hits its range. Skrelp comes out and Lombre tanks a Water Pulse -> Fake Outs.
+    % switch to Kadabra, tanking Acid. I AGAIN FORGOT HP PSYCHIC but we two-shot and take 50% ish hp dmg back.
+    % Lombre tanks a Brine from Tirtouga. Mega Drain kills it in two shots and we are still almost full HP.
+    % Mareanie poisons Geodude but takes a lot of damage. Tympole takes a Venoshock and kills with Spark.
+    % Whirlipede comes out next.. Mega Drain kills it in two shots and we are still almost full HP.
+    % Mareanie poisons Geodude but takes a lot of damage. Tympole takes a Venoshock and kills with Spark.
+    % Whirlipede comes out next. Sizzlipede takes 2 hits from Pin Missile. Ember chips, and it lives a crit Rollout.
+    % Switch to Priplup while Whirlipede is locked into Rollouts. It misses its last Rollout and dies to 2x Pluck.
+    % Lombre switches in on Shock Wave and kills with 2x Mega Drain.
 
 :- end_tests(run4).
