@@ -9,7 +9,7 @@ test(youngster_calvin, [nondet]) :-
     assertion(AfterMove1.attacker.rawStats.spe > AfterMove1.defender.rawStats.spe),
     damageRoll(Growlithe, Poochyena, "Covet", "Covet"-[LowRollPercent|_]),
     assertion(LowRollPercent >= 100),
-    fast_kill(Growlithe, Poochyena, "Covet").
+    fast_kill_guaranteed(Growlithe, Poochyena, "Covet").
     % TODO: Poochyena will Quick Attack!
     % TODO: Lillipup and Rookidee are a range to OHKO and deal very little damage back.
 

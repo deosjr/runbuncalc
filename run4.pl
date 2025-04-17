@@ -6,9 +6,9 @@
 test(bug_catcher_rick, [nondet]) :-
     Fletchling = #{ability:"Keen Eye", ivs:[29, 27, 23, 9, 26, 26], level:12, moves:["Tackle", "Growl", "Quick Attack", "Aerial Ace"], name:"Fletchling", nature:"Docile"},
     opponent('Bug Catcher Rick', [Grubbin, Pineco, Sizzlipede]),
-    assertion(fast_kill(Fletchling, Grubbin, "Aerial Ace")),
-    assertion(fast_kill(Fletchling, Pineco, "Aerial Ace")),     % NOTE: forgot about Sturdy again!
-    assertion(fast_kill(Fletchling, Sizzlipede, "Aerial Ace")).
+    assertion(fast_kill_guaranteed(Fletchling, Grubbin, "Aerial Ace")),
+    assertion(fast_kill_guaranteed(Fletchling, Pineco, "Aerial Ace")),     % TODO: forgot about Sturdy again!
+    assertion(fast_kill_guaranteed(Fletchling, Sizzlipede, "Aerial Ace")).
 
 %test(youngster_allen, [nondet]) :-
     % Fletchling kills everything with Aerial Ace.
@@ -79,10 +79,16 @@ test(bug_catcher_rick, [nondet]) :-
     % Luxio Howls, we Mega Drain it low, but now crit Spark kills Lombre. Switching through Exeggcute (take Spark, bait Bite) to Fletchinder and Quick Attack kills.
     % Nidorino Sand Attacks and Aerial Ace again doensnt care.
 
-%test(tuber_hailey) :-
+test(tuber_hailey, [nondet]) :-
     % Kadabra fast-kills Mienfoo with Confusion, bringing out Flaaffy (as Nidorina is a range).
     % It is likely (guaranteed?) to go for speed control with Thunder Wave, so bring anti-para berry and hopefully 2-shot it.
     % if we do, Kadabra sweeps. If we dont, Lombre finishes Flaaffy and we switch to Prinplup for Nidorina (bring anti-poison)
+    Kadabra = #{ability:"Synchronize", item:"Oran Berry", ivs:[20, 18, 7, 5, 31, 30], level:17, moves:["Kinesis", "Confusion"], name:"Kadabra", nature:"Quiet"},
+    opponent('Tuber Hailey', [Mienfoo, Nidorina, Flaaffy]),
+    assertion(fast_kill_guaranteed(Kadabra, Mienfoo, "Confusion")),
+    % test that the only option to switch in is Flaaffy
+    post_ko_switch_in(Kadabra, [Nidorina, Flaaffy], SwitchinsPostMienfoo),
+    assertion(SwitchinsPostMienfoo == [Flaaffy]).
     % Actual: Flaaffy lives on 1hp after 2 confusions, so we confusion again but are paralyzed.
     % Prinplup switches into Nidorina, Bubble Beams it low, then we switch Lombre but get poisoned, so Fletchinder finishes.
 

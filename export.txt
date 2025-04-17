@@ -105,3 +105,33 @@ IVs: 2 HP / 17 Atk / 2 Def / 22 SpA / 18 SpD / 19 Spe
 - Aqua Jet
 - Aurora Beam
 - Vise Grip
+
+Horsea
+Ability: Sniper
+Level: 17
+Brave Nature
+IVs: 27 HP / 27 Atk / 2 Def / 1 SpA / 6 SpD / 20 Spe
+- Bubble Beam
+- Smokescreen
+- Leer
+- Twister
+
+Remoraid
+Ability: Hustle
+Level: 17
+Docile Nature
+IVs: 25 HP / 2 Atk / 20 Def / 25 SpA / 22 SpD / 14 Spe
+- Water Gun
+- Lock-On
+- Psybeam
+- Aurora Beam
+
+Geodude-Alola
+Ability: Magnet Pull
+Level: 17
+Careful Nature
+IVs: 29 HP / 10 Atk / 10 Def / 21 SpA / 1 SpD / 3 Spe
+- Spark
+- Smack Down
+- Rock Smash
+- Bulldoze
