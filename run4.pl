@@ -98,7 +98,20 @@ test(camper_gavi, [nondet]) :-
     opponent('Camper Gavi', [Bibarel, Ponyta, Eelektrik, Sunflora, Dustox]),
     ai_is_faster(Bibarel, Geodude),
     highest_damage_move(Bibarel, Geodude, "Super Fang"),
+    highRoll(Bibarel, Geodude, false, "Super Fang", 22),
     damageRoll(Geodude, Bibarel, "Spark", _-[SparkLow,_]),
-    assertion((57.1 < SparkLow, 57.2 > SparkLow)).
+    assertion((57.1 < SparkLow, 57.2 > SparkLow)),
+    GeodudeHP = 23, % 45 - 22
+    GeodudeDamaged = Geodude.put(#{curHP:GeodudeHP}),
+    highest_damage_move(Bibarel, GeodudeDamaged, "Aqua Jet"),
+    % switch into Lombre to tank Aqua Jet
+    % then Fake Out + Mega Drain kills, taking one Pluck
+    ai_is_faster(Bibarel, Lombre),
+    highest_damage_move(Bibarel, Lombre, "Pluck"),
+    LombreDamaged = Lombre.put(#{curHP:25}), % lets say, without crits, its around this value
+    post_ko_switch_in(LombreDamaged, [Ponyta, Eelektrik, Sunflora, Dustox], SwitchinsPostBibarel),
+    SwitchinsPostBibarel = [SwitchIn1|_],
+    assertion(SwitchIn1 == Dustox). % it is faster and sees a kill with Venoshock
+    % TODO: calc that Aqua Jet + Pluck BOTH crit still do not kill Lombre (it lives on ~1HP)
 
 :- end_tests(run4).
