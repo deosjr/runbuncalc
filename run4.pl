@@ -92,4 +92,11 @@ test(tuber_hailey, [nondet]) :-
     % Actual: Flaaffy lives on 1hp after 2 confusions, so we confusion again but are paralyzed.
     % Prinplup switches into Nidorina, Bubble Beams it low, then we switch Lombre but get poisoned, so Fletchinder finishes.
 
+test(camper_gavi, [nondet]) :-
+    Geodude = #{ability:"Magnet Pull", ivs:[29, 10, 10, 21, 1, 3], level:17, moves:["Spark", "Smack Down", "Rock Smash", "Bulldoze"], name:"Geodude-Alola", nature:"Careful"},
+    Lombre = #{ability:"Rain Dish", ivs:[24, 2, 25, 30, 16, 7], level:17, moves:["Natural Gift", "Fake Out", "Mega Drain", "Bubble"], name:"Lombre", nature:"Bashful"},
+    opponent('Camper Gavi', [Bibarel, Ponyta, Eelektrik, Sunflora, Dustox]),
+    ai_is_faster(Bibarel, Geodude),
+    highest_damage_move(Bibarel, Geodude, "Super Fang").
+
 :- end_tests(run4).

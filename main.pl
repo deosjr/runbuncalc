@@ -75,6 +75,13 @@ highRoll(Attacker, Defender, Crit, Move, High) :-
     calculate_http(Attacker, Defender, Move, Crit, Out),
     ( Out.damage = [_|_] -> last(Out.damage, High) ; High=Out.damage).
 
+% only succeeds if there is a single move guaranteed highest
+highest_damage_move(Attacker, Defender, Move) :-
+    damageRolls(Attacker, Defender, Data),
+    member(Move-[_,High], Data),
+    include({High}/[_-[Low,_]]>>(Low > High), Data, []).
+
+
 assertTrainerPokemon :-
     open("gen8.json", read, Stream),
     % cant use json_read_dict because Vivillion has multiple 'Bug Maniac Jeffrey' keys...
@@ -167,6 +174,9 @@ moveRangeByHighest(>, _-[_,H1], _-[_,H2]) :- H1 > H2.
 moveRangeByHighest(<, _-[_,H1], _-[_,H2]) :- H1 < H2.
 moveRangeByHighest(=, _-[_,H1], _-[_,H2]) :- H1 = H2.
 
+% TODO: if multiple Pokémon have the same score, the AI sends in their Pokémon in party order
+% This would mean there is only ever one option, but with ranges there might be multiple options
+% since we do not know exact HP ahead of time.
 post_ko_switch_in(Player, OppTeam, Switchins) :-
     maplist(switchin_pair(Player), OppTeam, Scores),
     keysort(Scores, RevCandidates),
