@@ -149,4 +149,11 @@ test(camper_gavi, [nondet]) :-
     % Switch to Priplup while Whirlipede is locked into Rollouts. It misses its last Rollout and dies to 2x Pluck.
     % Lombre switches in on Shock Wave and kills with 2x Mega Drain.
 
+test(battle_girl_laura, [nondet]) :-
+    Kadabra = #{ability:"Synchronize", item:"Pecha Berry", ivs:_{atk:18, def:7, hp:20, spa:5, spd:31, spe:30}, level:21, moves:["Confusion", "Kinesis", "Disable", "Hidden Power Psychic"], name:"Kadabra", nature:"Quiet"},
+    opponent('Battle Girl Laura', [Riolu, Stufful, Mankey]),
+    assertion(fast_kill_guaranteed(Kadabra, Riolu, "Hidden Power Psychic")),
+    assertion(fast_kill_guaranteed(Kadabra, Stufful, "Hidden Power Psychic")),
+    assertion(fast_kill_guaranteed(Kadabra, Mankey, "Hidden Power Psychic")).
+
 :- end_tests(run4).

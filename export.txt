@@ -1,76 +1,16 @@
-Fletchinder @ Pecha Berry
-Ability: Flame Body
-Level: 17
-Docile Nature
-IVs: 29 HP / 27 Atk / 23 Def / 9 SpA / 26 SpD / 26 Spe
-- Flame Charge
-- Growl
-- Quick Attack
-- Aerial Ace
-
-Prinplup @ Pecha Berry
-Ability: Clear Body
-Level: 17
-Careful Nature
-IVs: 31 HP / 16 Atk / 31 Def / 20 SpA / 14 SpD / 31 Spe
-- Metal Claw
-- Growl
-- Bubble Beam
-- Pluck
-
-Shellos @ Oran Berry
-Ability: Sand Force
-Level: 17
-Jolly Nature
-IVs: 20 HP / 4 Atk / 11 Def / 19 SpA / 16 SpD / 9 Spe
-- Mud-Slap
-- Hidden Power Ghost
-- Water Pulse
-- Mud Shot
-
-Lombre
-Ability: Rain Dish
-Level: 17
-Bashful Nature
-IVs: 24 HP / 2 Atk / 25 Def / 30 SpA / 16 SpD / 7 Spe
-- Natural Gift
-- Fake Out
-- Mega Drain
-- Bubble
-
-Exeggcute
-Ability: Chlorophyll
-Level: 17
-Jolly Nature
-IVs: 18 HP / 5 Atk / 7 Def / 6 SpA / 10 SpD / 17 Spe
-- Bullet Seed
+Kadabra @ Pecha Berry
+Ability: Synchronize
+Level: 21
+Quiet Nature
+IVs: 20 HP / 18 Atk / 7 Def / 5 SpA / 31 SpD / 30 Spe
 - Confusion
-- Sleep Powder
-- Stun Spore
+- Kinesis
+- Disable
+- Hidden Power Psychic
 
-Timburr
-Ability: Guts
-Level: 17
-Hardy Nature
-IVs: 13 HP / 10 Atk / 18 Def / 27 SpA / 3 SpD / 22 Spe
-- Pound
-- Rock Throw
-- Focus Energy
-- Low Kick
-
-Sizzlipede
-Ability: Flame Body
-Level: 17
-Quirky Nature
-IVs: 16 HP / 13 Atk / 24 Def / 30 SpA / 16 SpD / 15 Spe
-- Ember
-- Smokescreen
-- Bite
-- Bug Bite
-
-Zigzagoon-Galar @ Oran Berry
+Linoone-Galar @ Oran Berry
 Ability: Gluttony
-Level: 17
+Level: 21
 Calm Nature
 IVs: 24 HP / 8 Atk / 4 Def / 29 SpA / 0 SpD / 30 Spe
 - Headbutt
@@ -78,57 +18,49 @@ IVs: 24 HP / 8 Atk / 4 Def / 29 SpA / 0 SpD / 30 Spe
 - Rock Smash
 - Snarl
 
-Kadabra @ Oran Berry
-Ability: Synchronize
-Level: 17
-Quiet Nature
-IVs: 20 HP / 18 Atk / 7 Def / 5 SpA / 31 SpD / 30 Spe
-- Kinesis
-- Confusion
-
-Spheal
-Ability: Thick Fat
-Level: 17
-Relaxed Nature
-IVs: 1 HP / 4 Atk / 2 Def / 26 SpA / 26 SpD / 16 Spe
-- Charm
-- Brine
-- Powder Snow
-- Rollout
-
-Clauncher
-Ability: Mega Launcher
-Level: 17
-Lonely Nature
-IVs: 2 HP / 17 Atk / 2 Def / 22 SpA / 18 SpD / 19 Spe
+Remoraid
+Ability: Hustle
+Level: 21
+Docile Nature
+IVs: 25 HP / 2 Atk / 20 Def / 25 SpA / 22 SpD / 14 Spe
 - Bubble Beam
-- Aqua Jet
+- Hidden Power Rock
+- Psybeam
 - Aurora Beam
-- Vise Grip
 
-Horsea
+Shellos @ Oran Berry
+Ability: Sand Force
+Level: 21
+Jolly Nature
+IVs: 20 HP / 4 Atk / 11 Def / 19 SpA / 16 SpD / 9 Spe
+- Mud-Slap
+- Hidden Power Ghost
+- Water Pulse
+- Mud Shot
+
+Seadra
 Ability: Sniper
-Level: 17
+Level: 21
 Brave Nature
 IVs: 27 HP / 27 Atk / 2 Def / 1 SpA / 6 SpD / 20 Spe
 - Bubble Beam
 - Smokescreen
-- Leer
+- Clear Smog
 - Twister
 
-Remoraid
-Ability: Hustle
-Level: 17
-Docile Nature
-IVs: 25 HP / 2 Atk / 20 Def / 25 SpA / 22 SpD / 14 Spe
-- Water Gun
-- Lock-On
-- Psybeam
-- Aurora Beam
+Timburr @ Oran Berry
+Ability: Guts
+Level: 21
+Hardy Nature
+IVs: 13 HP / 10 Atk / 18 Def / 27 SpA / 3 SpD / 22 Spe
+- Wake-Up Slap
+- Rock Throw
+- Focus Energy
+- Low Kick
 
-Geodude-Alola
+Geodude-Alola @ Oran Berry
 Ability: Magnet Pull
-Level: 17
+Level: 21
 Careful Nature
 IVs: 29 HP / 10 Atk / 10 Def / 21 SpA / 1 SpD / 3 Spe
 - Spark
@@ -136,11 +68,63 @@ IVs: 29 HP / 10 Atk / 10 Def / 21 SpA / 1 SpD / 3 Spe
 - Rock Smash
 - Bulldoze
 
-Tynamo
+Clauncher
+Ability: Mega Launcher
+Level: 21
+Lonely Nature
+IVs: 2 HP / 17 Atk / 2 Def / 22 SpA / 18 SpD / 19 Spe
+- Bubble Beam
+- Aqua Jet
+- Aurora Beam
+- Bounce
+
+Sealeo
+Ability: Thick Fat
+Level: 21
+Relaxed Nature
+IVs: 1 HP / 4 Atk / 2 Def / 26 SpA / 26 SpD / 16 Spe
+- Charm
+- Brine
+- Aurora Beam
+- Rollout
+
+Prinplup
+Ability: Clear Body
+Level: 21
+Careful Nature
+IVs: 31 HP / 16 Atk / 31 Def / 20 SpA / 14 SpD / 31 Spe
+- Metal Claw
+- Aqua Jet
+- Bubble Beam
+- Pluck
+
+Lombre @ Oran Berry
+Ability: Rain Dish
+Level: 21
+Bashful Nature
+IVs: 24 HP / 2 Atk / 25 Def / 30 SpA / 16 SpD / 7 Spe
+- Natural Gift
+- Fake Out
+- Mega Drain
+- Bubble Beam
+
+Eelektrik @ Pecha Berry
 Ability: Levitate
-Level: 17
+Level: 21
 Careful Nature
 IVs: 19 HP / 17 Atk / 4 Def / 1 SpA / 25 SpD / 22 Spe
 - Thunder Wave
 - Spark
 - Shock Wave
+- Crunch
+
+Sizzlipede
+Ability: Flame Body
+Level: 21
+Quirky Nature
+IVs: 16 HP / 13 Atk / 24 Def / 30 SpA / 16 SpD / 15 Spe
+- Flame Wheel
+- Smokescreen
+- Bite
+- Bug Bite
+
