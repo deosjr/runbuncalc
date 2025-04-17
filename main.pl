@@ -74,6 +74,9 @@ damageRoll(Attacker, Defender, Move, Range) :-
 highRoll(Attacker, Defender, Crit, Move, High) :-
     calculate_http(Attacker, Defender, Move, Crit, Out),
     ( Out.damage = [_|_] -> last(Out.damage, High) ; High=Out.damage).
+lowRoll(Attacker, Defender, Crit, Move, Low) :-
+    calculate_http(Attacker, Defender, Move, Crit, Out),
+    ( Out.damage = [Low|_] -> true ; Low=Out.damage).
 
 % only succeeds if there is a single move guaranteed highest
 highest_damage_move(Attacker, Defender, Move) :-
@@ -92,7 +95,7 @@ assertTrainerPokemon :-
                 member(index=I, T),
                 atom_json_term(A, json(T), []),
                 atom_json_dict(A, D, []),
-                WithName = D.put(#{name:Pokemon, ivs:[31,31,31,31,31,31]}),
+                WithName = D.put(#{name:Pokemon, ivs:_{atk:31,def:31,hp:31,spa:31,spd:31,spe:31}}),
                 assertz(pok(I, Trainer, Pokemon, WithName))
             )
         )
@@ -223,9 +226,10 @@ parse_export_pokemon(Pokemon) -->
     "IVs: ", integer(HP), " HP / ", integer(Atk), " Atk / ", integer(Def), " Def / ", integer(SpA), " SpA / ", integer(SpD), " SpD / ", integer(Spe), " Spe\n",
     parse_moves(Moves),
     {string_codes(A, Ability), string_codes(Nat, Nature),
+    IVs = _{atk:Atk,def:Def,hp:HP,spa:SpA,spd:SpD,spe:Spe},
     (I==none ->
-        Pokemon = #{name:N, ability:A, level:L, nature:Nat, ivs:[HP, Atk, Def, SpA, SpD, Spe], moves:Moves};
-        Pokemon = #{name:N, item:I, ability:A, level:L, nature:Nat, ivs:[HP, Atk, Def, SpA, SpD, Spe], moves:Moves})}.
+        Pokemon = #{name:N, ability:A, level:L, nature:Nat, ivs:IVs, moves:Moves};
+        Pokemon = #{name:N, item:I, ability:A, level:L, nature:Nat, ivs:IVs, moves:Moves})}.
 
 parse_name_item(N, none) --> string_without("@\n", Name), {string_codes(N, Name)}, "\n".
 parse_name_item(N, I) --> parse_name(N), parse_item(I).

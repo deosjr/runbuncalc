@@ -93,10 +93,12 @@ test(tuber_hailey, [nondet]) :-
     % Prinplup switches into Nidorina, Bubble Beams it low, then we switch Lombre but get poisoned, so Fletchinder finishes.
 
 test(camper_gavi, [nondet]) :-
-    Geodude = #{ability:"Magnet Pull", ivs:[29, 10, 10, 21, 1, 3], level:17, moves:["Spark", "Smack Down", "Rock Smash", "Bulldoze"], name:"Geodude-Alola", nature:"Careful"},
-    Lombre = #{ability:"Rain Dish", ivs:[24, 2, 25, 30, 16, 7], level:17, moves:["Natural Gift", "Fake Out", "Mega Drain", "Bubble"], name:"Lombre", nature:"Bashful"},
+    Geodude = #{ability:"Magnet Pull", ivs:_{atk:10, def:10, hp:29, spa:21, spd:1, spe:3}, level:17, moves:["Spark", "Smack Down", "Rock Smash", "Bulldoze"], name:"Geodude-Alola", nature:"Careful"},
+    Lombre = #{ability:"Rain Dish", ivs:_{atk:2, def:25, hp:24, spa:30, spd:16, spe:7}, level:17, moves:["Natural Gift", "Fake Out", "Mega Drain", "Bubble"], name:"Lombre", nature:"Bashful"},
     opponent('Camper Gavi', [Bibarel, Ponyta, Eelektrik, Sunflora, Dustox]),
     ai_is_faster(Bibarel, Geodude),
-    highest_damage_move(Bibarel, Geodude, "Super Fang").
+    highest_damage_move(Bibarel, Geodude, "Super Fang"),
+    damageRoll(Geodude, Bibarel, "Spark", _-[SparkLow,_]),
+    assertion((57.1 < SparkLow, 57.2 > SparkLow)).
 
 :- end_tests(run4).
