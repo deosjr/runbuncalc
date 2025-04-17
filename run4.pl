@@ -196,7 +196,27 @@ test(battle_girl_jocelyn, [nondet]) :-
     opponent('Battle Girl Jocelyn', [Kecleon, Golett, Pignite, Hakamoo]),
     Timburr = #{ability:"Guts", item:"Oran Berry", ivs:_{atk:10, def:18, hp:13, spa:27, spd:3, spe:22}, level:21, moves:["Wake-Up Slap", "Rock Throw", "Focus Energy", "Low Kick"], name:"Timburr", nature:"Hardy"},
     PreBurnedTimburr = Timburr.put(_{status:brn}),
-    assertion(fast_kill_guaranteed(PreBurnedTimburr, Kecleon, "Wake-Up Slap")).
+    assertion(fast_kill_guaranteed(PreBurnedTimburr, Kecleon, "Wake-Up Slap")),
+    BurnDmgTimburr = PreBurnedTimburr.put(_{curHP:61}), % 65 - 4
+    post_ko_switch_in(BurnDmgTimburr, [Golett, Pignite, Hakamoo], SwitchinsPostKecleon),
+    SwitchinsPostKecleon = [SwitchIn1|_],
+    assertion(SwitchIn1 == Golett). % everyone outspeeds and outdamages but doesnt kill, so we go in party order
+    % Golett gets killed by Prinplup. Hakamo-o comes out, we Pluck its Sitrus Berry then switch to Sealeo
+    % Sealeo kills with Aurora Beam, then Pignite gets cleaned up by Seadra.
+    % ACTUAL: Timbur starts the fight healed because thats how Gym battles work...
+    % It still kills Kecleon pretty easily. Prinplup switches in and starts Bubble Beaming.
+    % Pignite is next and goes down to Bubble Beam + Aqua Jet. Hakamo-o gets Plucked, then Dragon Tails and drags out Kadabra, who kills him.
 
+%test(leader_brawly, [nondet]) :-
+    % Kubfu has Sucker Punch, can we Disable -> fast kill it with Kadabra?
+    % Even if that works, it gets Pursuit trapped by Hitmontop... unless Lopunny sees a kill with Retaliate!
+    % OK so Kadabra kills Kubfu, then Lopunny comes in. Geodude tanks Retaliate, then Timburr switches on Drain Punch.
+    % Timburr hits with Wake-Up Slap which makes Lopunny eject for Combusken, baiting Incinerate.
+    % This lets us switch to Prinplup who kills with Bubble Beam + Aqua Jet.
+    % Lombre deals with Poliwhirl, but Hitmontop and Scraggy will take some sacrifices..
+
+    % ACTUAL:
+    % Hitmontop comes out after Prinplup kills Combusken (why? Did Lopunny move to the back?)
+    % Everything falls apart, and the run ends here. I retried the fight a few times and won it some percentage, but it takes some luck.
 
 :- end_tests(run4).
