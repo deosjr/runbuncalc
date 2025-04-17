@@ -105,7 +105,7 @@ test(camper_gavi, [nondet]) :-
     GeodudeDamaged = Geodude.put(#{curHP:23}),  % 45 - 22
     highest_damage_move(Bibarel, GeodudeDamaged, "Aqua Jet"),
     % switch into Lombre to tank Aqua Jet
-    % then Fake Out + Mega Drain kills, taking one Pluck
+    % then Fake Out + Mega Drain kills, taking one Pluck (maybe dont Fake Out, so we steal more HP back)
     % TODO: calc that it is actually dead here
     ai_is_faster(Bibarel, Lombre),
     highest_damage_move(Bibarel, Lombre, "Pluck"),
@@ -123,5 +123,14 @@ test(camper_gavi, [nondet]) :-
     % Prinplup then takes on Ponyta, Plucking its Sitrus Berry and Bubble Beaming it
     % Fletchinder is a backup, also taking on Sunflora.
     % If Lombre did not take a crit, it can take on Eelektrik. Kadabra can also help out.
+    % Exeggcute could come in on a Shock Wave from Eelektrik and bait a Super Fang?
+    % Putting it to sleep could be huge.
+    % ACTUAL: Lombre is left on 31/51 after Bibarel going exactly as planned.
+    % Kadabra is left on 31/44 after Dustox also going exactly as we calculated.
+    % Exeggcute lives 2 Shock Waves as it misses Sleep Powder once, then puts Eelektrik to sleep.
+    % Exeggcute max lowrolls Bullet Seed twice(!), lives on 2hp as Eelektrik wakes up.
+    % A switch to Kadabra brings it lower and uses up its berry, but Exeggcute is sacced in the end.
+    % Fletchinder manages to kill with 2x Flame Charge, which was a range, and is at 27/53 vs Sunflora.
+    % It lives a Sludge Bomb, but that poisons and takes it out. First 2 deaths of the run. Kadabra cleans up.
 
 :- end_tests(run4).
