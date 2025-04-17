@@ -138,7 +138,7 @@ test(camper_gavi, [nondet]) :-
     % lead Geodude, Spark is a range, Night shade is Murkrows highest dmg move.
     % Kadabra switches in on Skrelp and Lombre on Tirtouga.
     % Geodude Sparks again vs Mareanie, and Tympole is backup.
-    % Lombre should deal with Frillish and Sizzlipede + Priplup need to take on Whirlipede.
+    % Lombre should deal with Frillish and Sizzlipede + Prinplup need to take on Whirlipede.
     % ACTUAL: Geodude hits its range. Skrelp comes out and Lombre tanks a Water Pulse -> Fake Outs.
     % switch to Kadabra, tanking Acid. I AGAIN FORGOT HP PSYCHIC but we two-shot and take 50% ish hp dmg back.
     % Lombre tanks a Brine from Tirtouga. Mega Drain kills it in two shots and we are still almost full HP.
@@ -146,7 +146,7 @@ test(camper_gavi, [nondet]) :-
     % Whirlipede comes out next.. Mega Drain kills it in two shots and we are still almost full HP.
     % Mareanie poisons Geodude but takes a lot of damage. Tympole takes a Venoshock and kills with Spark.
     % Whirlipede comes out next. Sizzlipede takes 2 hits from Pin Missile. Ember chips, and it lives a crit Rollout.
-    % Switch to Priplup while Whirlipede is locked into Rollouts. It misses its last Rollout and dies to 2x Pluck.
+    % Switch to Prinplup while Whirlipede is locked into Rollouts. It misses its last Rollout and dies to 2x Pluck.
     % Lombre switches in on Shock Wave and kills with 2x Mega Drain.
 
 test(battle_girl_laura, [nondet]) :-
@@ -155,5 +155,48 @@ test(battle_girl_laura, [nondet]) :-
     assertion(fast_kill_guaranteed(Kadabra, Riolu, "Hidden Power Psychic")),
     assertion(fast_kill_guaranteed(Kadabra, Stufful, "Hidden Power Psychic")),
     assertion(fast_kill_guaranteed(Kadabra, Mankey, "Hidden Power Psychic")).
+
+test(sailor_brenden, [nondet]) :-
+    Kadabra = #{ability:"Synchronize", item:"Pecha Berry", ivs:_{atk:18, def:7, hp:20, spa:5, spd:31, spe:30}, level:21, moves:["Confusion", "Kinesis", "Disable", "Hidden Power Psychic"], name:"Kadabra", nature:"Quiet"},
+    opponent('Sailor Brenden', [Farfetchd, Heracross]),
+    assertion(fast_kill_guaranteed(Kadabra, Farfetchd, "Hidden Power Psychic")).
+    % but now we have a problem. Heracross counters the entire box
+    % best I can do is Sizzlipede to get an Ember off, then Prinplup kills with Pluck.
+    % Sizzlipede might live through 2x Pin Missile, and Prinplup might be able to switch in on a Rock Smash
+    % but no one guarantees Rock Smash cleanly. Geodude, Sealeo and Linoone are switch bait.
+    % ACTUAL: Sizzlipede lives 3 Pin Missiles and Flame Wheels twice. Prinplup cleans up with Aqua Jet.
+
+test(battle_girl_lilith, [nondet]) :-
+    Kadabra = #{ability:"Synchronize", item:"Pecha Berry", ivs:_{atk:18, def:7, hp:20, spa:5, spd:31, spe:30}, level:21, moves:["Confusion", "Kinesis", "Disable", "Hidden Power Psychic"], name:"Kadabra", nature:"Quiet"},
+    opponent('Battle Girl Lilith', [Makuhita, Mankey, Ledian]),
+    assertion(fast_kill_guaranteed(Kadabra, Makuhita, "Hidden Power Psychic")).
+    % Mankey has a Focus Sash so we dont OHKO it. Instead, we can Kinesis + Disable its Power-Up Punch
+    % If fast Disable makes it Struggle, we can then OHKO it after struggle damage.
+    % Otherwise, we switch to Prinplup and slow kill with Pluck + Aqua Jet.
+    % Ledian meets two Electric types in Geodude and Eelektrik.
+    % ACTUAL: Ledian comes out second. Eelektrik one-shots it with Spark.
+    % Mankey gets solod even though I Thunder Wave without reading Defiant first.
+    % Eelektrik would live a crit punch and is now faster, so Crunch + Spark kills.
+
+%test(black_belt_takao, [nondet]) :-
+    % Breloom and Mienfoo are both one-shot by Kadabra, though they get prio moves off
+    % Buneary is dealt with by Timburr after Lombre switches and Fake Outs.
+    % ACTUAL: Buneary comes out before Mienfoo, so Prinplup needs to deal with it.
+    % Kadabra switches in on Mienfoos FakeOut and kills it.
+
+%test(black_belt_christian, [nondet]) :-
+    % Seadra 2HKOs Meditite with Bubble Beam and is faster, taking FakeOut + Brick Break.
+    % Gurdurr is fast killed by Kadabra, and Machoke take 80 from it.
+    % Eelektrik and Prinplup deal decent damage vs Machoke, just dont paralyze it.
+    % ACTUAL: Machoke takes damage from Seadra but uses Bulk Up. Kadabra switch couldve killed it on a crit, or Mach Punch from Gurdurr
+    % Machoke however Protects and so we sweep easily.
+
+test(battle_girl_jocelyn, [nondet]) :-
+    % Timburr fast kills Kecleon if he starts preburned.
+    opponent('Battle Girl Jocelyn', [Kecleon, Golett, Pignite, Hakamoo]),
+    Timburr = #{ability:"Guts", item:"Oran Berry", ivs:_{atk:10, def:18, hp:13, spa:27, spd:3, spe:22}, level:21, moves:["Wake-Up Slap", "Rock Throw", "Focus Energy", "Low Kick"], name:"Timburr", nature:"Hardy"},
+    PreBurnedTimburr = Timburr.put(_{status:brn}),
+    assertion(fast_kill_guaranteed(PreBurnedTimburr, Kecleon, "Wake-Up Slap")).
+
 
 :- end_tests(run4).
