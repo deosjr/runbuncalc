@@ -1,60 +1,100 @@
-Ponyta
-Ability: Flame Body
-Level: 12
-Impish Nature
-IVs: 9 HP / 0 Atk / 19 Def / 20 SpA / 29 SpD / 21 Spe
-- Growl
-- Stomp
-- Tail Whip
-- Ember
+Exeggcute
+Ability: Chlorophyll
+Level: 17
+Jolly Nature
+IVs: 10 HP / 29 Atk / 27 Def / 13 SpA / 18 SpD / 6 Spe
+- Bullet Seed
+- Confusion
+- Sleep Powder
+- Stun Spore
 
-Chimchar
+Fletchinder @ Oran Berry
+Ability: Flame Body
+Level: 17
+Timid Nature
+IVs: 8 HP / 4 Atk / 19 Def / 18 SpA / 10 SpD / 1 Spe
+- Flame Charge
+- Growl
+- Quick Attack
+- Aerial Ace
+
+Spheal
+Ability: Thick Fat
+Level: 17
+Lonely Nature
+IVs: 23 HP / 3 Atk / 14 Def / 31 SpA / 8 SpD / 16 Spe
+- Charm
+- Brine
+- Powder Snow
+- Rollout
+
+Carvanha
+Ability: Rough Skin
+Level: 17
+Lonely Nature
+IVs: 0 HP / 4 Atk / 6 Def / 15 SpA / 5 SpD / 26 Spe
+- Leer
+- Bite
+- Water Pulse
+- Aqua Jet
+
+Tentacool
+Ability: Liquid Ooze
+Level: 17
+Careful Nature
+IVs: 12 HP / 11 Atk / 28 Def / 21 SpA / 3 SpD / 26 Spe
+- Confuse Ray
+- Water Pulse
+- Constrict
+- Acid
+
+Tyrogue
+Ability: Guts
+Level: 17
+Lonely Nature
+IVs: 4 HP / 3 Atk / 0 Def / 23 SpA / 9 SpD / 8 Spe
+- Tackle
+- Helping Hand
+- Fake Out
+- Foresight
+
+Monferno @ Oran Berry
 Ability: Vital Spirit
-Level: 12
+Level: 17
 Modest Nature
 IVs: 2 HP / 26 Atk / 31 Def / 29 SpA / 31 SpD / 31 Spe
-- Scratch
+- Flame Wheel
 - Leer
-- Ember
+- Low Sweep
 - Mach Punch
 
-Delcatty
+Palpitoad @ Oran Berry
+Ability: Poison Touch
+Level: 17
+Mild Nature
+IVs: 29 HP / 17 Atk / 29 Def / 1 SpA / 5 SpD / 26 Spe
+- Bubble
+- Growl
+- Mud Shot
+- Echoed Voice
+
+Delcatty @ Oran Berry
 Ability: Normalize
-Level: 12
+Level: 17
 Serious Nature
 IVs: 15 HP / 7 Atk / 9 Def / 20 SpA / 28 SpD / 14 Spe
 - Fake Out
 - Double Slap
 - Wake-Up Slap
-- Sing
+- Charm
 
-Tympole
-Ability: Poison Touch
-Level: 12
-Mild Nature
-IVs: 29 HP / 17 Atk / 29 Def / 1 SpA / 5 SpD / 26 Spe
-- Bubble
+Ponyta @ Oran Berry
+Ability: Flame Body
+Level: 17
+Impish Nature
+IVs: 9 HP / 0 Atk / 19 Def / 20 SpA / 29 SpD / 21 Spe
 - Growl
-- Mud-Slap
-- Echoed Voice
-
-Exeggcute
-Ability: Chlorophyll
-Level: 12
-Jolly Nature
-IVs: 10 HP / 29 Atk / 27 Def / 13 SpA / 18 SpD / 6 Spe
-- Bullet Seed
-- Confusion
-- Hypnosis
-- Stun Spore
-
-Fletchling
-Ability: Keen Eye
-Level: 12
-Timid Nature
-IVs: 8 HP / 4 Atk / 19 Def / 18 SpA / 10 SpD / 1 Spe
-- Tackle
-- Growl
-- Quick Attack
-- Aerial Ace
+- Stomp
+- Flame Wheel
+- Fire Spin
 

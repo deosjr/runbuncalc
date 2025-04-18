@@ -38,8 +38,8 @@ run :-
         forall(member(Pok, Box), (
             last(Pok.moves, Move),
             calculate(Pok, Opp, Move, Data),
-            PokSpeed = Data.attacker.rawStats.spe,
-            OppSpeed = Data.defender.rawStats.spe,
+            PokSpeed = Data.attacker.stats.spe,
+            OppSpeed = Data.defender.stats.spe,
             damageRolls(Pok, Opp, PokDamage),
             damageRolls(Opp, Pok, OppDamage),
             format('~w (spe: ~d) VS ~w (spe: ~d)\n', [Pok.name,PokSpeed,Opp.name,OppSpeed]),
@@ -58,7 +58,7 @@ damageRolls(Attacker, Defender, Data) :-
 damageRoll(Attacker, Defender, Move, Range) :-
     calculate(Attacker, Defender, Move, Data),
     %writeln(Data.damage),
-    % nature is included in rawStats
+    % nature is included in stats
     DefenderMaxHP = Data.defender.originalCurHP,
     (Data.damage = [Min|_] ->
         last(Data.damage, Max),
@@ -135,37 +135,37 @@ fast_kill_guaranteed(Attacker, Defender) :-
 % TODO: if Defender has Sturdy and is full HP, we cannot fast kill (unless double-hit moves, does the AI know about those?)
 fast_kill_guaranteed(Attacker, Defender, MoveName) :-
     calculate(Attacker, Defender, MoveName, Data),
-    Data.attacker.rawStats.spe > Data.defender.rawStats.spe,
+    Data.attacker.stats.spe > Data.defender.stats.spe,
     damageRoll(Attacker, Defender, MoveName, MoveName-[LowRollPercent|_]),
     LowRollPercent >= 100.
 
 fast_kill_possible(Attacker, Defender, MoveName) :-
     calculate(Attacker, Defender, MoveName, Data),
     % Note the >= here vs > on _guaranteed
-    Data.attacker.rawStats.spe >= Data.defender.rawStats.spe,
+    Data.attacker.stats.spe >= Data.defender.stats.spe,
     damageRoll(Attacker, Defender, MoveName, MoveName-[_,HighRollPercent]),
     HighRollPercent >= 100.
 
 slow_kill_possible(Attacker, Defender, MoveName) :-
     calculate(Attacker, Defender, MoveName, Data),
-    Data.attacker.rawStats.spe < Data.defender.rawStats.spe,
+    Data.attacker.stats.spe < Data.defender.stats.spe,
     damageRoll(Attacker, Defender, MoveName, MoveName-[_,HighRollPercent]),
     HighRollPercent >= 100.
 
 ai_is_faster(AI, Player) :-
     AI.moves = [Move|_],
     calculate(AI, Player, Move, Data),
-    Data.attacker.rawStats.spe >= Data.defender.rawStats.spe.
+    Data.attacker.stats.spe >= Data.defender.stats.spe.
 
 ai_is_slower(AI, Player) :-
     AI.moves = [Move|_],
     calculate(AI, Player, Move, Data),
-    Data.attacker.rawStats.spe < Data.defender.rawStats.spe.
+    Data.attacker.stats.spe < Data.defender.stats.spe.
 
 dead_to_crit(Defender, Attacker, MovesThatCritKill) :-
     last(Attacker.moves, Move1),
     calculate(Attacker, Defender, Move1, Data),
-    MaxHP = Data.defender.rawStats.hp,
+    MaxHP = Data.defender.stats.hp,
     maplist(highRoll(Attacker, Defender, true), Attacker.moves, Damages),
     zip_unzip(Attacker.moves, Damages, Moves),
     include([_-N]>>(N >= MaxHP), Moves, MovesThatCritKill).

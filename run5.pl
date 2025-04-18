@@ -55,4 +55,57 @@ test(bug_catcher_rick, [nondet]) :-
     % ACTUAL: Delcatty is 30/40hp vs Croagunk after killing Carvanha, so we tank a FakeOut then switch.
     % Fletchling is a speed-tie with Croagunk (which I forgot) so Exeggcute is needed for the kill. Ponyta gets paralyzed (shouldve brought a berry) but kills anyways.
 
+%test(fisherman_elliot, [nondet]) :-
+    % Delcatty FakeOut+WakeUp Slap kills Staryu. Lombre comes out, we slap it and switch to Fletchinder for the kill.
+    % Back to Delcatty for the Arrokuda to FakeOut+Slap again for the win.
+    % ACTUAL: was Lombre guaranteed to Teeter Dance on Delcatty? Either way it was perfect.
+
+%test(ruin_maniac_georgie, [nondet]) :-
+    % First fight where Delcatty is pretty useless!
+    % Palpitoad kills Dwebble with two Bubbles. Even if it gets Sticky Web off, Monferno still fast-kills Munchlax after it Belly Drums and eats Salac berry.
+    % Mawile gets countered by Ponyta and Sandygast by Exeggcute.
+    % ACTUAL: Sandygast comes out after Palpitoad kills Dwebble, who does indeed use Sticky Web.
+    % Switch to Exeggcute, it sleeps and lives some Astonishes before bringing it low with Bullet Seed. Palpitoad kills with another Bubble.
+    % Now Munchlax comes out, and as planned we kill with Low Sweep. Mawile is last and gets Flame Wheeled to death.
+
+% INTERMEZZO: I want to try fishing everywhere possible to ensure mons like Tirtouga and Quilfish
+% Route 106 for Spheal or Chewtle, Route 107 and Dewford for Remoraid/Horsea, then Route 104 for Buizel
+% ACTUAL: we get Spheal and Carvanha on 106/107, so this plan is already dead. Lets leave 104 and Dewford for now
+% and try our luck on Route 109 immediately. Result: Tentacool. Now we definitely go for the grass in 104.
+% But we cant! Not until Brawly! Thats a huge mistake! Dewford gives us Tyrogue.
+
+test(tuber_chandler, [nondet]) :-
+    Monferno = #{ability:"Vital Spirit", item:"Oran Berry", ivs:_{atk:26, def:31, hp:2, spa:29, spd:31, spe:31}, level:17, moves:["Flame Wheel", "Leer", "Low Sweep", "Mach Punch"], name:"Monferno", nature:"Modest"},
+    opponent('Tuber Chandler', [Smoochum, Elekid, Magby]),
+    assertion(fast_kill_guaranteed(Monferno, Smoochum, "Flame Wheel")),
+    post_ko_switch_in(Monferno, [Elekid, Magby], SwitchinsPostSmoochum),
+    assertion(SwitchinsPostSmoochum == [Elekid]),
+    % Elekid dies to 2x Low Sweep, second time should be slower due to speed drop
+    ElekidSlowed = Elekid.put(_{boosts:_{spe:(-1)}}),
+    ai_is_slower(ElekidSlowed, Monferno).
+    % after Elekid, switch to Delcatty to combo off Magby. This line should not need any berries.
+    % ACTUAL: Monferno solos the fight.
+    
+%test(tuber_lola, [nondet]) :-
+    % Palpitoad 2-shots Fletchinder with Bubble. Delcatty + Monferno should take out Herdier.
+    % ACTUAL: Monferno did not have to come in
+
+%test(sailor_edmond, [nondet]) :-
+    % Silk Scarf Delcatty oneshots Wingull, then kills Buizel.
+    % Palpitoad is handled by Exeggcute with Spheal as backup.
+
+%test(fisherman_bill, [nondet]) :-
+    % Ponyta kills everything, with two more Fire pokemon in the back.
+
+%test(tuber_ricky, [nondet]) :-
+    % Delcatty has a faster FakeOut and a high chance to fast-kill Aipom.
+    % Nidorino is next, we swap to Monferno to bring it low, then finish with Fletchinder.
+    % this baits Spark from Luxio, which we swap Palpitoad into for the win with Mudshot. 
+
+%test(tuber_hailey, [nondet]) :-
+    % Exeggcute hard-counters Mienfoo, baiting Nidorina. We switch Delcatty into that, and finish with Fletchinder or Tentacool.
+    % This baits Shock Wave from Flaaffy and we swap Palpitoad again.
+    % ACTUAL: we can actually pivot to Delcatty via Tentacool tanking Venoshock, baiting Shock Wave.
+    % Palpitoad gets confused but Fletchinder tanks a Fire Punch and we switch back.
+
 :- end_tests(run5).
