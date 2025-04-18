@@ -1,130 +1,60 @@
-Kadabra @ Pecha Berry
-Ability: Synchronize
-Level: 21
-Quiet Nature
-IVs: 20 HP / 18 Atk / 7 Def / 5 SpA / 31 SpD / 30 Spe
-- Confusion
-- Kinesis
-- Disable
-- Hidden Power Psychic
-
-Linoone-Galar @ Oran Berry
-Ability: Gluttony
-Level: 21
-Calm Nature
-IVs: 24 HP / 8 Atk / 4 Def / 29 SpA / 0 SpD / 30 Spe
-- Headbutt
-- Pin Missile
-- Rock Smash
-- Snarl
-
-Remoraid
-Ability: Hustle
-Level: 21
-Docile Nature
-IVs: 25 HP / 2 Atk / 20 Def / 25 SpA / 22 SpD / 14 Spe
-- Bubble Beam
-- Hidden Power Rock
-- Psybeam
-- Aurora Beam
-
-Shellos @ Oran Berry
-Ability: Sand Force
-Level: 21
-Jolly Nature
-IVs: 20 HP / 4 Atk / 11 Def / 19 SpA / 16 SpD / 9 Spe
-- Mud-Slap
-- Hidden Power Ghost
-- Water Pulse
-- Mud Shot
-
-Seadra
-Ability: Sniper
-Level: 21
-Brave Nature
-IVs: 27 HP / 27 Atk / 2 Def / 1 SpA / 6 SpD / 20 Spe
-- Bubble Beam
-- Smokescreen
-- Clear Smog
-- Twister
-
-Timburr @ Oran Berry
-Ability: Guts
-Level: 21
-Hardy Nature
-IVs: 13 HP / 10 Atk / 18 Def / 27 SpA / 3 SpD / 22 Spe
-- Wake-Up Slap
-- Rock Throw
-- Focus Energy
-- Low Kick
-
-Geodude-Alola @ Oran Berry
-Ability: Magnet Pull
-Level: 21
-Careful Nature
-IVs: 29 HP / 10 Atk / 10 Def / 21 SpA / 1 SpD / 3 Spe
-- Spark
-- Smack Down
-- Rock Smash
-- Bulldoze
-
-Clauncher
-Ability: Mega Launcher
-Level: 21
-Lonely Nature
-IVs: 2 HP / 17 Atk / 2 Def / 22 SpA / 18 SpD / 19 Spe
-- Bubble Beam
-- Aqua Jet
-- Aurora Beam
-- Bounce
-
-Sealeo
-Ability: Thick Fat
-Level: 21
-Relaxed Nature
-IVs: 1 HP / 4 Atk / 2 Def / 26 SpA / 26 SpD / 16 Spe
-- Charm
-- Brine
-- Aurora Beam
-- Rollout
-
-Prinplup
-Ability: Clear Body
-Level: 21
-Careful Nature
-IVs: 31 HP / 16 Atk / 31 Def / 20 SpA / 14 SpD / 31 Spe
-- Metal Claw
-- Aqua Jet
-- Bubble Beam
-- Pluck
-
-Lombre @ Oran Berry
-Ability: Rain Dish
-Level: 21
-Bashful Nature
-IVs: 24 HP / 2 Atk / 25 Def / 30 SpA / 16 SpD / 7 Spe
-- Natural Gift
-- Fake Out
-- Mega Drain
-- Bubble Beam
-
-Eelektrik @ Pecha Berry
-Ability: Levitate
-Level: 21
-Careful Nature
-IVs: 19 HP / 17 Atk / 4 Def / 1 SpA / 25 SpD / 22 Spe
-- Thunder Wave
-- Spark
-- Shock Wave
-- Crunch
-
-Sizzlipede
+Ponyta
 Ability: Flame Body
-Level: 21
-Quirky Nature
-IVs: 16 HP / 13 Atk / 24 Def / 30 SpA / 16 SpD / 15 Spe
-- Flame Wheel
-- Smokescreen
-- Bite
-- Bug Bite
+Level: 12
+Impish Nature
+IVs: 9 HP / 0 Atk / 19 Def / 20 SpA / 29 SpD / 21 Spe
+- Growl
+- Stomp
+- Tail Whip
+- Ember
+
+Chimchar
+Ability: Vital Spirit
+Level: 12
+Modest Nature
+IVs: 2 HP / 26 Atk / 31 Def / 29 SpA / 31 SpD / 31 Spe
+- Scratch
+- Leer
+- Ember
+- Mach Punch
+
+Delcatty
+Ability: Normalize
+Level: 12
+Serious Nature
+IVs: 15 HP / 7 Atk / 9 Def / 20 SpA / 28 SpD / 14 Spe
+- Fake Out
+- Double Slap
+- Wake-Up Slap
+- Sing
+
+Tympole
+Ability: Poison Touch
+Level: 12
+Mild Nature
+IVs: 29 HP / 17 Atk / 29 Def / 1 SpA / 5 SpD / 26 Spe
+- Bubble
+- Growl
+- Mud-Slap
+- Echoed Voice
+
+Exeggcute
+Ability: Chlorophyll
+Level: 12
+Jolly Nature
+IVs: 10 HP / 29 Atk / 27 Def / 13 SpA / 18 SpD / 6 Spe
+- Bullet Seed
+- Confusion
+- Hypnosis
+- Stun Spore
+
+Fletchling
+Ability: Keen Eye
+Level: 12
+Timid Nature
+IVs: 8 HP / 4 Atk / 19 Def / 18 SpA / 10 SpD / 1 Spe
+- Tackle
+- Growl
+- Quick Attack
+- Aerial Ace
 

@@ -127,8 +127,12 @@ calculate_http(Attacker, Defender, Move, Crit, Out) :-
     ]),
     http_get('http://localhost:3000/calculate', Out, [method(get), post(json(Data)), json_object(dict)]).
 
+fast_kill_guaranteed(Attacker, Defender) :-
+    include(fast_kill_guaranteed(Attacker, Defender), Attacker.moves, [_|_]).
+
 % AI sees speed ties as them being faster than the player
 % TODO: this will impact fast_kill tests for Player Attackers on speed ties!
+% TODO: if Defender has Sturdy and is full HP, we cannot fast kill (unless double-hit moves, does the AI know about those?)
 fast_kill_guaranteed(Attacker, Defender, MoveName) :-
     calculate(Attacker, Defender, MoveName, Data),
     Data.attacker.rawStats.spe > Data.defender.rawStats.spe,
