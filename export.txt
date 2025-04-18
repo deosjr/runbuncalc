@@ -1,16 +1,36 @@
-Exeggcute @ Oran Berry
-Ability: Chlorophyll
-Level: 17
-Jolly Nature
-IVs: 10 HP / 29 Atk / 27 Def / 13 SpA / 18 SpD / 6 Spe
-- Bullet Seed
-- Confusion
-- Sleep Powder
-- Stun Spore
+Ponyta
+Ability: Flame Body
+Level: 21
+Impish Nature
+IVs: 9 HP / 0 Atk / 19 Def / 20 SpA / 29 SpD / 21 Spe
+- Growl
+- Stomp
+- Flame Wheel
+- Bounce
+
+Sealeo @ Oran Berry
+Ability: Thick Fat
+Level: 21
+Lonely Nature
+IVs: 23 HP / 3 Atk / 14 Def / 31 SpA / 8 SpD / 16 Spe
+- Charm
+- Brine
+- Aurora Beam
+- Rollout
+
+Monferno @ Oran Berry
+Ability: Vital Spirit
+Level: 21
+Modest Nature
+IVs: 2 HP / 26 Atk / 31 Def / 29 SpA / 31 SpD / 31 Spe
+- Flame Wheel
+- Hidden Power Dragon
+- Low Sweep
+- Mach Punch
 
 Fletchinder @ Oran Berry
 Ability: Flame Body
-Level: 17
+Level: 21
 Timid Nature
 IVs: 8 HP / 4 Atk / 19 Def / 18 SpA / 10 SpD / 1 Spe
 - Flame Charge
@@ -18,19 +38,49 @@ IVs: 8 HP / 4 Atk / 19 Def / 18 SpA / 10 SpD / 1 Spe
 - Quick Attack
 - Aerial Ace
 
-Monferno @ Oran Berry
-Ability: Vital Spirit
-Level: 17
-Modest Nature
-IVs: 2 HP / 26 Atk / 31 Def / 29 SpA / 31 SpD / 31 Spe
-- Flame Wheel
-- Leer
-- Low Sweep
-- Mach Punch
+Hitmonlee
+Ability: Limber
+Level: 21
+Lonely Nature
+IVs: 4 HP / 3 Atk / 0 Def / 23 SpA / 9 SpD / 8 Spe
+- Tackle
+- Helping Hand
+- Fake Out
+- Double Kick
 
-Tentacool @ Oran Berry
+Delcatty @ Silk Scarf
+Ability: Normalize
+Level: 21
+Serious Nature
+IVs: 15 HP / 7 Atk / 9 Def / 20 SpA / 28 SpD / 14 Spe
+- Fake Out
+- Play Rough
+- Secret Power
+- Charm
+
+Carvanha @ Oran Berry
+Ability: Rough Skin
+Level: 21
+Lonely Nature
+IVs: 0 HP / 4 Atk / 6 Def / 15 SpA / 5 SpD / 26 Spe
+- Poison Fang
+- Bite
+- Water Pulse
+- Aqua Jet
+
+Palpitoad
+Ability: Poison Touch
+Level: 21
+Mild Nature
+IVs: 29 HP / 17 Atk / 29 Def / 1 SpA / 5 SpD / 26 Spe
+- Bubble Beam
+- Growl
+- Mud Shot
+- Echoed Voice
+
+Tentacool
 Ability: Liquid Ooze
-Level: 17
+Level: 21
 Careful Nature
 IVs: 12 HP / 11 Atk / 28 Def / 21 SpA / 3 SpD / 26 Spe
 - Confuse Ray
@@ -38,63 +88,22 @@ IVs: 12 HP / 11 Atk / 28 Def / 21 SpA / 3 SpD / 26 Spe
 - Hidden Power Electric
 - Acid
 
-Delcatty @ Silk Scarf
-Ability: Normalize
-Level: 17
-Serious Nature
-IVs: 15 HP / 7 Atk / 9 Def / 20 SpA / 28 SpD / 14 Spe
-- Fake Out
-- Hidden Power Flying
-- Secret Power
-- Charm
+Exeggcute
+Ability: Chlorophyll
+Level: 21
+Jolly Nature
+IVs: 10 HP / 29 Atk / 27 Def / 13 SpA / 18 SpD / 6 Spe
+- Bullet Seed
+- Psybeam
+- Sleep Powder
+- Stun Spore
 
-Ponyta @ Oran Berry
-Ability: Flame Body
-Level: 17
-Impish Nature
-IVs: 9 HP / 0 Atk / 19 Def / 20 SpA / 29 SpD / 21 Spe
-- Growl
-- Stomp
-- Flame Wheel
-- Fire Spin
-
-Spheal @ Oran Berry
-Ability: Thick Fat
-Level: 17
-Lonely Nature
-IVs: 23 HP / 3 Atk / 14 Def / 31 SpA / 8 SpD / 16 Spe
-- Charm
-- Brine
-- Powder Snow
-- Rollout
-
-Tyrogue
-Ability: Guts
-Level: 17
-Lonely Nature
-IVs: 4 HP / 3 Atk / 0 Def / 23 SpA / 9 SpD / 8 Spe
-- Tackle
-- Helping Hand
-- Fake Out
-- Foresight
-
-Palpitoad @ Oran Berry
-Ability: Poison Touch
-Level: 17
-Mild Nature
-IVs: 29 HP / 17 Atk / 29 Def / 1 SpA / 5 SpD / 26 Spe
-- Bubble
-- Growl
-- Mud Shot
-- Echoed Voice
-
-Carvanha @ Oran Berry
-Ability: Rough Skin
-Level: 17
-Lonely Nature
-IVs: 0 HP / 4 Atk / 6 Def / 15 SpA / 5 SpD / 26 Spe
-- Leer
+Boltund @ Oran Berry
+Ability: Strong Jaw
+Level: 22
+Hasty Nature
+IVs: 8 HP / 15 Atk / 6 Def / 30 SpA / 2 SpD / 22 Spe
 - Bite
-- Water Pulse
-- Aqua Jet
-
+- Hidden Power Fighting
+- Nuzzle
+- Spark

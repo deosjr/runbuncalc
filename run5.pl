@@ -119,5 +119,56 @@ test(tuber_chandler, [nondet]) :-
     % We can switch to Palpitoad immediately. It kills Whirlipede tanking Rollouts, and chips Frillish. Carvanha cleans up.
 
 %test(camper_gavi, [nondet]) :-
+    % Delcatty now fast-kills Bibarel with FakeOut+Slap. Ponyta gets 2HKOd by Tentacool. Delcatty comes back for Eelektrik.
+    % Sunflora and Dustox are killed by Ponyta and Monferno. Lets bring Exeggcute and Hitmonlee as backup.
+
+%test(battle_girl_laura, [nondet]) :-
+    % Fletchinder kills Riolu, Exeggcute kills Stufful, and Delcatty fast-kills Mankey with STAB Normal-typed Play Rough
+
+%test(sailor_brenden, [nondet]) :-
+    % We want Fletchinder for Heracross, so Delcatty leads and kills Farfetchd. We can pivot via Hitmonlee with FakeOut to guarantee the range.
+    % Remember to not wear the Silk Scarf or it gets Knocked Off (and we cant flinch Farfetchd either).
+
+%test(battle_girl_lilith, [nondet]) :-
+    % Delcatty combokills Makuhita, then Ledian comes in. Switch to Monferno to kill it, then back to Delcatty to combo through Mankeys Focus Sash.
+    % ACTUAL: Mankey does come out first, because it sees we dont OHKO it due to the Sash!
+    % A pivot via Fletchinder puts us back on track.
+
+%test(black_belt_takao, [nondet]) :-
+    % Ponyta kills Breloom with Bounce, Buneary comes out and gets Delcattyd, which leaves Mienfoo. Exeggcute can take care of that.
+    % ACTUAL: Buneary Cute Charm immobilised Delcatty, so Monferno helps out.
+
+%test(black_belt_christian, [nondet]) :-
+    % Delcatty has faster Fake Out and a guaranteed kill after on Meditite.
+    % Machoke and Gurdurr are both slower but outdamage, so Machoke comes out next.
+    % Fletchinder can take it on, and Exeggcute takes care of Gurdurr after.
+
+% INTERMEZZO: Used the Rare Candy to evolve Boltund.
+
+%test(battle_girl_jocelyn, [nondet]) :-
+    % Hitmonlee Double Kick is a guaranteed kill on Kecleon. Golett is next.
+    % switch through Delcatty (hoping on Shadow Punch) and take a Drain Punch into Boltund. Bite twice and hope on no crits.
+    % Hakamo-o is next because it outdamages. Monferno with HP Dragon should take care of that.
+    % Last is Pignite, and Palpitoad should be enough to secure the win. Tentacool in the back can help out if needed.
+    % ACTUAL: Pignite comes out before Hakamo-o, it actually also outdamages Boltund.
+    % Hakamo-o Dragon Tails Monferno on the switch, dragging out Hitmonlee. It FakeOuts+DoubleKicks, and another tail drags out Boltund.
+    % Yet another Dragon Tail brings back Monferno, who finally finishes with HP Dragon.
+
+%test(leader_brawly, [nondet]) :-
+    % Fletchinder 2HKOs Kubfu with Aerial Ace (it is speed tied). Lopunny comes in for the Retaliate but gets ejected out after Quick Attack.
+    % This should bring in Combusken baiting Thunder Punch. Palpitoad switches in and 2x Mud Shot should kill it.
+    % Hitmontop is a speed tie and would come in after on a low Palpitoad; would Pursuit kill it for sure.
+    % I dont see a better plan, so lets sac Palpitoad. Ponyta Bounce will have to weaken it, get sacced as well, so that Delcatty can finish it off.
+    % Poliwhirl comes in, switch Fletchinder(?) into Superpower or immediately to Boltund for Spark.
+    % Hitmonlee deals with Scraggy. Pray we dont sac more to Lopunny in the end.
+    % ACTUAL: I get screwed by our own crit Aerial Ace, triggering Kubfus berry and healing it. It does get burned hitting us back.
+    % Its just out of range for Quick Attack, so I go for Ace but get Zen Headbutt flinched. Burn brings it in range now and Quick Attack kills.
+    % Lopunny gets quick ejected and brings out Poliwhirl (ah, because it is faster!).
+    % it goes for Ice Beam instead of Bubble Beam on the switch to Boltund and freezes it..
+    % Boltund never thaws and dies. Delcatty revenge kills without taking damage. Lopunny is now back.
+    % I opt to stay in and chip with Play Rough. switch to Fletchinder to Quick Attack and get sacrificed.
+    % Hitmonlee is next, and it crits Fake Out! Combusken is next, switch to Palpitoad. It chips and dies. Delcatty and Hitmonlee take turns to FakeOut.
+    % Hitmontop comes out on 28/52hp Hitmonlee. Monferno dies to it while chipping (shouldve brought Ponyta!). Rest of the team wipes to Hitmontop.
+    % AFTERWARDS: I play the fight once more, and win with Hitmonlee and Monferno alive. Boltund couldve lived too but it died trying to paralyze a Limber Lopunny..
 
 :- end_tests(run5).
