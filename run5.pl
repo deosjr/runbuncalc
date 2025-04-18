@@ -108,7 +108,7 @@ test(tuber_chandler, [nondet]) :-
     % ACTUAL: we can actually pivot to Delcatty via Tentacool tanking Venoshock, baiting Shock Wave.
     % Palpitoad gets confused but Fletchinder tanks a Fire Punch and we switch back.
 
-%test(team_aqua_grunts_museam, [nondet]) :-
+%test(team_aqua_grunts_museum, [nondet]) :-
     % Delcatty leads into Murkrow. Skrelp does nothing vs Tentacool with HP Electric. Tirtouga meets Exeggcute.
     % Mareanie is again powerless vs Tentacool. Frillish is harder: pivot through Delcatty to Palpitoad, chip it,
     % then switch to Carvanha guaranteed not to eat a Shock Wave and kill with Bite.

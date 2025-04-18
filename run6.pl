@@ -55,7 +55,6 @@
 
 % INTERMEZZO: caught Chewtle, Horsea (with Dragon Scale!!) and Tentacool
 
-% NOT YET FOUGHT
 test(camper_gavi, [nondet]) :-
     % Grotle kills Bibarel with 2x Razor Leaf, and cannot get crit.
     % Dont equip a berry because of Pluck; we are uneven HP so Super Fang will not trigger it before
@@ -93,5 +92,19 @@ test(camper_gavi, [nondet]) :-
     % Grotle can then switch in on a Shock Wave and further chip with Razor Leaf.
     % Finally, Vivillon switches (via Chinchou) on a Mega Drain and finishes with Struggle Bug.
     % Last is Dustox, who Vivillon can 2HKO and Fletchinder can 3HKO.
+
+% caught an Electrike in route 110
+
+%test(team_aqua_grunts_museum, [nondet]) :-
+    % This fight goes horribly wrong. Chewtle kills Murkrow with 2x Ice Fang, then Skrelp comes out
+    % Palpitoad kills it with Mud Shots. Tirtouga is countered by Grotle with 2x Razor Leaf.
+    % Mareanie takes a Bite from Chewtle, then crits it down. Palpitoad kills it as well.
+    % Now Frillish comes out and it is a big problem. I can switch between Tentacool tanking Hex and baiting Shock Wave
+    % so that Chinchou can alternate between healing on it and using Electro Ball.
+    % Confusion x2 works through some of its uses of Recover before it goes down.
+    % Whirlipede comes out and I switch to Pidgeotto. It uses Feather Dance x3 bringing Whirlipede to -6.
+    % Then it starts chipping with Air Cutter but I misjudge Rollout damage and die.
+    % I try tanking the last rollout with Chewtle but it also dies. Palpitoad is the last to die to Whirlipede.
+    % Finally Chinchou manages to bring it down.
     
 :- end_tests(run6).
