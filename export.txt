@@ -1,78 +1,129 @@
-Turtwig
-Ability: Shell Armor
-Level: 12
-Rash Nature
-IVs: 31 HP / 25 Atk / 30 Def / 31 SpA / 31 SpD / 7 Spe
-- Bite
-- Growl
-- Absorb
-- Confide
-
-Surskit
-Ability: Swift Swim
-Level: 12
-Sassy Nature
-IVs: 23 HP / 30 Atk / 9 Def / 10 SpA / 20 SpD / 3 Spe
-- Bubble
-- Quick Attack
-- Sweet Scent
-- Bubble Beam
-
-Litleo
-Ability: Unnerve
-Level: 12
-Gentle Nature
-IVs: 29 HP / 21 Atk / 3 Def / 24 SpA / 23 SpD / 0 Spe
-- Tackle
-- Leer
-- Ember
-- Headbutt
-
-Fletchling
-Ability: Keen Eye
-Level: 12
-Adamant Nature
-IVs: 7 HP / 5 Atk / 4 Def / 4 SpA / 0 SpD / 0 Spe
-- Tackle
-- Growl
-- Quick Attack
-- Aerial Ace
-
-Pidgey
-Ability: Keen Eye
-Level: 12
-Calm Nature
-IVs: 26 HP / 22 Atk / 15 Def / 9 SpA / 18 SpD / 4 Spe
-- Gust
-- Sand Attack
-- Tackle
-
-Chinchou
-Ability: Volt Absorb
-Level: 12
-Jolly Nature
-IVs: 23 HP / 14 Atk / 6 Def / 30 SpA / 4 SpD / 29 Spe
-- Bubble
-- Supersonic
-- Bubble Beam
-- Electro Ball
-
-Vivillon
-Ability: Compound Eyes
-Level: 12
-Hasty Nature
-IVs: 3 HP / 11 Atk / 22 Def / 28 SpA / 20 SpD / 26 Spe
-- Air Cutter
-- String Shot
-- Stun Spore
-- Protect
-
-Tympole
+Palpitoad @ Oran Berry
 Ability: Poison Touch
-Level: 12
+Level: 17
 Quirky Nature
 IVs: 19 HP / 7 Atk / 8 Def / 12 SpA / 8 SpD / 14 Spe
 - Bubble
 - Growl
-- Mud-Slap
+- Mud Shot
 - Echoed Voice
+
+Vivillon @ Oran Berry
+Ability: Compound Eyes
+Level: 17
+Hasty Nature
+IVs: 3 HP / 11 Atk / 22 Def / 28 SpA / 20 SpD / 26 Spe
+- Air Cutter
+- Struggle Bug
+- Stun Spore
+- Protect
+
+Grotle @ Oran Berry
+Ability: Shell Armor
+Level: 17
+Rash Nature
+IVs: 31 HP / 25 Atk / 30 Def / 31 SpA / 31 SpD / 7 Spe
+- Bite
+- Razor Leaf
+- Absorb
+- Sand Tomb
+
+Chewtle
+Ability: Strong Jaw
+Level: 17
+Lax Nature
+IVs: 18 HP / 16 Atk / 7 Def / 9 SpA / 27 SpD / 18 Spe
+- Tackle
+- Water Pulse
+- Bite
+- Ice Fang
+
+Horsea
+Ability: Sniper
+Level: 17
+Gentle Nature
+IVs: 9 HP / 12 Atk / 20 Def / 29 SpA / 28 SpD / 10 Spe
+- Bubble Beam
+- Smokescreen
+- Leer
+- Twister
+
+Tentacool
+Ability: Clear Body
+Level: 17
+Careful Nature
+IVs: 16 HP / 30 Atk / 12 Def / 19 SpA / 16 SpD / 19 Spe
+- Poison Sting
+- Confuse Ray
+- Water Pulse
+- Acid
+
+Surskit @ Oran Berry
+Ability: Swift Swim
+Level: 17
+Sassy Nature
+IVs: 23 HP / 30 Atk / 9 Def / 10 SpA / 20 SpD / 3 Spe
+- Struggle Bug
+- Quick Attack
+- Sweet Scent
+- Bubble Beam
+
+Pidgeotto
+Ability: Keen Eye
+Level: 17
+Calm Nature
+IVs: 26 HP / 22 Atk / 15 Def / 9 SpA / 18 SpD / 4 Spe
+- Feather Dance
+- Sand Attack
+- Tackle
+- Air Cutter
+
+Fletchinder @ Oran Berry
+Ability: Flame Body
+Level: 17
+Adamant Nature
+IVs: 7 HP / 5 Atk / 4 Def / 4 SpA / 0 SpD / 0 Spe
+- Flame Charge
+- Growl
+- Quick Attack
+- Aerial Ace
+
+Chinchou @ Oran Berry
+Ability: Volt Absorb
+Level: 17
+Jolly Nature
+IVs: 23 HP / 14 Atk / 6 Def / 30 SpA / 4 SpD / 29 Spe
+- Confuse Ray
+- Supersonic
+- Bubble Beam
+- Electro Ball
+
+Mienfoo @ Oran Berry
+Ability: Inner Focus
+Level: 17
+Serious Nature
+IVs: 26 HP / 0 Atk / 19 Def / 1 SpA / 22 SpD / 5 Spe
+- Pound
+- Rock Smash
+- Fake Out
+- Double Slap
+
+Litleo @ Oran Berry
+Ability: Unnerve
+Level: 17
+Gentle Nature
+IVs: 29 HP / 21 Atk / 3 Def / 24 SpA / 23 SpD / 0 Spe
+- Noble Roar
+- Incinerate
+- Ember
+- Headbutt
+
+Electrike
+Ability: Static
+Level: 17
+Gentle Nature
+IVs: 15 HP / 21 Atk / 7 Def / 18 SpA / 10 SpD / 23 Spe
+- Thunder Wave
+- Thunder Fang
+- Bite
+- Quick Attack
