@@ -24,4 +24,35 @@ test(bug_catcher_rick, [nondet]) :-
     % (from the docs): No, the AI does not understand it has stat lowering abilities like Intimidate when determining the switch in.
     % It looks at the damage you do to it as if it were to be unchanged if it entered battle. It does however understand that Sturdy prevents it from getting OHKOed. (!)
 
+%test(youngster_allen, [nondet]) :-
+    % Delcatty kills everything, though doesnt fast-sweep anymore
+    % ACTUAL: FakeOut + WakeUp Slap kill Skiddo and Delcatty hits the range for both other mons, fast-sweeping anyways
+
+%test(lass_tiana, [nondet]) :-
+    % FakeOut + WakeUp Slap fast-kills Swirlix (unless crit FakeOut procs Berry Juice), 3x WakeUp Slap should kill Spinda (it has Juice too)
+    % ACTUAL: easiest Metronome fight thus far by far
+
+%test(traithlete_mikey, [nondet]) :-
+    % I finally figured out why Yanma has Iron Ball! Its not to nerf its Speed Boost a little, its so that Clobbopus is more likely to come out first!
+    % So we want to bait Yanma before Clobbopus, to prevent getting trapped by bind and Sonic Boomed to death.
+    % Delcatty is our most reliable Yanma counter on the switch, with FakeOut + 2x WakeUp Slap. It can take 2x Sonic Boom with an Oran Berry
+    % To bait Yanma, we need to get our lead pokemon to kill Krabby with 20hp or less remaining, and to resist Clobbopus Rock Smash.
+    % Exeggcute is the perfect pokemon to do this; it can stall with stun spore and take damage until low enough, and kill with Bullet Seed
+    % When Clobbopus finally comes out, we switch Fletchling in and kill with 2x Aerial Ace.
+    % NOTE: I forgot, we even get some new encounters first! But we dont need those right now
+    % ACTUAL: Krabby is actually guaranteed to Aqua Jet because it sees Exeggcute kiling it with Bullet Seed.
+    % Yanma does come out, Delcatty hits a range and has 30/40 hp remaining when it goes down.
+    % Clobbopus is still scary with Defense-lowering Rock Smash, but we manage to kill it with a crit.
+
+%test(fisherman_darian, [nondet]) :-
+    % Delcatty should solo this.. and does (with a switchin from Ponyta onto Bounce, that burns with Flame Body)
+
+%test(lady_cindy, [nondet]) :-
+    % Delcatty deals with Minccino but gets paralyzed twice. Ponyta flinches Jigglypuff repeatedly with Stomp and leaves Phanpy burned, for Tympole to clean up.
+
+%test(team_aqua_grunt, [nondet]) :-
+    % Delcatty deals with Carvanha, Croagunk meets Fletchling + Exeggcute and Exeggcute is killed by Ponyta with Ember
+    % ACTUAL: Delcatty is 30/40hp vs Croagunk after killing Carvanha, so we tank a FakeOut then switch.
+    % Fletchling is a speed-tie with Croagunk (which I forgot) so Exeggcute is needed for the kill. Ponyta gets paralyzed (shouldve brought a berry) but kills anyways.
+
 :- end_tests(run5).
