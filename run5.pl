@@ -108,4 +108,16 @@ test(tuber_chandler, [nondet]) :-
     % ACTUAL: we can actually pivot to Delcatty via Tentacool tanking Venoshock, baiting Shock Wave.
     % Palpitoad gets confused but Fletchinder tanks a Fire Punch and we switch back.
 
+%test(team_aqua_grunts_museam, [nondet]) :-
+    % Delcatty leads into Murkrow. Skrelp does nothing vs Tentacool with HP Electric. Tirtouga meets Exeggcute.
+    % Mareanie is again powerless vs Tentacool. Frillish is harder: pivot through Delcatty to Palpitoad, chip it,
+    % then switch to Carvanha guaranteed not to eat a Shock Wave and kill with Bite.
+    % Whirlipede is last and is killed by Ponyta.
+    % ACTUAL: Tirtouga comes out before Skrelp because it outdamages Delcatty.
+    % Whirlipede comes out before Frillish again because it outdamages Tentacool and Frillish doesnt.
+    % Whirlipede brings Ponyta pretty low with Rollouts, but is burned in the process.
+    % We can switch to Palpitoad immediately. It kills Whirlipede tanking Rollouts, and chips Frillish. Carvanha cleans up.
+
+%test(camper_gavi, [nondet]) :-
+
 :- end_tests(run5).

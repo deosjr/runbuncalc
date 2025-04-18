@@ -1,4 +1,4 @@
-Exeggcute
+Exeggcute @ Oran Berry
 Ability: Chlorophyll
 Level: 17
 Jolly Nature
@@ -18,46 +18,6 @@ IVs: 8 HP / 4 Atk / 19 Def / 18 SpA / 10 SpD / 1 Spe
 - Quick Attack
 - Aerial Ace
 
-Spheal
-Ability: Thick Fat
-Level: 17
-Lonely Nature
-IVs: 23 HP / 3 Atk / 14 Def / 31 SpA / 8 SpD / 16 Spe
-- Charm
-- Brine
-- Powder Snow
-- Rollout
-
-Carvanha
-Ability: Rough Skin
-Level: 17
-Lonely Nature
-IVs: 0 HP / 4 Atk / 6 Def / 15 SpA / 5 SpD / 26 Spe
-- Leer
-- Bite
-- Water Pulse
-- Aqua Jet
-
-Tentacool
-Ability: Liquid Ooze
-Level: 17
-Careful Nature
-IVs: 12 HP / 11 Atk / 28 Def / 21 SpA / 3 SpD / 26 Spe
-- Confuse Ray
-- Water Pulse
-- Constrict
-- Acid
-
-Tyrogue
-Ability: Guts
-Level: 17
-Lonely Nature
-IVs: 4 HP / 3 Atk / 0 Def / 23 SpA / 9 SpD / 8 Spe
-- Tackle
-- Helping Hand
-- Fake Out
-- Foresight
-
 Monferno @ Oran Berry
 Ability: Vital Spirit
 Level: 17
@@ -68,24 +28,24 @@ IVs: 2 HP / 26 Atk / 31 Def / 29 SpA / 31 SpD / 31 Spe
 - Low Sweep
 - Mach Punch
 
-Palpitoad @ Oran Berry
-Ability: Poison Touch
+Tentacool @ Oran Berry
+Ability: Liquid Ooze
 Level: 17
-Mild Nature
-IVs: 29 HP / 17 Atk / 29 Def / 1 SpA / 5 SpD / 26 Spe
-- Bubble
-- Growl
-- Mud Shot
-- Echoed Voice
+Careful Nature
+IVs: 12 HP / 11 Atk / 28 Def / 21 SpA / 3 SpD / 26 Spe
+- Confuse Ray
+- Water Pulse
+- Hidden Power Electric
+- Acid
 
-Delcatty @ Oran Berry
+Delcatty @ Silk Scarf
 Ability: Normalize
 Level: 17
 Serious Nature
 IVs: 15 HP / 7 Atk / 9 Def / 20 SpA / 28 SpD / 14 Spe
 - Fake Out
-- Double Slap
-- Wake-Up Slap
+- Hidden Power Flying
+- Secret Power
 - Charm
 
 Ponyta @ Oran Berry
@@ -97,4 +57,44 @@ IVs: 9 HP / 0 Atk / 19 Def / 20 SpA / 29 SpD / 21 Spe
 - Stomp
 - Flame Wheel
 - Fire Spin
+
+Spheal @ Oran Berry
+Ability: Thick Fat
+Level: 17
+Lonely Nature
+IVs: 23 HP / 3 Atk / 14 Def / 31 SpA / 8 SpD / 16 Spe
+- Charm
+- Brine
+- Powder Snow
+- Rollout
+
+Tyrogue
+Ability: Guts
+Level: 17
+Lonely Nature
+IVs: 4 HP / 3 Atk / 0 Def / 23 SpA / 9 SpD / 8 Spe
+- Tackle
+- Helping Hand
+- Fake Out
+- Foresight
+
+Palpitoad @ Oran Berry
+Ability: Poison Touch
+Level: 17
+Mild Nature
+IVs: 29 HP / 17 Atk / 29 Def / 1 SpA / 5 SpD / 26 Spe
+- Bubble
+- Growl
+- Mud Shot
+- Echoed Voice
+
+Carvanha @ Oran Berry
+Ability: Rough Skin
+Level: 17
+Lonely Nature
+IVs: 0 HP / 4 Atk / 6 Def / 15 SpA / 5 SpD / 26 Spe
+- Leer
+- Bite
+- Water Pulse
+- Aqua Jet
 
