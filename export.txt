@@ -108,3 +108,12 @@ IVs: 24 HP / 9 Atk / 1 Def / 8 SpA / 25 SpD / 18 Spe
 - Powder Snow
 - Rollout
 
+Tirtouga
+Ability: Solid Rock
+Level: 17
+Naive Nature
+IVs: 25 HP / 28 Atk / 22 Def / 31 SpA / 6 SpD / 8 Spe
+- Bite
+- Mud-Slap
+- Smack Down
+- Aqua Jet

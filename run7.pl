@@ -173,4 +173,24 @@ test(tuber_chandler, [nondet]) :-
     % ACTUAL: Magby comes in first, and indeed Magby outdamages but Elekid doesnt. Bug = fixed.
     % Definitely needed both Pancham and Lombre vs Elekid to play safe.
 
+test(tuber_lola, [nondet]) :-
+    % Welcome to the squad, Tirtouga!
+    box(BoxOld),
+    Tirtouga = #{ability:"Solid Rock", ivs:_{atk:28, def:22, hp:25, spa:31, spd:6, spe:8}, level:17, moves:["Bite", "Mud-Slap", "Smack Down", "Aqua Jet"], name:"Tirtouga", nature:"Naive"}, 
+    Box = [Tirtouga|BoxOld],
+    opponent('Tuber Lola', Lola),
+    find_line_less_naive(Box, Lola, Line),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    assertion(Names == ["Tirtouga", "Tirtouga"]),
+    % Tirtouga slow-kills Fletchinder with Smack Down. It can stay in to chip Herdier but we need a safe finisher
+    % Pancham can try but Headbutt flinches are a thing. We can pivot through Staravia, who also serves as a finisher
+    % Other options for chip damage are Prinplup, Spheal and Shellos
+    get_pokemon_by_name("Pancham", Box, Pancham),
+    get_pokemon_by_name('Herdier', Lola, Herdier),
+    % using BoxOld because it recommends pivotting through Tirtouga, who baits Rock Smash instead of Ice Fang
+    % nice try computer, but it has already seen some action (should have told you by setting its HP low instead)
+    pivot(Herdier, Tirtouga, Pancham, BoxOld, Via),
+    assertion(Via.name == "Staravia").
+    % ACTUAL: Tirtouga solos because it cannot be killed, even Intimidated and at -2 defense from Rock Smashes. No crits involved.
+
 :- end_tests(run7_dewford).
