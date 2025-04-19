@@ -164,5 +164,14 @@ test(camper_gavi, [nondet]) :-
     % There is no point though, because they are both special attackers, so stalling out Superpower does nothing.
     % Kingdra gets a Twister off before it gets low. I dont risk a crit and switch Vivillon, who Draining Kiss + Air Cutter wins!
 
+%test(bug_catcher_lyle, [nondet]) :-
+    % lets work backwards for once, since I really want Litleo to slowkill Ninjask with Incinerate.
+    % That means it needs to come in on a Leech Life or ideally on a Giga Drain.
+    % Rhyhorn can take out Ariados and bait Giga Drain, but it may need chip damage to be safe. Smack down deals at least 60%.
+    % Kingdra could do it with a Bubble Beam, but it baits Pin Missile.
+    % Grotle Sand Tomb + Mienfoo (switching in on Pin Missile) with Fake Out is the best I can do without risking deaths to crits.
+    % Kricketune is met by Kingdra and if it chips even once, Vivillon will switch in to finish.
+    % ACTUAL: only thing that couldve gone better is if I didnt equip a berry to Kingdra, because it got Bug bitten..
+
     
 :- end_tests(run6).
