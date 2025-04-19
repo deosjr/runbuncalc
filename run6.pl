@@ -106,5 +106,33 @@ test(camper_gavi, [nondet]) :-
     % Then it starts chipping with Air Cutter but I misjudge Rollout damage and die.
     % I try tanking the last rollout with Chewtle but it also dies. Palpitoad is the last to die to Whirlipede.
     % Finally Chinchou manages to bring it down.
+    % NOTE TO SELF: a steel type wouldve probably made a big difference. Stop delaying Granite Cave
+
+%test(battle_girl_laura, [nondet]) :-
+    % Vivillon sweeps, even hitting all its ranges
+
+%test(sailor_brenden, [nondet]) :-
+    % Kingdra 2HKOs Farfetchd with Bubble Beam, and Fletchinder solos Heracross with Vivillon as backup
+
+%test(battle_girl_lilith, [nondet]) :-
+    % Vivillon solos Makuhita and Mankey, Kingdra switches in on Ledian and gets Ice Punch frozen instantly..
+    % steer by sending out Mienfoo, who solos(!) using Fake Out, 2x Rock Smash, and a 4 hit Double Slap ending in crit.
+
+%test(black_belt_takao, [nondet]) :-
+    % Vivillon fast-kills Breloom, Kingdra takes care of Buneary, and Vivillon switches in on a Drain Punch to OHKO Mienfoo
+
+%test(black_belt_christian, [nondet]) :-
+    % Grotle solos Meditite and chips Machoke to half with a crit Razor Blade. Vivillon finishes.
+    % Gurdurr can kill with Rock Throw but sees that Vivillon has a range to fast-kill it, so it Mach Punches (is this guaranteed??)
+    % So maybe the fight couldve ended there, but I played (too?) safe and finished it with Kingdra instead.
+
+%test(battle_girl_jocelyn, [nondet]) :-
+    % Mienfoo FakeOut + Force Palm take Kecleon very low. It Dizzy Punches, so I steer via Vivillon but take a Thunder Wave para
+    % I had an anti-para berry on Mienfoo but not Vivillon, which was intended to take out Hakamo-o, so we steer from here.
+    % Vivillon kills Kecleon through para, then Golett gets Absorbed by Grotle. Kingdra switches without berry on Pignite Incinerate.
+    % 2x Bubble Beam kills it. Interestingly it went for Flame Charge over its more damaging moves, so Kingdra is very healthy going into Hakamo-o.
+    % This lets me kill it with Twister, which is super effective. Vivillon wasnt needed. Backup was Litleo to incinerate the Sitrus berry.
+
+%test(leader_brawly, [nondet]) :-
     
 :- end_tests(run6).
