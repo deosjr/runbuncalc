@@ -122,13 +122,13 @@ dead_to_crit(Defender, Attacker, MovesThatCritKill) :-
 
 outdamages(Pokemon, Opponent) :-
     damageRolls(Pokemon, Opponent, PokRolls),
-    damageRolls(Opponent, Opponent, OppRolls),
-    predsort(moveRangeByHighest, PokRolls, [_-[_,PokHigh]]),
-    predsort(moveRangeByHighest, OppRolls, [_-[_,OppHigh]]),
+    damageRolls(Opponent, Pokemon, OppRolls),
+    predsort(moveRangeByHighest, PokRolls, [_-[_,PokHigh]|_]),
+    predsort(moveRangeByHighest, OppRolls, [_-[_,OppHigh]|_]),
     PokHigh > OppHigh.
 
-moveRangeByHighest(>, _-[_,H1], _-[_,H2]) :- H1 > H2.
-moveRangeByHighest(<, _-[_,H1], _-[_,H2]) :- H1 < H2.
+moveRangeByHighest(>, _-[_,H1], _-[_,H2]) :- H1 < H2.
+moveRangeByHighest(<, _-[_,H1], _-[_,H2]) :- H1 > H2.
 moveRangeByHighest(=, _-[_,H1], _-[_,H2]) :- H1 = H2.
 
 % TODO: if multiple Pokémon have the same score, the AI sends in their Pokémon in party order

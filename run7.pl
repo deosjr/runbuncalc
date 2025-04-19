@@ -98,13 +98,14 @@ test(team_aqua_grunt, [nondet]) :-
     opponent('Team Aqua Grunt Petalburg Woods', Grunt),
     find_line_less_naive(Box, Grunt, Line),
     maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    % UPDATE: suggesting Psyduck instead of Surskit after bug fix
     % I like Beedrill first and last (though note we think we are faster because of a speed tie).
     % Surskit again is not that great of a pick, Piplup should do much better vs Croagunk.
     % Switching becomes more interesting here, making sure we have healthy lead matchups.
     % Psyduck can tank FakeOut from Croagunk (it will come out, Beedrill outdamages/outspeeds both).
     % Scratch + Confusion will kill without proccing Salac berry (I almost missed that!).
     % This means Beedrill can come in on a Bullet Seed and kill with Bug Bite
-    assertion(Names == ["Beedrill", "Surskit", "Beedrill"]).
+    assertion(Names == ["Beedrill", "Psyduck", "Beedrill"]).
     % ACTUAL: learned that bug bite triggers before rough skin.
     % Psyduck wasnt super low but still got a Confusion instead of Bullet Seed.
 
@@ -141,10 +142,10 @@ test(ruin_maniac_georgie, [nondet]) :-
     opponent('Ruin Maniac Georgie', Georgie),
     find_line_less_naive(Box, Georgie, Line),
     maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
-    % Oh boy. Prinplup is great here, but Pancham needs to come out to counter Belly Drum shenanigans.
+    % Oh boy. Prinplup is great here, but Pancham needs to come out to counter Belly Drum shenanigans instead of Staravia.
     % Im expecting Munchlax second, so after Pancham kills it Mawile will want to come out because it outdamages with Covet.
     % Pivot to Prinplup is safest via a mon that takes Covet well and baits Metal Claw or Fire Fang: Beedrill.
-    assertion(Names == ["Prinplup", "Prinplup", "Prinplup", "Prinplup"]),
+    assertion(Names == ["Prinplup", "Prinplup", "Prinplup", "Staravia"]),
     get_pokemon_by_name("Prinplup", Box, Prinplup),
     get_pokemon_by_name("Pancham", Box, Pancham),
     % TODO: trainer pokemon names are atoms..
@@ -153,5 +154,23 @@ test(ruin_maniac_georgie, [nondet]) :-
     pivot(Mawile, Pancham, Prinplup, Box, Via),
     assertion(Via.name == "Beedrill").
     % ACTUAL: exactly like we drew it up.
+
+test(tuber_chandler, [nondet]) :-
+    box(Box),
+    opponent('Tuber Chandler', Chandler),
+    find_line_less_naive(Box, Chandler, Line),
+    Chandler = [_Smoochum, _Elekid, Magby],
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    assertion(Names == ["Beedrill", "Prinplup", "Prinplup"]),
+    % Elekid vs Prinplup seems wrong, rest is fine.
+    get_pokemon_by_name("Beedrill", Box, Beedrill),
+    post_ko_switch_in(Beedrill, Chandler, [Switchin|_]),
+    assertion(Switchin == Magby). % both are faster, but only Magby outdamages Beedrill
+    % Prinplup is suggested because no one in the box outspeeds, and it is the first to outdamage Elekid
+    % But we want to use it for Magby instead.
+    % both Pancham and Lombre resist Elekids attacks overall really well, and have decent damage
+    % We can bring both just to be sure.
+    % ACTUAL: Magby comes in first, and indeed Magby outdamages but Elekid doesnt. Bug = fixed.
+    % Definitely needed both Pancham and Lombre vs Elekid to play safe.
 
 :- end_tests(run7_dewford).
