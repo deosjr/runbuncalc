@@ -173,5 +173,39 @@ test(camper_gavi, [nondet]) :-
     % Kricketune is met by Kingdra and if it chips even once, Vivillon will switch in to finish.
     % ACTUAL: only thing that couldve gone better is if I didnt equip a berry to Kingdra, because it got Bug bitten..
 
+%test(bug_maniac_james, [nondet]) :-
+    % Kingdra kills Larvesta. Ribombee comes out because it outspeeds, I go for Bubble Beam chip and crit kill instead.
+    % Vivillon would have been the answer. Next is Vibrava, for which I brought Grotle without a berry.
+    % Grotle 2-shots it and has high HP remaining, so it can stay in to try and kill Shedinja with Bite.
+    % That works; Fletchinder was in the back to Aerial Ace through Bright Powder just in case.
+
+%test(rich_boy_winston, [nondet]) :-
+    % Kingdra tanks Furfrou and Bubble Beams twice, then Vivillon comes in to kill it and fast-kills Mightyena.
+
+%test(fisherman_ivan, [nondet]) :-
+    % Vivillon solos Qwilfish by baiting Dive and Protecting when it hits.
+    % Sealeo gets solod by Litleo using Incinerate because it prefers Aurora Beam over Whirlpool.
+    % Litleo then baits Seadra to use Brine, so Grotle can switch in and Mega Drain for the win.
+
+%test(twins_gina_and_mia, [nondet]) :-
+    % first (true) double battle!
+    % Vivillon baits Electroweb and Protects while Grotle uses Razor Leaf. (we could learn Bug Bite to get rid of Sitrus?)
+    % Second turn we switch Vivillon into Chinchou and take no damage.
+    % Third we switch Chinchou into Litleo to tank Dazzling Gleam. Grotle Razor Leafs one last time.
+    % Mienfoo switches in on Abra to Fake Out. Togedemaru is pretty useless vs Chinchou and Grotle.
+    % Kingdra is backup if things go wrong. Lets see if I understand Double Battles, its been a while.
+    % ACTUAL: second Razor Leaf is a crit on Clefairy. Chinchou stays in for a turn to chip at Clefairy
+    % Lots of switching while I figure targetting AI out. I remember cross-positioning, but thats superseded when AI sees a kill?
+    % Anyway, Volt Absorb is MVP here as I Protect and Predict. Clefairy gets taken out first, then Abra, so that Mienfoo can come in.
+    % In hindsight, Litleo Unnerve/Incinerate wouldve worked great as a lead to deal with Dedenne!
+
+%test(lass_haley, [nondet]) :-
+    % Grotle 2HKOs Lumineon, then Gloom comes out. Litleo can take it on and has low Atk stat vs Strength Sap.
+    % Staravia is next because we are low HP and it is faster. Kingdra tanks and kills it, and fast-kills Numel through its Passho berry.
+    % ACTUAL: Grotle gets flinched twice in a row without dealing damage, so Chinchou has to come in and Shock Wave it x2 instead.
+    % This actually works out better because now Litleo comes in guaranteed on Glooms Magical Leaf.
+    % Litleo gets put to sleep after one Incinerate but wakes up in time.
+    % Numel comes out first because it sees a kill with Earth Power and Staravia doesnt see a kill yet.
+    % Kingdra switches in and kills it, then puts Staravia to 1HP with Aurora Beam. Rhyhorn comes in for the kill with Smack Down.
     
 :- end_tests(run6).
