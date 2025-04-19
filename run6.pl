@@ -231,5 +231,20 @@ test(camper_gavi, [nondet]) :-
     % Carnivine is sacrificed. Rest of the team is not healthy enough to risklessly kill Gyarados now.
     % Vivillons second Air Cutter critting is its only chance to stay alive: it doesnt and so it is killed too.
     % Mienfoo FakeOut is just enough to not need even more sacrifices here.
+
+%test(school_kids_jerry_and_johnson, [nondet]) :-
+    % I just lost my only Protect user, which hurts a lot.
+    % I lead Mienfoo and Electrike, switching for Grotle and FakingOut the Simipour.
+    % This runs into Super Fang on Grotle + Icy Wind, but Grotle lives through that, and Mienfoo can Drain Punch Purugly.
+    % Razor Leaf cleans Purugly up and brings Simipour low (should that have been a Miracle Seed Razor Leaf?)
+    % Sneasel comes out. Grotle baits both Ice moves and switches to Kingdra. Mienfoo leaves Sneasel on 1hp with Drain Punch due to Focus Sash.
+    % Tentacool switches in to take the hits headed for Mienfoo, while Kingdra takes out Sneasel.
+    % Turns out, this is not a true double, and so Simipour is left alone! HP Rock finished the rest of the fight while the other slot baits hits.
+
+%test(bug_catcher_jose, [nondet]) :-
+    % Pinsir takes a Smack Down from Rhyhorn, then I pivot via Fletchinder into Mienfoo to FakeOut + Bounce. This brings it super low.
+    % I switch to Rhyhorn again, who dies, then chip the last bit of damage with another FakeOut.
+    % Fletchinder pivots taking First Impression and baiting Thunder Fang. Chinchou pivots to Litleo and we kill with Incinerate.
+    % Switch to Kingdra, get crit with Bug Buzz from Vivillon, and wipe due to lack of speed.
     
 :- end_tests(run6).
