@@ -228,11 +228,43 @@ test(fisherman_bill, [nondet]) :-
     opponent('Fisherman Bill', Bill),
     find_line_less_naive(Box, Bill, Line),
     maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    % OLD: assertion(Names == ["Houndour", "Houndour", "Houndour","Houndour","Houndour"]).
+    % NEW: fixed! Beedrill at the end there because the last bug uses Struggle Bug, a Special move.
+    assertion(Names == ["Staravia", "Staravia", "Staravia","Staravia","Beedrill"]).
     % funny, Houndour comes before Staravia in party order. Both fast-kill the entire team except for Scatterbug.
     % Id much prefer to take Staravia because it takes at most 31.2% from a crit while Houndour would be dead.
     % Suggests some subsorting within the priority categories for taking less max damage back that we could try.
-    %assertion(Names == ["Houndour", "Houndour", "Houndour","Houndour","Houndour"]).
-    % Fixed! Beedrill at the end there because the last bug uses Struggle Bug, a Special move.
-    assertion(Names == ["Staravia", "Staravia", "Staravia","Staravia","Beedrill"]).
+
+test(tuber_ricky, [nondet]) :-
+    % Welcome to the squad, Cufant!
+    box(BoxOld),
+    Tirtouga = #{ability:"Solid Rock", ivs:_{atk:28, def:22, hp:25, spa:31, spd:6, spe:8}, level:17, moves:["Bite", "Mud-Slap", "Smack Down", "Aqua Jet"], name:"Tirtouga", nature:"Naive"}, 
+    Cufant = #{ability:"Sheer Force",ivs:_{atk:28,def:24,hp:3,spa:24,spd:4,spe:24},level:17,moves:["Bulldoze","Growl","Rock Throw","Rock Smash"],name:"Cufant",nature:"Impish"},
+    Box = [Tirtouga, Cufant|BoxOld],
+    opponent('Tuber Ricky', Ricky),
+    find_line_less_naive(Box, Ricky, Line),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    assertion(Names == ["Tirtouga", "Beedrill", "Beedrill"]).
+    % Tirtouga keeps going vs Nidorino, only switching because its accuracy is -3. Beedrill fares worse and cant get many hits in. 
+    % Tirtouga switches back and kills with Smack Down. Now we switch in Cufant, but get paralyzed immediately. Luckily it still Bulldozes.
+    % Luxio is now low enough for Lombre to kill. Pancham and Prinplup were backup options, but neither of them were great at that.
+
+test(tuber_hailey, [nondet]) :-
+    box(BoxOld),
+    Tirtouga = #{ability:"Solid Rock", ivs:_{atk:28, def:22, hp:25, spa:31, spd:6, spe:8}, level:17, moves:["Bite", "Mud-Slap", "Smack Down", "Aqua Jet"], name:"Tirtouga", nature:"Naive"}, 
+    Cufant = #{ability:"Sheer Force",ivs:_{atk:28,def:24,hp:3,spa:24,spd:4,spe:24},level:17,moves:["Bulldoze","Growl","Rock Throw","Rock Smash"],name:"Cufant",nature:"Impish"},
+    Box = [Tirtouga, Cufant|BoxOld],
+    opponent('Tuber Hailey', Hailey),
+    find_line_less_naive(Box, Hailey, Line),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    assertion(Names == ["Staravia", "Beedrill", "Lombre"]).
+    % Individual choices are okay, but to make it work safely we need to string it together
+    % That would be the next thing to do, estimate damage taken 1-on-1, guess switchins, and try to see a kill while coming in safely.
+    % Tirtouga leads to break Focus Sash. Staravia comes in on anything but Rock Tomb and kills with Aerial Ace.
+    % If it somehow still is Rock Tomb, Prinplup will have to clean up.
+    % Either Nidorina or Flaaffy comes in next, depending on range (this would also be interesting to calc!).
+    % In both cases we bait an electric-type move. Cufant switches in on Nidorina and solos it.
+    % On Flaaffy I want Lombre, can pivot via Beedrill but it takes so much damage that Id rather keep it as backup to fast-kill after chip damage.
+    % NOTE TO SELF: I did not consider last pivotting, which ended up not being that important but still!
 
 :- end_tests(run7_dewford).
