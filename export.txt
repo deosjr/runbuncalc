@@ -107,3 +107,23 @@ IVs: 6 HP / 13 Atk / 14 Def / 28 SpA / 8 SpD / 30 Spe
 - Acid Spray
 - Bite
 - Leaf Tornado
+
+Munna
+Ability: Synchronize
+Level: 25
+Rash Nature
+IVs: 2 HP / 1 Atk / 9 Def / 8 SpA / 18 SpD / 29 Spe
+- Psyshock
+- Heal Bell
+- Draining Kiss
+- Yawn
+
+Herdier
+Ability: Sand Rush
+Level: 25
+Impish Nature
+IVs: 5 HP / 28 Atk / 17 Def / 11 SpA / 8 SpD / 21 Spe
+- Take Down
+- Bite
+- Submission
+- Covet

@@ -207,5 +207,29 @@ test(camper_gavi, [nondet]) :-
     % Litleo gets put to sleep after one Incinerate but wakes up in time.
     % Numel comes out first because it sees a kill with Earth Power and Staravia doesnt see a kill yet.
     % Kingdra switches in and kills it, then puts Staravia to 1HP with Aurora Beam. Rhyhorn comes in for the kill with Smack Down.
+
+%test(youngster_joey, [nondet]) :-
+    % Kingdra handles Raticate (speed drop makes it even easier), Rhyhorn tanks Retaliate from Linoone and baits Seed Bomb.
+    % Grotle can come in on that and spam Mega Drain. Pidgeotto is last, and gets countered by Chinchou.
+
+%test(lass_janice, [nondet]) :-
+    % Rhyhorn slow-kills Oricorio and should bait Brionne, whose Liquid Voice Echoed Voice sees a kill.
+    % Chinchou kills it fast enough, with Kingdra as backup if things go wrong (x4 resisting).
+    % Whimsicott has Prankster + Grass Whistle, so time to equip an anti-sleep berry for the first time.
+    % one of Vivillon, Fletchinder or Litleo will have to kill it: all 3 have Chesto Berries.
+    % ACTUAL: Rhyhorn takes a Feather Dance so has to Smack Down twice. Brionne is dealt with as planned.
+    % Chinchou baits Energy Ball so we first switch Vivillon into Whimsicott.
+    % It takes a Grass Whistle but wakes up with the berry and brings it low with Air Cutter.
+    % Protect sees it going for Dazzling Gleam next, which crits but doesnt kill and so Vivillon Air Cutters again for the win.
+
+%test(rich_boy_dawson, [nondet]) :-
+    % Komala gets walled by Grotle, with an anti-para berry to be sure vs Body Slam.
+    % Gyarados is fast and always deals 40 damage, so only mons with more than 70hp + Oran Berry can come in.
+    % First we teach one of them Bug Bite to eat the Sitrus berry it has. Then Chinchou can chip a large chunk of HP.
+    % Rest can finish it off with more chip damage. Carnivine learns Bug Bite, backup is Vivillon, Kingdra, Mienfoo (with FakeOut)
+    % ACTUAL: Komala not only paralyzes twice in a row on Grotle, but proceeds to paralyze TWICE MORE after that.
+    % Carnivine is sacrificed. Rest of the team is not healthy enough to risklessly kill Gyarados now.
+    % Vivillons second Air Cutter critting is its only chance to stay alive: it doesnt and so it is killed too.
+    % Mienfoo FakeOut is just enough to not need even more sacrifices here.
     
 :- end_tests(run6).
