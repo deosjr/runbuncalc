@@ -1,79 +1,110 @@
-Surskit
+Prinplup @ Pecha Berry
+Ability: Clear Body
+Level: 17
+Bashful Nature
+IVs: 16 HP / 31 Atk / 14 Def / 31 SpA / 24 SpD / 31 Spe
+- Metal Claw
+- Growl
+- Bubble Beam
+- Pluck
+
+Surskit @ Pecha Berry
 Ability: Swift Swim
-Level: 12
+Level: 17
 Bashful Nature
 IVs: 17 HP / 7 Atk / 20 Def / 8 SpA / 21 SpD / 31 Spe
-- Bubble
+- Struggle Bug
 - Quick Attack
 - Sweet Scent
 - Bubble Beam
 
-Piplup
-Ability: Clear Body
-Level: 12
-Bashful Nature
-IVs: 16 HP / 31 Atk / 14 Def / 31 SpA / 24 SpD / 31 Spe
-- Pound
-- Growl
-- Bubble
-- Pluck
-
-Starly
-Ability: Keen Eye
-Level: 12
-Brave Nature
-IVs: 18 HP / 4 Atk / 31 Def / 3 SpA / 15 SpD / 22 Spe
-- Tackle
-- Growl
-- Quick Attack
-- Aerial Ace
-
-Houndour
-Ability: Early Bird
-Level: 12
-Lonely Nature
-IVs: 5 HP / 25 Atk / 9 Def / 29 SpA / 20 SpD / 4 Spe
-- Leer
-- Ember
-- Smog
-- Bite
-
-Lotad
-Ability: Rain Dish
-Level: 12
-Serious Nature
-IVs: 14 HP / 11 Atk / 1 Def / 22 SpA / 11 SpD / 29 Spe
-- Natural Gift
-- Growl
-- Absorb
-- Bubble
-
 Psyduck
 Ability: Swift Swim
-Level: 12
+Level: 17
 Lax Nature
 IVs: 25 HP / 9 Atk / 28 Def / 8 SpA / 24 SpD / 15 Spe
 - Confusion
 - Scratch
 - Tail Whip
-- Water Gun
+- Water Pulse
 
-Beedrill
-Ability: Sniper
-Level: 12
-Bashful Nature
-IVs: 0 HP / 4 Atk / 14 Def / 5 SpA / 4 SpD / 12 Spe
-- Bug Bite
-- Fury Attack
-- String Shot
-- Twineedle
+Lombre @ Oran Berry
+Ability: Rain Dish
+Level: 17
+Serious Nature
+IVs: 14 HP / 11 Atk / 1 Def / 22 SpA / 11 SpD / 29 Spe
+- Natural Gift
+- Fake Out
+- Mega Drain
+- Bubble
+
+Houndour @ Oran Berry
+Ability: Early Bird
+Level: 17
+Lonely Nature
+IVs: 5 HP / 25 Atk / 9 Def / 29 SpA / 20 SpD / 4 Spe
+- Bite
+- Ember
+- Fire Fang
+- Leer
 
 Shellos
 Ability: Sticky Hold
-Level: 12
+Level: 17
 Relaxed Nature
 IVs: 29 HP / 17 Atk / 6 Def / 13 SpA / 24 SpD / 2 Spe
 - Mud-Slap
-- Mud Sport
+- Hidden Power Rock
 - Water Pulse
 - Mud Shot
+
+Staravia @ Cheri Berry
+Ability: Intimidate
+Level: 17
+Brave Nature
+IVs: 18 HP / 4 Atk / 31 Def / 3 SpA / 15 SpD / 22 Spe
+- Endeavor
+- Growl
+- Quick Attack
+- Aerial Ace
+
+Beedrill
+Ability: Sniper
+Level: 17
+Bashful Nature
+IVs: 0 HP / 4 Atk / 14 Def / 5 SpA / 4 SpD / 12 Spe
+- Bug Bite
+- Pluck
+- String Shot
+- Pin Missile
+
+Pancham
+Ability: Mold Breaker
+Level: 17
+Hasty Nature
+IVs: 12 HP / 15 Atk / 12 Def / 16 SpA / 12 SpD / 16 Spe
+- Karate Chop
+- Covet
+- Arm Thrust
+- Feint Attack
+
+Remoraid
+Ability: Hustle
+Level: 17
+Naughty Nature
+IVs: 16 HP / 4 Atk / 8 Def / 28 SpA / 0 SpD / 15 Spe
+- Water Gun
+- Lock-On
+- Psybeam
+- Aurora Beam
+
+Spheal
+Ability: Oblivious
+Level: 17
+Modest Nature
+IVs: 24 HP / 9 Atk / 1 Def / 8 SpA / 25 SpD / 18 Spe
+- Charm
+- Brine
+- Powder Snow
+- Rollout
+

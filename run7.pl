@@ -109,3 +109,49 @@ test(team_aqua_grunt, [nondet]) :-
     % Psyduck wasnt super low but still got a Confusion instead of Bullet Seed.
 
 :- end_tests(run7_petalburg).
+
+% welcome to the party, Pancham, Remoraid and Spheal!
+run7box3 :-
+    retractall(box(_)),
+    Prinplup = #{ability:"Clear Body",item:"Pecha Berry",ivs:_{atk:31,def:14,hp:16,spa:31,spd:24,spe:31},level:17,moves:["Metal Claw","Growl","Bubble Beam","Pluck"],name:"Prinplup",nature:"Bashful"},
+    Surskit = #{ability:"Swift Swim",item:"Pecha Berry",ivs:_{atk:7,def:20,hp:17,spa:8,spd:21,spe:31},level:17,moves:["Struggle Bug","Quick Attack","Sweet Scent","Bubble Beam"],name:"Surskit",nature:"Bashful"},
+    Psyduck = #{ability:"Swift Swim",ivs:_{atk:9,def:28,hp:25,spa:8,spd:24,spe:15},level:17,moves:["Confusion","Scratch","Tail Whip","Water Pulse"],name:"Psyduck",nature:"Lax"},
+    Lombre = #{ability:"Rain Dish",item:"Oran Berry",ivs:_{atk:11,def:1,hp:14,spa:22,spd:11,spe:29},level:17,moves:["Natural Gift","Fake Out","Mega Drain","Bubble"],name:"Lombre",nature:"Serious"},
+    Houndour = #{ability:"Early Bird",item:"Oran Berry",ivs:_{atk:25,def:9,hp:5,spa:29,spd:20,spe:4},level:17,moves:["Bite","Ember","Fire Fang","Leer"],name:"Houndour",nature:"Lonely"},
+    Shellos = #{ability:"Sticky Hold",ivs:_{atk:17,def:6,hp:29,spa:13,spd:24,spe:2},level:17,moves:["Mud-Slap","Hidden Power Rock","Water Pulse","Mud Shot"],name:"Shellos",nature:"Relaxed"},
+    Staravia = #{ability:"Intimidate",item:"Cheri Berry",ivs:_{atk:4,def:31,hp:18,spa:3,spd:15,spe:22},level:17,moves:["Endeavor","Growl","Quick Attack","Aerial Ace"],name:"Staravia",nature:"Brave"},
+    Beedrill = #{ability:"Sniper",ivs:_{atk:4,def:14,hp:0,spa:5,spd:4,spe:12},level:17,moves:["Bug Bite","Pluck","String Shot","Pin Missile"],name:"Beedrill",nature:"Bashful"},
+    Pancham = #{ability:"Mold Breaker",ivs:_{atk:15,def:12,hp:12,spa:16,spd:12,spe:16},level:17,moves:["Karate Chop","Covet","Arm Thrust","Feint Attack"],name:"Pancham",nature:"Hasty"},
+    Remoraid = #{ability:"Hustle",ivs:_{atk:4,def:8,hp:16,spa:28,spd:0,spe:15},level:17,moves:["Water Gun","Lock-On","Psybeam","Aurora Beam"],name:"Remoraid",nature:"Naughty"},
+    Spheal = #{ability:"Oblivious",ivs:_{atk:9,def:1,hp:24,spa:8,spd:25,spe:18},level:17,moves:["Charm","Brine","Powder Snow","Rollout"],name:"Spheal",nature:"Modest"},
+    assertz(box([Prinplup, Surskit, Psyduck, Lombre, Houndour, Shellos, Staravia, Beedrill, Pancham, Remoraid, Spheal])).
+
+:- begin_tests(run7_dewford, [setup(run7box3)]).
+
+test(fisherman_elliot, [nondet]) :-
+    box(Box),
+    opponent('Fisherman Elliot', Elliot),
+    find_line_less_naive(Box, Elliot, Line),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    % seems good. Arrokuda is speed tied so thinks it is faster, and comes out first, which is even better.
+    assertion(Names == ["Lombre", "Beedrill", "Lombre"]).
+
+test(ruin_maniac_georgie, [nondet]) :-
+    box(Box),
+    opponent('Ruin Maniac Georgie', Georgie),
+    find_line_less_naive(Box, Georgie, Line),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    % Oh boy. Prinplup is great here, but Pancham needs to come out to counter Belly Drum shenanigans.
+    % Im expecting Munchlax second, so after Pancham kills it Mawile will want to come out because it outdamages with Covet.
+    % Pivot to Prinplup is safest via a mon that takes Covet well and baits Metal Claw or Fire Fang: Beedrill.
+    assertion(Names == ["Prinplup", "Prinplup", "Prinplup", "Prinplup"]),
+    get_pokemon_by_name("Prinplup", Box, Prinplup),
+    get_pokemon_by_name("Pancham", Box, Pancham),
+    % TODO: trainer pokemon names are atoms..
+    get_pokemon_by_name('Mawile', Georgie, Mawile),
+    % pivot(Versus, From, To, Box, Via)
+    pivot(Mawile, Pancham, Prinplup, Box, Via),
+    assertion(Via.name == "Beedrill").
+    % ACTUAL: exactly like we drew it up.
+
+:- end_tests(run7_dewford).

@@ -22,35 +22,11 @@ opponent(Name, OppTeam) :-
 byIndex(<, T1, T2) :- T1.index < T2.index.
 byIndex(>, T1, T2) :- T1.index > T2.index.
 
-run :-
-    Opponent = 'Youngster Calvin',
-    %Opponent = 'Bug Catcher Rick',
-    %Opponent = 'Youngster Allen',
-    %Opponent = 'Lady Cindy',
-    %Opponent = 'Team Aqua Grunt Petalburg Woods',
-    %Opponent = 'Camper Gavi',
-    %Opponent = 'Battle Girl Jocelyn',
-    opponent(Opponent, OppTeam),
-    writeln(OppTeam),
-    box(Box),
-    writeln(Box),
-    forall(member(Opp, OppTeam), (
-        forall(member(Pok, Box), (
-            last(Pok.moves, Move),
-            calculate(Pok, Opp, Move, Data),
-            PokSpeed = Data.attacker.stats.spe,
-            OppSpeed = Data.defender.stats.spe,
-            damageRolls(Pok, Opp, PokDamage),
-            damageRolls(Opp, Pok, OppDamage),
-            format('~w (spe: ~d) VS ~w (spe: ~d)\n', [Pok.name,PokSpeed,Opp.name,OppSpeed]),
-            format('~w\n', [PokDamage]),
-            format('~w\n', [OppDamage]),
-            include(fast_kill_guaranteed(Pok, Opp), Pok.moves, PokFastKills),
-            format('Fast kills: ~w\n', [PokFastKills]),
-            dead_to_crit(Pok, Opp, MovesThatCritKill),
-            format('Dead to crit: ~w\n', [MovesThatCritKill])
-        ))
-    )).
+print_box :- box(Box), member(P, Box), format("~w = ~W,", [P.name, P, [quoted(true)]]), nl, fail. %"
+
+get_pokemon_by_name(Name, List, Pokemon) :-
+    member(Pokemon, List),
+    Pokemon.name = Name.
 
 damageRolls(Attacker, Defender, Data) :-
     maplist(damageRoll(Attacker, Defender), Attacker.moves, Data).
@@ -78,7 +54,7 @@ lowRoll(Attacker, Defender, Crit, Move, Low) :-
     calculate_http(Attacker, Defender, Move, Crit, Out),
     ( Out.damage = [Low|_] -> true ; Low=Out.damage).
 
-% only succeeds if there is a single move guaranteed highest
+% backtracks over all highest damage moves on a tie
 highest_damage_move(Attacker, Defender, Move) :-
     damageRolls(Attacker, Defender, Data),
     member(Move-[_,High], Data),
@@ -232,6 +208,35 @@ find_line_less_naive(Party, [Lead|Rest], [Switch|Line]) :-
     nuzlocke_switchin(Lead, Party, [Switch|_]),
     find_line_less_naive(Party, Rest, Line).
 
+% find the best option to get To out, starting point is From vs Versus.
+% for now we guarantee a single pivot pokemon that takes least damage from move baited by From
+% and baits one of the lowest damaging moves onto To
+% if there are multiple equal options, we take the first
+% for now we do not consider situations in which multiple moves are equally likely to be baited
+% ie: highest damaging move is bait, ties again are broken by which move is first
+% This is not how the AI actually works, it is more complicated than that!
+pivot(Versus, From, To, [SoFar|Rest], Via) :-
+    naive_pivot(Versus, From, To, Rest, SoFar, Via).
+
+naive_pivot(_, _, _, [], Via, Via).
+
+naive_pivot(Versus, From, To, [P|Rest], SoFar, Via) :-
+    pivot_score(Versus, From, To, SoFar, ScoreSoFar),
+    pivot_score(Versus, From, To, P, NewScore),
+    ( NewScore < ScoreSoFar -> 
+        naive_pivot(Versus, From, To, Rest, P, Via)
+    ;
+        naive_pivot(Versus, From, To, Rest, SoFar, Via)
+    ).
+
+:- table pivot_score/5.
+pivot_score(Versus, From, To, P, Score) :-
+    highest_damage_move(Versus, From, Bait),
+    highRoll(Versus, P, false, Bait, BaitHighDmg),
+    highest_damage_move(Versus, P, NewBait),
+    highRoll(Versus, To, false, NewBait, NewBaitHighDmg),
+    Score is BaitHighDmg + NewBaitHighDmg.
+
 parse_export([P|T]) -->
     parse_export_pokemon(P),
     "\n\n",
@@ -286,3 +291,33 @@ assertExportedPokemon :-
     ).
 
 zip_unzip(Names,Values,Zipped) :- maplist([N,V,N-V]>>true,Names,Values,Zipped).
+
+run :-
+    Opponent = 'Youngster Calvin',
+    %Opponent = 'Bug Catcher Rick',
+    %Opponent = 'Youngster Allen',
+    %Opponent = 'Lady Cindy',
+    %Opponent = 'Team Aqua Grunt Petalburg Woods',
+    %Opponent = 'Camper Gavi',
+    %Opponent = 'Battle Girl Jocelyn',
+    opponent(Opponent, OppTeam),
+    writeln(OppTeam),
+    box(Box),
+    writeln(Box),
+    forall(member(Opp, OppTeam), (
+        forall(member(Pok, Box), (
+            last(Pok.moves, Move),
+            calculate(Pok, Opp, Move, Data),
+            PokSpeed = Data.attacker.stats.spe,
+            OppSpeed = Data.defender.stats.spe,
+            damageRolls(Pok, Opp, PokDamage),
+            damageRolls(Opp, Pok, OppDamage),
+            format('~w (spe: ~d) VS ~w (spe: ~d)\n', [Pok.name,PokSpeed,Opp.name,OppSpeed]),
+            format('~w\n', [PokDamage]),
+            format('~w\n', [OppDamage]),
+            include(fast_kill_guaranteed(Pok, Opp), Pok.moves, PokFastKills),
+            format('Fast kills: ~w\n', [PokFastKills]),
+            dead_to_crit(Pok, Opp, MovesThatCritKill),
+            format('Dead to crit: ~w\n', [MovesThatCritKill])
+        ))
+    )).
