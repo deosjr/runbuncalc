@@ -175,7 +175,20 @@ nuzlocke_switchin(Opponent, Party, Switchins) :-
     keysort(Scores, Candidates),
     last(Candidates, Highest-_),
     include([S-_]>>(S==Highest), Candidates, SwitchinsWithScore),
-    maplist([S-P,X]>>(X=P), SwitchinsWithScore, Switchins).
+    maplist([S-P,X]>>(X=P), SwitchinsWithScore, Pokemon),
+    % subsort by least damage taken from highest move by opponent (noncrit)
+    predsort(least_damage_taken(Opponent), Pokemon, Switchins).
+
+least_damage_taken(Attacker, C, P1, P2) :-
+    highest_damage_move(Attacker, P1, Move1),
+    highRoll(Attacker, P1, false, Move1, Dmg1),
+    highest_damage_move(Attacker, P2, Move2),
+    highRoll(Attacker, P2, false, Move2, Dmg2),
+    reify_comp(C, Dmg1, Dmg2).
+
+reify_comp(>, X, Y) :- X > Y.
+reify_comp(<, X, Y) :- X < Y.
+reify_comp(=, X, Y) :- X = Y.
 
 nuzlocke_switchin_pair(Opponent, Player, Score-Player) :-
     nuzlocke_switchin_score(Player, Opponent, Score).

@@ -161,7 +161,8 @@ test(tuber_chandler, [nondet]) :-
     find_line_less_naive(Box, Chandler, Line),
     Chandler = [_Smoochum, _Elekid, Magby],
     maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
-    assertion(Names == ["Beedrill", "Prinplup", "Prinplup"]),
+    % OLD: assertion(Names == ["Beedrill", "Prinplup", "Prinplup"]),
+    assertion(Names == ["Beedrill", "Lombre", "Prinplup"]),
     % Elekid vs Prinplup seems wrong, rest is fine.
     get_pokemon_by_name("Beedrill", Box, Beedrill),
     post_ko_switch_in(Beedrill, Chandler, [Switchin|_]),
@@ -192,5 +193,46 @@ test(tuber_lola, [nondet]) :-
     pivot(Herdier, Tirtouga, Pancham, BoxOld, Via),
     assertion(Via.name == "Staravia").
     % ACTUAL: Tirtouga solos because it cannot be killed, even Intimidated and at -2 defense from Rock Smashes. No crits involved.
+
+test(sailor_edmond, [nondet]) :-
+    box(BoxOld),
+    Tirtouga = #{ability:"Solid Rock", ivs:_{atk:28, def:22, hp:25, spa:31, spd:6, spe:8}, level:17, moves:["Bite", "Mud-Slap", "Smack Down", "Aqua Jet"], name:"Tirtouga", nature:"Naive"}, 
+    Box = [Tirtouga|BoxOld],
+    opponent('Sailor Edmond', Edmond),
+    find_line_less_naive(Box, Edmond, Line),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    % OLD: assertion(Names == ["Tirtouga", "Tirtouga", "Lombre"]).
+    assertion(Names == ["Tirtouga", "Prinplup", "Lombre"]).
+    % Tirtouga again is a great lead slow-killing Wingull, but keeping it in vs Buizel is way too risky.
+    % Palpitoad comes out second anyways, unless Wingull gets a crit Water Pulse off.
+    % Lombre is great vs both Buizel and Palpitoad, but again cannot safely fight both.
+    % Buizel is the greater threat and can be perfectly calculated with Sonic Boom being highest damage, so we save Lombre for him.
+    % Both Beedrill and Prinplup decently outdamage and tank Palpitoad. Only Beedrill outspeeds.
+    % IF Palpitoad is second, we bait Mud Shot. Clear Body Prinplup should deal with that no problem.
+    % Backup plan is a pivot via Pancham onto Beedrill, so we dont get an accuracy drop on it.
+    % Beedrill takes a ton of Pursuit damage though! Staravia would be safer.
+    % We prefer not to kill with Prinplup either way because it baits Sonic Boom, we would rather switch Lombre in on Water Pulse.
+    % IF Buizel is second, Tirtouga still lives a Pursuit crit, and otherwise baits Water Pulse. Lombre kills Buizel and baits Sludge.
+    % That would be great for Beedrill to come in on and kill Palpitoad.
+    % ACTUAL: Wingull did not crit (its Shock Wave, equally likely) but Buizel came out anyway because were just outside of Palpitoad range.
+    % that was actually extremely likely to happen, only one roll on a non-crit would lead to Palpitoad seeing a kill.
+    % Nice, because the Buizel line is less complicated. Buizel confuses Lombre on the switchin, so we pivot (again to Lombre) via Staravia
+    % I expected that to bait another Water Pulse but it Sonic Boomed. At 25/49 we are still safe to go for Mega Drain because of how much we heal back.
+    % Buizel falls. Palpitoad does Sludge onto Beedrill, takes a Pin Missile (x2), Rain Dances and is now very scary, but dies to another Pin Missile (x3).
+    % Prinplup would have been the counter if that did not kill, but I did not think of that ahead of time!
+
+test(fisherman_bill, [nondet]) :-
+    box(BoxOld),
+    Tirtouga = #{ability:"Solid Rock", ivs:_{atk:28, def:22, hp:25, spa:31, spd:6, spe:8}, level:17, moves:["Bite", "Mud-Slap", "Smack Down", "Aqua Jet"], name:"Tirtouga", nature:"Naive"}, 
+    Box = [Tirtouga|BoxOld],
+    opponent('Fisherman Bill', Bill),
+    find_line_less_naive(Box, Bill, Line),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    % funny, Houndour comes before Staravia in party order. Both fast-kill the entire team except for Scatterbug.
+    % Id much prefer to take Staravia because it takes at most 31.2% from a crit while Houndour would be dead.
+    % Suggests some subsorting within the priority categories for taking less max damage back that we could try.
+    %assertion(Names == ["Houndour", "Houndour", "Houndour","Houndour","Houndour"]).
+    % Fixed! Beedrill at the end there because the last bug uses Struggle Bug, a Special move.
+    assertion(Names == ["Staravia", "Staravia", "Staravia","Staravia","Beedrill"]).
 
 :- end_tests(run7_dewford).
