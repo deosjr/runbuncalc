@@ -134,5 +134,35 @@ test(camper_gavi, [nondet]) :-
     % This lets me kill it with Twister, which is super effective. Vivillon wasnt needed. Backup was Litleo to incinerate the Sitrus berry.
 
 %test(leader_brawly, [nondet]) :-
+    % Vivillon vs Kubfu: scout Sucker Punch with Protect (just to test), Draining Kiss hopefully low roll so berry doesnt proc, then Air Cutter
+    % If berry does proc, just Draining Kiss one more time first to regain HP.
+    % Grotle takes Retaliate better than Kingdra and cannot get crit by it. Does fine vs Lopunny anyways. Absorb first because we need the HP.
+    % Kingdra is the perfect counter to Combusken. Again, no berry switch-in on an Incinerate.
+    % Lopunny comes back in because it outspeeds and outdamages. Grotle tanks again. Mienfoo needs to clean it up.
+    % Hitmontop will probably claim a sacrifice. What can I roll in Granite Cave to counter it? I dont see anything
+    % So then Mienfoo is sacced. Kingdra comes in and brings it to half HP, Vivillon switches in and kills with Air Cutter.
+    % Surskit hilariously counters Poliwhirl pretty well, and is my #1 choice to sac anyway, so might come along.
+    % It can Struggle-Bug to lower its SpA while dealing decent chip damage and tanking Superpower which lowers Atk and Def too.
+    % Even if Surskit gets frozen on the switch-in, tanking multiple Superpowers is worth it.
+    % Tentacool can then kill it, and is the last potential sacrifice.
+    % Kingdra tanks Scraggy and can clear its PowerUp boost. Vivillon can revenge kill from 55%.
+    % HOLD UP: I can evolve Surskit to Masquerain, which gets Gust and HP Ground. 
+    % It can solo Kubfu, Quick Attack Lopunny, then bait Hitmontop (because it outspeeds and outdamages Combusken) and chip it with Gust.
+    % If I had a mon that could tank Rock Slide (Granite Cave!?) it could even switch between them and stack Intimidate.
+    % Caught a Rhyhorn, which is perfect for this plan. It can also take Retaliate and bait Drain Punch from Lopunny.
+    % Kingdra taking Ice Beam and Maquerain taking Superpower from Poliwhirl also still works.
+    % OR we just sac Masquerain here and revenge-kill with Grotle. Kingdra is needed for Combusken who hasnt come out yet, Grotle sets that up.
+    % The plan for Scraggy is unchanged. Mienfoo still takes out Lopunny and might get sacced to setup on Scraggy though.
+    % ACTUAL: Inner Focus blocks Intimidate.. lame. Kubfu dies, Lopunny gets QuickAttacked, Hitmontop comes out.
+    % The switcheroo combo gets it to -4 atk, Rhyhorn chips it down to half HP, then Vivillon safely comes in to finish it off.
+    % Scraggy comes out and want to Rock Tomb, so we get to switcheroo again, but Masquerain is now very low and we only Intimidate once.
+    % switch to Grotle and Sand Tomb + Absorb until it is low, then Vivillon comes in to finish with Draining Kiss.
+    % Rhyhorn tanks a Retaliate from Lopunny and lives at 3hp. Masquerain is sacced to Intimidate (it couldve tanked that Retaliate!!)
+    % now Mienfoo comes in a little more safe. Im afraid of Headbutt flinch, so I switch Grotle into an oncoming attack so Mienfoo gets another FakeOut off.
+    % Combusken comes out, and Kingdra finally steps up. I get lucky, both taking an Incinerate and slow-killing with one Bubble Beam.
+    % Poliwhirl is last. Vivillon and Kingdra are the only mons left with high HP, and they bait/tank Superpower/IceBeam pretty well.
+    % There is no point though, because they are both special attackers, so stalling out Superpower does nothing.
+    % Kingdra gets a Twister off before it gets low. I dont risk a crit and switch Vivillon, who Draining Kiss + Air Cutter wins!
+
     
 :- end_tests(run6).

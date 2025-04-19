@@ -8,16 +8,6 @@ IVs: 9 HP / 12 Atk / 20 Def / 29 SpA / 28 SpD / 10 Spe
 - Leer
 - Twister
 
-Surskit @ Oran Berry
-Ability: Swift Swim
-Level: 21
-Sassy Nature
-IVs: 23 HP / 30 Atk / 9 Def / 10 SpA / 20 SpD / 3 Spe
-- Struggle Bug
-- Quick Attack
-- Sweet Scent
-- Bubble Beam
-
 Fletchinder
 Ability: Flame Body
 Level: 17
@@ -98,3 +88,22 @@ IVs: 31 HP / 25 Atk / 30 Def / 31 SpA / 31 SpD / 7 Spe
 - Absorb
 - Sand Tomb
 
+Rhyhorn
+Ability: Rock Head
+Level: 21
+Mild Nature
+IVs: 9 HP / 19 Atk / 26 Def / 8 SpA / 29 SpD / 13 Spe
+- Smack Down
+- Tail Whip
+- Scary Face
+- Bulldoze
+
+Masquerain @ Oran Berry
+Ability: Intimidate
+Level: 22
+Sassy Nature
+IVs: 23 HP / 30 Atk / 9 Def / 10 SpA / 20 SpD / 3 Spe
+- Struggle Bug
+- Quick Attack
+- Gust
+- Hidden Power Ground
