@@ -194,6 +194,44 @@ find_line_naive(Party, [Lead|Rest], [Switch|Line]) :-
     post_ko_switch_in(Lead, Party, [Switch|_]),
     find_line_naive(Party, Rest, Line).
 
+nuzlocke_switchin(Opponent, Party, Switchins) :-
+    maplist(nuzlocke_switchin_pair(Opponent), Party, Scores),
+    keysort(Scores, Candidates),
+    last(Candidates, Highest-_),
+    include([S-_]>>(S==Highest), Candidates, SwitchinsWithScore),
+    maplist([S-P,X]>>(X=P), SwitchinsWithScore, Switchins).
+
+nuzlocke_switchin_pair(Opponent, Player, Score-Player) :-
+    nuzlocke_switchin_score(Player, Opponent, Score).
+
+% score of Pokemon switching in when Opponent is already out
+nuzlocke_switchin_score(Pokemon, Opponent, 6) :-
+    include(fast_kill_guaranteed(Pokemon, Opponent), Pokemon.moves, [_|_]), !.
+nuzlocke_switchin_score(Pokemon, Opponent, 5) :-
+    include(fast_kill_possible(Pokemon, Opponent), Pokemon.moves, [_|_]), !.
+nuzlocke_switchin_score(Pokemon, Opponent, 4) :-
+    include(fast_kill_possible(Opponent, Pokemon), Opponent.moves, []),
+    include(slow_kill_possible(Pokemon, Opponent), Pokemon.moves, [_|_]), !.
+nuzlocke_switchin_score(Pokemon, Opponent, 3) :-
+    ai_is_faster(Pokemon, Opponent),
+    outdamages(Pokemon, Opponent), !.
+nuzlocke_switchin_score(Pokemon, Opponent, 2) :-
+    ai_is_slower(Pokemon, Opponent),
+    outdamages(Pokemon, Opponent), !.
+nuzlocke_switchin_score(Pokemon, Opponent, 1) :-
+    ai_is_faster(Pokemon, Opponent), !.
+nuzlocke_switchin_score(Pokemon, Opponent, 0) :-
+    ai_is_slower(Pokemon, Opponent),
+    include(fast_kill_possible(Opponent, Pokemon), Opponent.moves, []), !.
+nuzlocke_switchin_score(Pokemon, Opponent, -1) :-
+    ai_is_slower(Pokemon, Opponent),
+    include(fast_kill_possible(Opponent, Pokemon), Opponent.moves, [_|_]).
+
+find_line_less_naive(_, [], []).
+find_line_less_naive(Party, [Lead|Rest], [Switch|Line]) :-
+    nuzlocke_switchin(Lead, Party, [Switch|_]),
+    find_line_less_naive(Party, Rest, Line).
+
 parse_export([P|T]) -->
     parse_export_pokemon(P),
     "\n\n",
@@ -224,6 +262,7 @@ parse_moves([M|T]) --> parse_move(M), "\n", parse_moves(T).
 assertTrainerPokemon :-
     open("gen8.json", read, Stream),
     % cant use json_read_dict because Vivillion has multiple 'Bug Maniac Jeffrey' keys...
+    % same with Magikarp having multiple Fisherman Darian entries
     json_read(Stream, json(JSON)),
     forall(member(Pokemon=json(Trainers), JSON),
         forall(member(Trainer=json(T), Trainers),

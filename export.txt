@@ -58,3 +58,22 @@ IVs: 25 HP / 9 Atk / 28 Def / 8 SpA / 24 SpD / 15 Spe
 - Tail Whip
 - Water Gun
 
+Beedrill
+Ability: Sniper
+Level: 12
+Bashful Nature
+IVs: 0 HP / 4 Atk / 14 Def / 5 SpA / 4 SpD / 12 Spe
+- Bug Bite
+- Fury Attack
+- String Shot
+- Twineedle
+
+Shellos
+Ability: Sticky Hold
+Level: 12
+Relaxed Nature
+IVs: 29 HP / 17 Atk / 6 Def / 13 SpA / 24 SpD / 2 Spe
+- Mud-Slap
+- Mud Sport
+- Water Pulse
+- Mud Shot
