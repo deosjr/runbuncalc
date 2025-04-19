@@ -1,129 +1,60 @@
-Grotle
-Ability: Shell Armor
-Level: 25
-Rash Nature
-IVs: 31 HP / 25 Atk / 30 Def / 31 SpA / 31 SpD / 7 Spe
-- Bite
-- Razor Leaf
-- Mega Drain
-- Sand Tomb
+Surskit
+Ability: Swift Swim
+Level: 12
+Bashful Nature
+IVs: 17 HP / 7 Atk / 20 Def / 8 SpA / 21 SpD / 31 Spe
+- Bubble
+- Quick Attack
+- Sweet Scent
+- Bubble Beam
 
-Electrike @ Oran Berry
-Ability: Static
-Level: 25
-Gentle Nature
-IVs: 15 HP / 21 Atk / 7 Def / 18 SpA / 10 SpD / 23 Spe
-- Thunder Wave
-- Shock Wave
-- Bite
-- Fire Fang
-
-Tentacool @ Oran Berry
+Piplup
 Ability: Clear Body
-Level: 25
-Careful Nature
-IVs: 16 HP / 30 Atk / 12 Def / 19 SpA / 16 SpD / 19 Spe
-- Acid Spray
-- Confuse Ray
-- Brine
-- Acid
+Level: 12
+Bashful Nature
+IVs: 16 HP / 31 Atk / 14 Def / 31 SpA / 24 SpD / 31 Spe
+- Pound
+- Growl
+- Bubble
+- Pluck
 
-Fletchinder @ Oran Berry
-Ability: Flame Body
-Level: 25
-Adamant Nature
-IVs: 7 HP / 5 Atk / 4 Def / 4 SpA / 0 SpD / 0 Spe
-- Flame Charge
-- Roost
+Starly
+Ability: Keen Eye
+Level: 12
+Brave Nature
+IVs: 18 HP / 4 Atk / 31 Def / 3 SpA / 15 SpD / 22 Spe
+- Tackle
+- Growl
 - Quick Attack
 - Aerial Ace
 
-Chinchou @ Oran Berry
-Ability: Volt Absorb
-Level: 25
-Jolly Nature
-IVs: 23 HP / 14 Atk / 6 Def / 30 SpA / 4 SpD / 31 Spe
-- Shock Wave
-- Thunder Wave
-- Bubble Beam
-- Spark
-
-Litleo @ Oran Berry
-Ability: Unnerve
-Level: 25
-Gentle Nature
-IVs: 29 HP / 21 Atk / 3 Def / 24 SpA / 23 SpD / 0 Spe
-- Echoed Voice
-- Incinerate
+Houndour
+Ability: Early Bird
+Level: 12
+Lonely Nature
+IVs: 5 HP / 25 Atk / 9 Def / 29 SpA / 20 SpD / 4 Spe
+- Leer
 - Ember
-- Headbutt
+- Smog
+- Bite
 
-Vivillon
-Ability: Compound Eyes
-Level: 25
-Hasty Nature
-IVs: 3 HP / 11 Atk / 22 Def / 28 SpA / 20 SpD / 26 Spe
-- Air Cutter
-- Signal Beam
-- Draining Kiss
-- Protect
-
-Rhyhorn
-Ability: Rock Head
-Level: 25
-Mild Nature
-IVs: 9 HP / 19 Atk / 26 Def / 8 SpA / 29 SpD / 13 Spe
-- Smack Down
-- Tail Whip
-- Scary Face
-- Bulldoze
-
-Mienfoo
-Ability: Inner Focus
-Level: 25
+Lotad
+Ability: Rain Dish
+Level: 12
 Serious Nature
-IVs: 26 HP / 0 Atk / 19 Def / 1 SpA / 22 SpD / 5 Spe
-- Drain Punch
-- Rock Smash
-- Fake Out
-- Bounce
+IVs: 14 HP / 11 Atk / 1 Def / 22 SpA / 11 SpD / 29 Spe
+- Natural Gift
+- Growl
+- Absorb
+- Bubble
 
-Kingdra
-Ability: Sniper
-Level: 25
-Gentle Nature
-IVs: 9 HP / 12 Atk / 20 Def / 29 SpA / 28 SpD / 10 Spe
-- Bubble Beam
-- Clear Smog
-- Aurora Beam
-- Twister
+Psyduck
+Ability: Swift Swim
+Level: 12
+Lax Nature
+IVs: 25 HP / 9 Atk / 28 Def / 8 SpA / 24 SpD / 15 Spe
+- Confusion
+- Scratch
+- Tail Whip
+- Water Gun
 
-Carnivine
-Ability: Levitate
-Level: 25
-Calm Nature
-IVs: 6 HP / 13 Atk / 14 Def / 28 SpA / 8 SpD / 30 Spe
-- Razor Leaf
-- Acid Spray
-- Bite
-- Leaf Tornado
-
-Munna
-Ability: Synchronize
-Level: 25
-Rash Nature
-IVs: 2 HP / 1 Atk / 9 Def / 8 SpA / 18 SpD / 29 Spe
-- Psyshock
-- Heal Bell
-- Draining Kiss
-- Yawn
-
-Herdier
-Ability: Sand Rush
-Level: 25
-Impish Nature
-IVs: 5 HP / 28 Atk / 17 Def / 11 SpA / 8 SpD / 21 Spe
-- Take Down
-- Bite
-- Submission
-- Covet

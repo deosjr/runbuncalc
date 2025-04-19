@@ -84,32 +84,6 @@ highest_damage_move(Attacker, Defender, Move) :-
     member(Move-[_,High], Data),
     include({High}/[_-[Low,_]]>>(Low > High), Data, []).
 
-
-assertTrainerPokemon :-
-    open("gen8.json", read, Stream),
-    % cant use json_read_dict because Vivillion has multiple 'Bug Maniac Jeffrey' keys...
-    json_read(Stream, json(JSON)),
-    forall(member(Pokemon=json(Trainers), JSON),
-        forall(member(Trainer=json(T), Trainers),
-            (
-                member(index=I, T),
-                atom_json_term(A, json(T), []),
-                atom_json_dict(A, D, []),
-                WithName = D.put(#{name:Pokemon, ivs:_{atk:31,def:31,hp:31,spa:31,spd:31,spe:31}}),
-                assertz(pok(I, Trainer, Pokemon, WithName))
-            )
-        )
-    ).
-
-assertExportedPokemon :-
-    phrase_from_file(parse_export(Pokemon), "export.txt"),
-    retractall(pok(-1, 'You', _, _)),
-    forall(member(P, Pokemon),
-        (
-            assertz(pok(-1, you, P.name, P))
-        )
-    ).
-
 calculate(Attacker, Defender, Move, Out) :-
     calculate_http(Attacker, Defender, Move, false, Out).
 calculate_with_crit(Attacker, Defender, Move, Out) :-
@@ -215,6 +189,11 @@ switchin_score(Pokemon, Opponent, -1) :-
     ai_is_slower(Pokemon, Opponent),
     include(fast_kill_possible(Opponent, Pokemon), Opponent.moves, [_|_]).
 
+find_line_naive(_, [], []).
+find_line_naive(Party, [Lead|Rest], [Switch|Line]) :-
+    post_ko_switch_in(Lead, Party, [Switch|_]),
+    find_line_naive(Party, Rest, Line).
+
 parse_export([P|T]) -->
     parse_export_pokemon(P),
     "\n\n",
@@ -241,5 +220,30 @@ parse_item(I) --> string_without("\n", Item), {string_codes(I, Item)}, "\n".
 parse_move(M) --> "- ", string_without("\n", Move), {string_codes(M, Move)}.
 parse_moves([M]) --> parse_move(M).
 parse_moves([M|T]) --> parse_move(M), "\n", parse_moves(T).
+
+assertTrainerPokemon :-
+    open("gen8.json", read, Stream),
+    % cant use json_read_dict because Vivillion has multiple 'Bug Maniac Jeffrey' keys...
+    json_read(Stream, json(JSON)),
+    forall(member(Pokemon=json(Trainers), JSON),
+        forall(member(Trainer=json(T), Trainers),
+            (
+                member(index=I, T),
+                atom_json_term(A, json(T), []),
+                atom_json_dict(A, D, []),
+                WithName = D.put(#{name:Pokemon, ivs:_{atk:31,def:31,hp:31,spa:31,spd:31,spe:31}}),
+                assertz(pok(I, Trainer, Pokemon, WithName))
+            )
+        )
+    ).
+
+assertExportedPokemon :-
+    phrase_from_file(parse_export(Pokemon), "export.txt"),
+    retractall(pok(-1, 'You', _, _)),
+    forall(member(P, Pokemon),
+        (
+            assertz(pok(-1, you, P.name, P))
+        )
+    ).
 
 zip_unzip(Names,Values,Zipped) :- maplist([N,V,N-V]>>true,Names,Values,Zipped).
