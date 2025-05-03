@@ -201,6 +201,7 @@ nuzlocke_switchin_score(Pokemon, Opponent, 5) :-
 nuzlocke_switchin_score(Pokemon, Opponent, 4) :-
     include(fast_kill_possible(Opponent, Pokemon), Opponent.moves, []),
     include(slow_kill_possible(Pokemon, Opponent), Pokemon.moves, [_|_]), !.
+    % TODO: and is not dead to a crit, because fast_kill doesnt check that!
 nuzlocke_switchin_score(Pokemon, Opponent, 3) :-
     ai_is_faster(Pokemon, Opponent),
     outdamages(Pokemon, Opponent), !.
@@ -209,6 +210,7 @@ nuzlocke_switchin_score(Pokemon, Opponent, 2) :-
     outdamages(Pokemon, Opponent), !.
 nuzlocke_switchin_score(Pokemon, Opponent, 1) :-
     ai_is_faster(Pokemon, Opponent), !.
+    % and is not immediately dead, how about that?
 nuzlocke_switchin_score(Pokemon, Opponent, 0) :-
     ai_is_slower(Pokemon, Opponent),
     include(fast_kill_possible(Opponent, Pokemon), Opponent.moves, []), !.
