@@ -1,139 +1,59 @@
-Pancham @ Oran Berry
-Ability: Mold Breaker
-Level: 21
-Hasty Nature
-IVs: 12 HP / 15 Atk / 12 Def / 16 SpA / 12 SpD / 16 Spe
-- Karate Chop
-- Covet
-- Circle Throw
-- Feint Attack
-
-Surskit @ Oran Berry
-Ability: Swift Swim
-Level: 21
-Bashful Nature
-IVs: 17 HP / 7 Atk / 20 Def / 8 SpA / 21 SpD / 31 Spe
-- Struggle Bug
-- Quick Attack
-- Sweet Scent
-- Bubble Beam
-
-Sealeo @ Oran Berry
-Ability: Oblivious
-Level: 21
-Modest Nature
-IVs: 24 HP / 9 Atk / 1 Def / 8 SpA / 25 SpD / 18 Spe
-- Charm
-- Brine
-- Aurora Beam
-- Rollout
-
-Remoraid
-Ability: Hustle
-Level: 21
-Naughty Nature
-IVs: 16 HP / 4 Atk / 8 Def / 28 SpA / 0 SpD / 15 Spe
-- Bubble Beam
-- Lock-On
-- Psybeam
-- Aurora Beam
-
-Houndour @ Oran Berry
-Ability: Early Bird
-Level: 21
-Lonely Nature
-IVs: 5 HP / 25 Atk / 9 Def / 29 SpA / 20 SpD / 4 Spe
+Lillipup
+Ability: Vital Spirit
+Level: 12
+Gentle Nature
+IVs: 15 HP / 19 Atk / 0 Def / 11 SpA / 31 SpD / 26 Spe
+- Leer
+- Tackle
+- Baby-Doll Eyes
 - Bite
-- Flame Burst
-- Fire Fang
-- Hidden Power Bug
 
-Psyduck @ Oran Berry
+Chimchar
+Ability: Vital Spirit
+Level: 12
+Quirky Nature
+IVs: 31 HP / 31 Atk / 23 Def / 3 SpA / 3 SpD / 31 Spe
+- Scratch
+- Leer
+- Ember
+- Mach Punch
+
+Finneon
 Ability: Swift Swim
-Level: 21
-Lax Nature
-IVs: 25 HP / 9 Atk / 28 Def / 8 SpA / 24 SpD / 15 Spe
-- Psybeam
-- Hidden Power Poison
-- Tail Whip
-- Water Pulse
+Level: 12
+Timid Nature
+IVs: 5 HP / 26 Atk / 9 Def / 18 SpA / 22 SpD / 4 Spe
+- Pound
+- Water Gun
+- Gust
 
-Cufant
-Ability: Sheer Force
-Level: 21
-Impish Nature
-IVs: 3 HP / 28 Atk / 24 Def / 24 SpA / 4 SpD / 24 Spe
-- Bulldoze
-- Growl
-- Rock Throw
-- Rock Smash
-
-Shellos @ Oran Berry
-Ability: Sticky Hold
-Level: 21
-Relaxed Nature
-IVs: 29 HP / 17 Atk / 6 Def / 13 SpA / 24 SpD / 2 Spe
-- Mud-Slap
-- Hidden Power Rock
-- Water Pulse
-- Mud Shot
-
-Tirtouga
-Ability: Solid Rock
-Level: 21
-Naive Nature
-IVs: 25 HP / 28 Atk / 22 Def / 31 SpA / 6 SpD / 8 Spe
-- Bite
-- Ancient Power
-- Brine
-- Aqua Jet
-
-Staravia @ Oran Berry
+Growlithe
 Ability: Intimidate
-Level: 21
-Brave Nature
-IVs: 18 HP / 4 Atk / 31 Def / 3 SpA / 15 SpD / 22 Spe
-- Endeavor
-- Growl
-- Quick Attack
-- Aerial Ace
+Level: 12
+Mild Nature
+IVs: 5 HP / 29 Atk / 18 Def / 2 SpA / 16 SpD / 24 Spe
+- Ember
+- Bite
+- Covet
+- Flame Wheel
 
-Lombre @ Pecha Berry
-Ability: Rain Dish
-Level: 21
-Serious Nature
-IVs: 14 HP / 11 Atk / 1 Def / 22 SpA / 11 SpD / 29 Spe
-- Natural Gift
-- Fake Out
-- Mega Drain
-- Bubble Beam
+Gossifleur
+Ability: Cotton Down
+Level: 12
+Relaxed Nature
+IVs: 5 HP / 20 Atk / 10 Def / 15 SpA / 1 SpD / 5 Spe
+- Leafage
+- Sing
+- Rapid Spin
+- Magical Leaf
 
-Prinplup @ Oran Berry
-Ability: Clear Body
-Level: 21
+Rookidee
+Ability: Unnerve
+Level: 12
 Bashful Nature
-IVs: 16 HP / 31 Atk / 14 Def / 31 SpA / 24 SpD / 31 Spe
-- Aqua Jet
-- Hidden Power Ghost
-- Bubble Beam
-- Pluck
+IVs: 13 HP / 4 Atk / 5 Def / 24 SpA / 13 SpD / 30 Spe
+- Peck
+- Leer
+- Fury Attack
+- Sand Attack
 
-Beedrill @ Oran Berry
-Ability: Sniper
-Level: 21
-Bashful Nature
-IVs: 0 HP / 4 Atk / 14 Def / 5 SpA / 4 SpD / 12 Spe
-- Bug Bite
-- Pluck
-- Focus Energy
-- Pin Missile
-
-Eelektrik
-Ability: Levitate
-Level: 21
-Lonely Nature
-IVs: 15 HP / 27 Atk / 26 Def / 4 SpA / 3 SpD / 30 Spe
-- Thunder Wave
-- Spark
-- Shock Wave
-- Crunch

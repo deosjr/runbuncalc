@@ -252,6 +252,52 @@ pivot_score(Versus, From, To, P, Score) :-
     highRoll(Versus, To, false, NewBait, NewBaitHighDmg),
     Score is BaitHighDmg + NewBaitHighDmg.
 
+% Two pokemon enter, only one leaves. No switches considered.
+lines_1v1(Pokemon, Opponent, Lines) :-
+    findall(Res, move_1v1(Pokemon, Opponent, Res), Lines).
+
+move_1v1(Pokemon, Opponent, Resolution) :-
+    % Todo: only plausible moves
+    findall(M, highest_damage_move(Pokemon, Opponent, M), PokemonMoves),
+    findall(M, highest_damage_move(Opponent, Pokemon, M), OpponentMoves),
+    member(Move, PokemonMoves),
+    member(OppMove, OpponentMoves),
+    % we are still calculating safe
+    lowRoll(Pokemon, Opponent, false, Move, Low),
+    highRoll(Opponent, Pokemon, false, OppMove, High),
+    calculate(Pokemon, Opponent, Move, Data),
+    PokemonHP = Data.attacker.originalCurHP,
+    OpponentHP = Data.defender.originalCurHP,
+    PokemonSpeed = Data.attacker.stats.spe,
+    OpponentSpeed = Data.defender.stats.spe,
+    resolve_1v1(Pokemon, PokemonHP, PokemonSpeed, Move, Low, Opponent, OpponentHP, OpponentSpeed, OppMove, High, Resolution).
+
+resolve_1v1(Pokemon, HP, Spe, Move, Dmg, Opp, OppHP, OppSpe, OppMove, OppDmg, Res) :-
+    Spe > OppSpe,   % pokemon is faster than opponent
+    OppNewHP is max(0, OppHP - Dmg),
+    NewOpp = Opp.put(_{curHP:OppNewHP}),
+    ( OppNewHP = 0 -> 
+        Res = [Pokemon, Move, NewOpp]
+    ;
+        PokemonNewHP is max(0, HP - OppDmg),
+        NewPokemon = Pokemon.put(_{curHP:PokemonNewHP}),
+        Res = [NewPokemon, Move, NewOpp, OppMove]
+    ).
+
+resolve_1v1(Pokemon, HP, Spe, Move, Dmg, Opp, OppHP, OppSpe, OppMove, OppDmg, Res) :-
+    Spe < OppSpe,   % pokemon is slower than opponent
+    PokemonNewHP is max(0, HP - OppDmg),
+    NewPokemon = Pokemon.put(_{curHP:PokemonNewHP}),
+    ( PokemonNewHP = 0 -> 
+        Res = [NewPokemon, Opp, OppMove]
+    ;
+        OppNewHP is max(0, OppHP - Dmg),
+        NewOpp = Opp.put(_{curHP:OppNewHP}),
+        Res = [NewPokemon, Move, NewOpp, OppMove]
+    ).
+
+% TODO: resolve_1v1 on a speed tie
+
 parse_export([P|T]) -->
     parse_export_pokemon(P),
     "\n\n",
