@@ -254,14 +254,24 @@ pivot_score(Versus, From, To, P, Score) :-
 
 % Two pokemon enter, only one leaves. No switches considered.
 lines_1v1(Pokemon, Opponent, Lines) :-
-    findall(Res, move_1v1(Pokemon, Opponent, Res), Lines).
+    findall(Line, line_1v1(Pokemon, Opponent, Line), Lines).
 
-move_1v1(Pokemon, Opponent, Resolution) :-
+line_1v1(Pokemon, Opponent, Line) :-
     % Todo: only plausible moves
     findall(M, highest_damage_move(Pokemon, Opponent, M), PokemonMoves),
     findall(M, highest_damage_move(Opponent, Pokemon, M), OpponentMoves),
     member(Move, PokemonMoves),
     member(OppMove, OpponentMoves),
+    move_1v1(Pokemon, Opponent, Move, OppMove, Res),
+    Res = res(NewPokemon, _, NewOpp, _),
+    ( (NewPokemon.curHP == 0 ; NewOpp.curHP == 0) ->
+        Line = [Res]
+    ;
+        line_1v1(NewPokemon, NewOpp, More),
+        Line = [Res|More]
+    ).
+
+move_1v1(Pokemon, Opponent, Move, OppMove, Resolution) :-
     % we are still calculating safe
     lowRoll(Pokemon, Opponent, false, Move, Low),
     highRoll(Opponent, Pokemon, false, OppMove, High),
@@ -277,11 +287,12 @@ resolve_1v1(Pokemon, HP, Spe, Move, Dmg, Opp, OppHP, OppSpe, OppMove, OppDmg, Re
     OppNewHP is max(0, OppHP - Dmg),
     NewOpp = Opp.put(_{curHP:OppNewHP}),
     ( OppNewHP = 0 -> 
-        Res = [Pokemon, Move, NewOpp]
+        NewPokemon = Pokemon.put(_{curHP:HP}),
+        Res = res(NewPokemon, Move, NewOpp, none)
     ;
         PokemonNewHP is max(0, HP - OppDmg),
         NewPokemon = Pokemon.put(_{curHP:PokemonNewHP}),
-        Res = [NewPokemon, Move, NewOpp, OppMove]
+        Res = res(NewPokemon, Move, NewOpp, OppMove)
     ).
 
 resolve_1v1(Pokemon, HP, Spe, Move, Dmg, Opp, OppHP, OppSpe, OppMove, OppDmg, Res) :-
@@ -289,14 +300,21 @@ resolve_1v1(Pokemon, HP, Spe, Move, Dmg, Opp, OppHP, OppSpe, OppMove, OppDmg, Re
     PokemonNewHP is max(0, HP - OppDmg),
     NewPokemon = Pokemon.put(_{curHP:PokemonNewHP}),
     ( PokemonNewHP = 0 -> 
-        Res = [NewPokemon, Opp, OppMove]
+        NewOpp = Opp.put(_{curHP:OppHP}),
+        Res = res(NewPokemon, none, NewOpp, OppMove)
     ;
         OppNewHP is max(0, OppHP - Dmg),
         NewOpp = Opp.put(_{curHP:OppNewHP}),
-        Res = [NewPokemon, Move, NewOpp, OppMove]
+        Res = res(NewPokemon, Move, NewOpp, OppMove)
     ).
 
 % TODO: resolve_1v1 on a speed tie
+
+print_lines([]).
+print_lines([L|T]) :-
+    maplist([X,Y]>>(X=res(P,PM,O,OM),get_dict(name,P,PN),get_dict(name,O,ON),Y=res(PN,PM,ON,OM)), L, PL),
+    writeln(PL),
+    print_lines(T).
 
 parse_export([P|T]) -->
     parse_export_pokemon(P),

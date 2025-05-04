@@ -27,15 +27,20 @@ test(youngster_calvin, [nondet]) :-
     lines_1v1(Chimchar, Poochyena, Lines),
     % Chimchar mach punches Poochyena to death. Note it sees its dead and tries to Quick Attack
     % but Punch is also +1 speed. This is _not_ reflected in lines_1v1 logic yet though!
-    assertion(Lines = [[Chimchar, "Mach Punch", _]]),
+    assertion(Lines = [[res(_, "Mach Punch", _, none)]]),
     post_ko_switch_in(Chimchar, [Lillipup, Rookidee], [Next|_]),
     assertion(Next == Lillipup),    % both are outsped/outdamaged, so party order applies
     lines_1v1(Chimchar, Lillipup, Lines2),
     % Chimchar cannot OHKO Lillipup, so it gets either Tackle/Bite off.
     % We dont consider status moves yet; they just count as 0-damage moves atm.
-    assertion(Lines2 = [[_, "Mach Punch", _, "Tackle"], [_, "Mach Punch", _, "Bite"]]),
-    % TODO: Chimchar starts damaged vs Rookidee!
+    % Duplicate lines are due to Lillipup trying to Tackle/Bite at the end and fainting before it can
+    assertion(Lines2 = [[res(_, "Mach Punch", _, "Tackle"), res(_, "Mach Punch", _, none)],
+                        [res(_, "Mach Punch", _, "Tackle"), res(_, "Mach Punch", _, none)],
+                        [res(_, "Mach Punch", _, "Bite"), res(_, "Mach Punch", _, none)],
+                        [res(_, "Mach Punch", _, "Bite"), res(_, "Mach Punch", _, none)]]),
+    % TODO: Chimchar starts damaged vs Rookidee (but it wont matter)!
     lines_1v1(Chimchar, Rookidee, Lines3),
-    assertion(Lines3 = [[_, "Ember", _, "Wing Attack"]]).
+    assertion(Lines3 = [[res(_, "Ember", _, "Wing Attack"), res(_, "Ember", _, none)]]).
+    % ACTUAL: we took some sand attacks but never missed, and never had to switch
 
 :- end_tests(run10_start).
