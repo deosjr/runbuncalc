@@ -123,7 +123,7 @@ test(team_aqua_grunt_petalburg, [nondet]) :-
     opponent('Team Aqua Grunt Petalburg Woods', Grunt),
     find_line_less_naive(Box, Grunt, Line),
     maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
-    assertion(Names == ["Gossifleur", "Vivillon", "Vivillon"]).
+    assertion(Names == ["Gossifleur", "Vivillon", "Vivillon"]),
     % Gossifleur has a 50% chance to slow-kill Carvanha with Magical Leaf, taking no Rough Skin damage.
     % If Carvanha lives, it will trigger Cotton Down and be at -1 speed afterwards.
     % It will see that it is dead and therefore Aqua Jet. Finneon can switch in and finish up if needed.
@@ -132,5 +132,83 @@ test(team_aqua_grunt_petalburg, [nondet]) :-
     % Exeggcute gets Vivillon immediately. If Croagunk is left, still Rookidee+Vivillon finisher as the plan.
     % ACTUAL: Carvanha Bites, we flinch, and we have to steer.. almost lost a few pokemon here
     % My mistake here was thinking Carvanha always goes for Poison Fang!
+    % So lets do some after-the-fact calculations:
+    Grunt = [Carvanha, Croagunk, Exeggcute],
+    get_pokemon_by_name("Gossifleur", Box, Gossifleur),
+    lines_1v1(Gossifleur, Carvanha, Lines),
+    % NOTE that this shouldve told me I missed something, but doesnt take flinching into account yet
+    assertion(Lines = [[res(_, "Magical Leaf", _, "Bite"), res(_, none, _, "Bite")],
+                       [res(_, "Magical Leaf", _, "Bite"), res(_, none, _, "Poison Fang")],
+                       [res(_, "Magical Leaf", _, "Poison Fang"), res(_, none, _, "Bite")],
+                       [res(_, "Magical Leaf", _, "Poison Fang"), res(_, none, _, "Poison Fang")]]),
+    post_ko_switch_in(Gossifleur, [Croagunk, Exeggcute], [Next|_]),
+    assertion(Next == Croagunk).    % even if Gossifleur is heavily damaged, this doesnt change
+    % Not sure about Croagunk Belch damage counting when looking at switch-in logic?
 
 :- end_tests(run10_petalburg).
+
+run10box3 :-
+    retractall(box(_)),
+    Box = [
+    #{ability:"Swift Swim",ivs:_{atk:26,def:9,hp:5,spa:18,spd:22,spe:4},level:17,moves:["Pound","Water Gun","Gust","Water Pulse"],name:"Finneon",nature:"Timid"},
+    #{ability:"Intimidate",ivs:_{atk:19,def:0,hp:15,spa:11,spd:31,spe:26},level:17,moves:["Leer","Covet","Baby-Doll Eyes","Bite"],name:"Herdier",nature:"Gentle"},
+    #{ability:"Swift Swim",ivs:_{atk:14,def:9,hp:6,spa:27,spd:19,spe:1},level:17,moves:["Fake Out","Natural Gift","Mega Drain","Bubble"],name:"Lombre",nature:"Hasty"},
+    #{ability:"Guts",ivs:_{atk:22,def:24,hp:24,spa:17,spd:11,spe:14},level:17,moves:["Pound","Leer","Rock Throw","Low Kick"],name:"Timburr",nature:"Hardy"},
+    #{ability:"Oblivious",ivs:_{atk:26,def:21,hp:5,spa:5,spd:25,spe:27},level:17,moves:["Charm","Brine","Powder Snow","Rollout"],name:"Spheal",nature:"Hardy"},
+    #{ability:"Rough Skin",ivs:_{atk:26,def:20,hp:5,spa:28,spd:14,spe:26},level:17,moves:["Water Pulse","Bite","Rage","Aqua Jet"],name:"Carvanha",nature:"Modest"},
+    #{ability:"Shield Dust",ivs:_{atk:25,def:3,hp:18,spa:26,spd:20,spe:10},level:17,moves:["Air Cutter","Struggle Bug","Stun Spore","Protect"],name:"Vivillon",nature:"Hardy"},
+    #{ability:"Cotton Down",ivs:_{atk:20,def:10,hp:5,spa:15,spd:1,spe:5},level:17,moves:["Round","Sing","Rapid Spin","Magical Leaf"],name:"Gossifleur",nature:"Relaxed"},
+    #{ability:"Vital Spirit",ivs:_{atk:31,def:23,hp:31,spa:3,spd:3,spe:31},level:17,moves:["Low Sweep","Leer","Flame Wheel","Mach Punch"],name:"Monferno",nature:"Quirky"},
+    #{ability:"Intimidate",ivs:_{atk:29,def:18,hp:5,spa:2,spd:16,spe:24},level:17,moves:["Ember","Bite","Covet","Fire Fang"],name:"Growlithe",nature:"Mild"},
+    #{ability:"Unnerve",ivs:_{atk:4,def:5,hp:13,spa:24,spd:13,spe:30},level:17,moves:["Pluck","Leer","Fury Attack","Sand Attack"],name:"Rookidee",nature:"Bashful"}
+    ],
+    assertz(box(Box)).
+
+:- begin_tests(run10_dewford, [setup(run10box3)]).
+
+test(fisherman_elliot, [nondet]) :-
+    box(Box),
+    opponent('Fisherman Elliot', Elliot),
+    find_line_less_naive(Box, Elliot, Line),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    assertion(Names == ["Lombre", "Vivillon", "Vivillon"]),
+    Elliot = [Staryu, OppLombre, Arrokuda],
+    % Lombre vs Staryu should only ever be FakeOut + Mega Drain, but our logic doesnt know about flinch
+    % Vivillon vs Lombre is also interesting, lines_1v1 suggests Air Cutter or Struggle Bug
+    % but only Air Cutter is a range to kill so we should never go for Struggle Bug here.
+    % Same thing vs Arrokuda
+    get_pokemon_by_name("Vivillon", Box, Vivillon),
+    lines_1v1(Vivillon, Arrokuda, Lines),
+    assertion(Lines = [[res(_, "Air Cutter", _, "Peck"), res(_, "Air Cutter", _, none)],
+                       [res(_, "Air Cutter", _, "Peck"), res(_, "Struggle Bug", _, none)],
+                       [res(_, "Struggle Bug", _, "Peck"), res(_, "Air Cutter", _, none)],
+                       [res(_, "Struggle Bug", _, "Peck"), res(_, "Struggle Bug", _, none)]]),
+    % lets check to make sure who comes out after Staryu. All its attacks deal exactly the same range of damage
+    get_pokemon_by_name("Lombre", Box, Lombre),
+    highest_damage_move(Staryu, Lombre, Move),
+    lowRoll(Staryu, Lombre, false, Move, Low),
+    highRoll(Staryu, Lombre, false, Move, High),
+    lowRoll(Staryu, Lombre, true, Move, LowCrit),
+    highRoll(Staryu, Lombre, true, Move, HighCrit),
+    calculate(Staryu, Lombre, Move, Data),
+    LombreDmgLow is Data.defender.originalCurHP - Low,
+    LombreLowDmgd = Lombre.put(_{curHP: LombreDmgLow}),
+    post_ko_switch_in(LombreLowDmgd, [OppLombre, Arrokuda], [NextLow|_]),
+    assertion(NextLow == OppLombre),
+    LombreDmgHigh is Data.defender.originalCurHP - High,
+    LombreHighDmgd = Lombre.put(_{curHP: LombreDmgHigh}),
+    post_ko_switch_in(LombreHighDmgd, [OppLombre, Arrokuda], [NextHigh|_]),
+    assertion(NextHigh == OppLombre),
+    LombreDmgLowCrit is Data.defender.originalCurHP - LowCrit,
+    LombreLowCritDmgd = Lombre.put(_{curHP: LombreDmgLowCrit}),
+    post_ko_switch_in(LombreLowCritDmgd, [OppLombre, Arrokuda], [NextLowCrit|_]),
+    assertion(NextLowCrit == OppLombre),
+    LombreDmgHighCrit is Data.defender.originalCurHP - HighCrit,
+    LombreHighCritDmgd = Lombre.put(_{curHP: LombreDmgHighCrit}),
+    post_ko_switch_in(LombreHighCritDmgd, [OppLombre, Arrokuda], [NextHighCrit|_]),
+    assertion(NextHighCrit == OppLombre).
+    % its all Lombre, no matter the damage. Our Lombre outdamages both but doesnt outspeed any.
+    % A Staryu crit deals 27% max, nowhere near enough for Arrokuda to see a kill with Peck
+    % And that is not even accounting for Mega Drain regaining health (probably guaranteed to get all back)
+
+:- end_tests(run10_dewford).
