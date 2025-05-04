@@ -211,4 +211,88 @@ test(fisherman_elliot, [nondet]) :-
     % A Staryu crit deals 27% max, nowhere near enough for Arrokuda to see a kill with Peck
     % And that is not even accounting for Mega Drain regaining health (probably guaranteed to get all back)
 
+test(ruin_maniac_georgie, [nondet]) :-
+    box(Box),
+    opponent('Ruin Maniac Georgie', Georgie),
+    find_line_less_naive(Box, Georgie, Line),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    assertion(Names == ["Carvanha", "Lombre", "Growlithe", "Timburr"]).
+    % I think Mawile comes out on Carvanha, but other than that this team should work fine.
+    % I do prefer Monferno over Timburr as a counter to Munchlax since its faster, but shouldnt matter.
+
+test(tuber_chandler, [nondet]) :-
+    box(Box),
+    opponent('Tuber Chandler', Chandler),
+    find_line_less_naive(Box, Chandler, Line),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    assertion(Names == ["Carvanha", "Herdier", "Monferno"]).
+    % This should work. Monferno also fast-kills Smoochum so Carvanha isnt even needed.
+
+test(tuber_lola, [nondet]) :-
+    box(Box),
+    opponent('Tuber Lola', Lola),
+    find_line_less_naive(Box, Lola, Line),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    assertion(Names == ["Carvanha", "Monferno"]),
+    % Carvanha has a range to slow-kill Fletchinder with Water Pulse, made easier because it will also trigger Rough Skin.
+    % It lives a crit, but might die to crit + burn damage if it tries to finish with Aqua Jet and Flame Body triggers.
+    % If that happens we would like to pivot to Monferno but without taking more Flying attacks.
+    Lola = [Fletchinder, Herdier],
+    get_pokemon_by_name("Carvanha", Box, Carvanha),
+    get_pokemon_by_name("Monferno", Box, Monferno),
+    get_pokemon_by_name("Spheal", Box, Spheal),
+    get_pokemon_by_name("Gossifleur", Box, Gossifleur),
+    get_pokemon_by_name("Vivillon", Box, Vivillon),
+    pivot(Fletchinder, Carvanha, Monferno, Box, Via),
+    assertion(Via == Spheal), % unfortunately, there is no one like that. Spheal can at least tank/finish
+    pivot(Herdier, Carvanha, Monferno, Box, Via2),
+    assertion(Via2 == Gossifleur),
+    select(Spheal, Box, NoSphealBox),       % should remove others from Box too, but Im lazy. This was the only clash
+    pivot(Herdier, Spheal, Monferno, NoSphealBox, Via3),
+    assertion(Via3 == Gossifleur),
+    select(Spheal, Box, NoSphealBox),       % should remove others from Box too, but Im lazy. This was the only clash
+    % Pivotting via Gossifleur is possible but baits Ice Fang, and risks being frozen.
+    select(Gossifleur, Box, NoGossifleurBox),
+    pivot(Herdier, Carvanha, Monferno, NoGossifleurBox, Via4),
+    assertion(Via4 == Vivillon).            % that doesnt help. We dont have a better way it seems
+    % Oh well, Low Sweep + Mach Punch should kill before 2x Headbutt does unless both maxroll crit
+
+test(sailor_edmond, [nondet]) :-
+    box(Box),
+    opponent('Sailor Edmond', Edmond),
+    find_line_less_naive(Box, Edmond, Line),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    assertion(Names == ["Vivillon", "Vivillon", "Lombre"]).
+    % maybe? Id like to go for something slightly more complicated:
+    % Rookidee tanks a Shock Wave and Plucks the oran berry.
+    % Switch to Gossifleur to tank another Shock Wave, lowering speed, then Herdier to finish
+    % Buizel should be next, Herdier can chip, then switch to Lombre to finish. Monferno in the back if needed, but risky
+    % Palpitoad is hard countered by Vivillon.
+    % ACTUAL: Rookidee solos Wingull as it goes for Rain Dance. Lombre solos Buizel in the rain.
+    % Lombre can stay in vs Palpitoad as it has just enough HP to survive crit Sludge, and kills with Mega Drain.
+
+% Fisherman Bill gets solod by Vivillon.
+
+test(tuber_ricky, [nondet]) :-
+    box(Box),
+    opponent('Tuber Ricky', Ricky),
+    find_line_less_naive(Box, Ricky, Line),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    assertion(Names == ["Monferno", "Vivillon", "Monferno"]).
+    % Vivillon would be nice vs Aipom, protecting vs Fake Out, but we need it vs Nidorino.
+    % Monferno is amazing vs Luxio so we are looking for an Aipom counter.
+    % Growlithe with Intimidate does okay, and if needed Herdier with another Intimidate can finish
+    % Herdier baits Nidorino with Double Kick which is perfect, so maybe we try that anyways
+    % ACTUAL: swapped Growlite and Herdier on Aipom until it was at -4, worked great
+
+test(tuber_hailey, [nondet]) :-
+    box(Box),
+    opponent('Tuber Hailey', Hailey),
+    find_line_less_naive(Box, Hailey, Line),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    assertion(Names == ["Vivillon", "Herdier", "Herdier"]).
+    % Herdier cannot 1v1 Nidorina, but Vivillon can chip a lot first.
+    % Flaaffy can then be handled by Growlithe/Monferno/Lombre
+    % ACTUAL: Flaaffy comes out before Nidorina, but we steer just fine.
+
 :- end_tests(run10_dewford).
