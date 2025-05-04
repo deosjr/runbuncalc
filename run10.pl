@@ -43,4 +43,28 @@ test(youngster_calvin, [nondet]) :-
     assertion(Lines3 = [[res(_, "Ember", _, "Wing Attack"), res(_, "Ember", _, none)]]).
     % ACTUAL: we took some sand attacks but never missed, and never had to switch
 
+test(bug_catcher_rick, [nondet]) :-
+    box(Box),
+    opponent('Bug Catcher Rick', Rick),
+    find_line_less_naive(Box, Rick, Line),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    assertion(Names == ["Growlithe", "Chimchar", "Chimchar"]),
+    % This one is the other way around: Growlithe should solo here.
+    % The first switch is especially dumb, since Growlithe also solo kills but Chimchar is first in party order
+    Rick = [Grubbin, Pineco, Sizzlipede],
+    get_pokemon_by_name("Growlithe", Box, Growlithe),
+    lines_1v1(Growlithe, Grubbin, Lines),
+    assertion(Lines = [[res(_, "Flame Wheel", _, none)],[res(_, "Flame Wheel", _, none)]]),
+    post_ko_switch_in(Growlithe, [Pineco, Sizzlipede], [Next|_]),
+    assertion(Next == Pineco),    % Sizzlipede is not OHKOd, but Pineco isnt either because it is Sturdy
+    lines_1v1(Growlithe, Pineco, Lines2),
+    assertion(Lines2 = [[res(_, "Ember", _, "Pin Missile"), res(_, "Ember", _, none)],
+                        [res(_, "Ember", _, "Pin Missile"), res(_, "Flame Wheel", _, none)],
+                        [res(_, "Flame Wheel", _, "Pin Missile"), res(_, "Ember", _, none)],
+                        [res(_, "Flame Wheel", _, "Pin Missile"), res(_, "Flame Wheel", _, none)]]),
+    % TODO: Growlithe starts damaged vs Sizzlipede (but it wont matter)!
+    % The amount of lines vs Sizzlipede gets large, and we arent considering crits nor Oran Berries yet!
+    % But all lines have one thing in common: spam Bite until it faints.
+    % ACTUAL: Growlithe indeed solos the fight
+
 :- end_tests(run10_start).

@@ -87,20 +87,23 @@ fast_kill_guaranteed(Attacker, Defender, MoveName) :-
     calculate(Attacker, Defender, MoveName, Data),
     Data.attacker.stats.spe > Data.defender.stats.spe,
     damageRoll(Attacker, Defender, MoveName, MoveName-[LowRollPercent|_]),
-    LowRollPercent >= 100.
+    LowRollPercent >= 100,
+    not(sturdy(Defender, Data)).
 
 fast_kill_possible(Attacker, Defender, MoveName) :-
     calculate(Attacker, Defender, MoveName, Data),
     % Note the >= here vs > on _guaranteed
     Data.attacker.stats.spe >= Data.defender.stats.spe,
     damageRoll(Attacker, Defender, MoveName, MoveName-[_,HighRollPercent]),
-    HighRollPercent >= 100.
+    HighRollPercent >= 100,
+    not(sturdy(Defender, Data)).
 
 slow_kill_possible(Attacker, Defender, MoveName) :-
     calculate(Attacker, Defender, MoveName, Data),
     Data.attacker.stats.spe < Data.defender.stats.spe,
     damageRoll(Attacker, Defender, MoveName, MoveName-[_,HighRollPercent]),
-    HighRollPercent >= 100.
+    HighRollPercent >= 100,
+    not(sturdy(Defender, Data)).
 
 ai_is_faster(AI, Player) :-
     AI.moves = [Move|_],
@@ -273,42 +276,51 @@ line_1v1(Pokemon, Opponent, Line) :-
 
 move_1v1(Pokemon, Opponent, Move, OppMove, Resolution) :-
     % we are still calculating safe
-    lowRoll(Pokemon, Opponent, false, Move, Low),
-    highRoll(Opponent, Pokemon, false, OppMove, High),
     calculate(Pokemon, Opponent, Move, Data),
-    PokemonHP = Data.attacker.originalCurHP,
-    OpponentHP = Data.defender.originalCurHP,
-    PokemonSpeed = Data.attacker.stats.spe,
-    OpponentSpeed = Data.defender.stats.spe,
-    resolve_1v1(Pokemon, PokemonHP, PokemonSpeed, Move, Low, Opponent, OpponentHP, OpponentSpeed, OppMove, High, Resolution).
-
-resolve_1v1(Pokemon, HP, Spe, Move, Dmg, Opp, OppHP, OppSpe, OppMove, OppDmg, Res) :-
-    Spe > OppSpe,   % pokemon is faster than opponent
-    OppNewHP is max(0, OppHP - Dmg),
-    NewOpp = Opp.put(_{curHP:OppNewHP}),
-    ( OppNewHP = 0 -> 
-        NewPokemon = Pokemon.put(_{curHP:HP}),
-        Res = res(NewPokemon, Move, NewOpp, none)
+    Data.attacker.stats.spe > Data.defender.stats.spe,   % pokemon is faster than opponent
+    lowRoll(Pokemon, Opponent, false, Move, Low),
+    resolve_dmg(Pokemon, Opponent, Data, Low, NewOpponent),
+    ( NewOpponent.curHP == 0 -> 
+        NewPokemon = Pokemon.put(_{curHP:Data.attacker.originalCurHP}),
+        Resolution = res(NewPokemon, Move, NewOpponent, none)
     ;
-        PokemonNewHP is max(0, HP - OppDmg),
-        NewPokemon = Pokemon.put(_{curHP:PokemonNewHP}),
-        Res = res(NewPokemon, Move, NewOpp, OppMove)
+        calculate(Opponent, Pokemon, OppMove, OppData),
+        highRoll(Opponent, Pokemon, false, OppMove, High),
+        resolve_dmg(Opponent, Pokemon, OppData, High, NewPokemon),
+        Resolution = res(NewPokemon, Move, NewOpponent, OppMove)
     ).
 
-resolve_1v1(Pokemon, HP, Spe, Move, Dmg, Opp, OppHP, OppSpe, OppMove, OppDmg, Res) :-
-    Spe < OppSpe,   % pokemon is slower than opponent
-    PokemonNewHP is max(0, HP - OppDmg),
-    NewPokemon = Pokemon.put(_{curHP:PokemonNewHP}),
-    ( PokemonNewHP = 0 -> 
-        NewOpp = Opp.put(_{curHP:OppHP}),
-        Res = res(NewPokemon, none, NewOpp, OppMove)
+move_1v1(Pokemon, Opponent, Move, OppMove, Resolution) :-
+    % we are still calculating safe
+    calculate(Pokemon, Opponent, Move, Data),
+    Data.attacker.stats.spe < Data.defender.stats.spe,   % pokemon is slower than opponent
+    calculate(Opponent, Pokemon, OppMove, OppData),
+    highRoll(Opponent, Pokemon, false, OppMove, High),
+    resolve_dmg(Opponent, Pokemon, OppData, High, NewPokemon),
+    ( NewPokemon.curHP == 0 -> 
+        NewOpponent = Opponent.put(_{curHP:Data.defender.originalCurHP}),
+        Resolution = res(NewPokemon, none, NewOpponent, OppMove)
     ;
-        OppNewHP is max(0, OppHP - Dmg),
-        NewOpp = Opp.put(_{curHP:OppNewHP}),
-        Res = res(NewPokemon, Move, NewOpp, OppMove)
+        lowRoll(Pokemon, Opponent, false, Move, Low),
+        resolve_dmg(Pokemon, Opponent, Data, Low, NewOpponent),
+        Resolution = res(NewPokemon, Move, NewOpponent, OppMove)
     ).
 
 % TODO: resolve_1v1 on a speed tie
+
+resolve_dmg(_Pokemon, Opponent, Data, Damage, NewOpponent) :-
+    Min is Data.defender.originalCurHP - Damage,
+    (sturdy(Opponent, Data) ->
+        NewHP is max(1, Min)
+    ;
+        NewHP is max(0, Min)
+    ),
+    NewOpponent = Opponent.put(_{curHP:NewHP}).
+
+% Does sturdy prevent OHKO?
+sturdy(Defender, Data) :-
+    Defender.ability = "Sturdy",
+    Data.defender.stats.hp = Data.defender.originalCurHP.
 
 print_lines([]).
 print_lines([L|T]) :-
