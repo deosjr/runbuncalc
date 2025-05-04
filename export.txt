@@ -57,3 +57,22 @@ IVs: 13 HP / 4 Atk / 5 Def / 24 SpA / 13 SpD / 30 Spe
 - Fury Attack
 - Sand Attack
 
+Lotad
+Ability: Swift Swim
+Level: 12
+Hasty Nature
+IVs: 6 HP / 14 Atk / 9 Def / 27 SpA / 19 SpD / 1 Spe
+- Astonish
+- Natural Gift
+- Absorb
+- Bubble
+
+Vivillon
+Ability: Shield Dust
+Level: 12
+Hardy Nature
+IVs: 18 HP / 25 Atk / 3 Def / 26 SpA / 20 SpD / 10 Spe
+- Air Cutter
+- String Shot
+- Stun Spore
+- Protect
