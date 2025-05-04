@@ -110,6 +110,27 @@ test(lady_cindy, [nondet]) :-
     find_line_less_naive(Box, Cindy, Line),
     maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
     assertion(Names == ["Vivillon", "Growlithe", "Finneon"]).
-    % TODO
+    % Thunder Wave / Attract makes this harder to plan
+    % Vivillon needs 3 turns to kill Minccino due to Oran Berry
+    % Growlithe actually has a chance to 2HKO if it lowrolls its first Flame Wheel and highrolls the second
+    % Similarly for Vivillon on Jigglypuff, so I might switch those two around.
+    % Finneon vs Panphy is fine. Gossifleur is a nice second, though it is very slow.
+    % Chimchar can come in on the first two mons if we get paralyzed/infatuated
+    % Since only Vivillon is faster, I think only it should have a Cheri berry? Since T-wave will be more likely?
+
+test(team_aqua_grunt_petalburg, [nondet]) :-
+    box(Box),
+    opponent('Team Aqua Grunt Petalburg Woods', Grunt),
+    find_line_less_naive(Box, Grunt, Line),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    assertion(Names == ["Gossifleur", "Vivillon", "Vivillon"]).
+    % Gossifleur has a 50% chance to slow-kill Carvanha with Magical Leaf, taking no Rough Skin damage.
+    % If Carvanha lives, it will trigger Cotton Down and be at -1 speed afterwards.
+    % It will see that it is dead and therefore Aqua Jet. Finneon can switch in and finish up if needed.
+    % Gossifleur gets Croagunk while Finneon baits Exeggcute, I think.
+    % Croagunk gets Rookidee chipping with Peck, then Vivillon to OHKO it before berry can trigger
+    % Exeggcute gets Vivillon immediately. If Croagunk is left, still Rookidee+Vivillon finisher as the plan.
+    % ACTUAL: Carvanha Bites, we flinch, and we have to steer.. almost lost a few pokemon here
+    % My mistake here was thinking Carvanha always goes for Poison Fang!
 
 :- end_tests(run10_petalburg).
