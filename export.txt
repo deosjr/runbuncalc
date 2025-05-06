@@ -1,96 +1,6 @@
-Finneon
-Ability: Swift Swim
-Level: 17
-Timid Nature
-IVs: 5 HP / 26 Atk / 9 Def / 18 SpA / 22 SpD / 4 Spe
-- Pound
-- Water Gun
-- Gust
-- Water Pulse
-
-Herdier @ Oran Berry
-Ability: Intimidate
-Level: 17
-Gentle Nature
-IVs: 15 HP / 19 Atk / 0 Def / 11 SpA / 31 SpD / 26 Spe
-- Leer
-- Covet
-- Baby-Doll Eyes
-- Bite
-
-Lombre @ Oran Berry
-Ability: Swift Swim
-Level: 17
-Hasty Nature
-IVs: 6 HP / 14 Atk / 9 Def / 27 SpA / 19 SpD / 1 Spe
-- Fake Out
-- Natural Gift
-- Mega Drain
-- Bubble
-
-Timburr
-Ability: Guts
-Level: 17
-Hardy Nature
-IVs: 24 HP / 22 Atk / 24 Def / 17 SpA / 11 SpD / 14 Spe
-- Pound
-- Leer
-- Rock Throw
-- Low Kick
-
-Spheal
-Ability: Oblivious
-Level: 17
-Hardy Nature
-IVs: 5 HP / 26 Atk / 21 Def / 5 SpA / 25 SpD / 27 Spe
-- Charm
-- Brine
-- Powder Snow
-- Rollout
-
-Carvanha
-Ability: Rough Skin
-Level: 17
-Modest Nature
-IVs: 5 HP / 26 Atk / 20 Def / 28 SpA / 14 SpD / 26 Spe
-- Water Pulse
-- Bite
-- Rage
-- Aqua Jet
-
-Vivillon
-Ability: Shield Dust
-Level: 17
-Hardy Nature
-IVs: 18 HP / 25 Atk / 3 Def / 26 SpA / 20 SpD / 10 Spe
-- Air Cutter
-- Struggle Bug
-- Stun Spore
-- Protect
-
-Gossifleur
-Ability: Cotton Down
-Level: 17
-Relaxed Nature
-IVs: 5 HP / 20 Atk / 10 Def / 15 SpA / 1 SpD / 5 Spe
-- Round
-- Sing
-- Rapid Spin
-- Magical Leaf
-
-Monferno
-Ability: Vital Spirit
-Level: 17
-Quirky Nature
-IVs: 31 HP / 31 Atk / 23 Def / 3 SpA / 3 SpD / 31 Spe
-- Low Sweep
-- Leer
-- Flame Wheel
-- Mach Punch
-
 Growlithe
 Ability: Intimidate
-Level: 17
+Level: 21
 Mild Nature
 IVs: 5 HP / 29 Atk / 18 Def / 2 SpA / 16 SpD / 24 Spe
 - Ember
@@ -98,13 +8,132 @@ IVs: 5 HP / 29 Atk / 18 Def / 2 SpA / 16 SpD / 24 Spe
 - Covet
 - Fire Fang
 
-Rookidee
+Eldegoss @ Oran Berry
+Ability: Cotton Down
+Level: 21
+Relaxed Nature
+IVs: 5 HP / 20 Atk / 10 Def / 15 SpA / 1 SpD / 5 Spe
+- Round
+- Leaf Tornado
+- Rapid Spin
+- Magical Leaf
+
+Sealeo @ Oran Berry
+Ability: Oblivious
+Level: 21
+Hardy Nature
+IVs: 5 HP / 26 Atk / 21 Def / 5 SpA / 25 SpD / 27 Spe
+- Charm
+- Brine
+- Aurora Beam
+- Rollout
+
+Chewtle
+Ability: Strong Jaw
+Level: 21
+Modest Nature
+IVs: 5 HP / 17 Atk / 14 Def / 26 SpA / 15 SpD / 15 Spe
+- Headbutt
+- Water Pulse
+- Bite
+- Ice Fang
+
+Carvanha
+Ability: Rough Skin
+Level: 21
+Modest Nature
+IVs: 5 HP / 26 Atk / 20 Def / 28 SpA / 14 SpD / 26 Spe
+- Water Pulse
+- Bite
+- Poison Fang
+- Aqua Jet
+
+Vivillon
+Ability: Shield Dust
+Level: 21
+Hardy Nature
+IVs: 18 HP / 25 Atk / 3 Def / 26 SpA / 20 SpD / 10 Spe
+- Air Cutter
+- Struggle Bug
+- Stun Spore
+- Protect
+
+Lumineon
+Ability: Swift Swim
+Level: 21
+Timid Nature
+IVs: 5 HP / 26 Atk / 9 Def / 18 SpA / 22 SpD / 4 Spe
+- Pound
+- Water Gun
+- Air Cutter
+- Water Pulse
+
+Corvisquire
 Ability: Unnerve
-Level: 17
+Level: 21
 Bashful Nature
 IVs: 13 HP / 4 Atk / 5 Def / 24 SpA / 13 SpD / 30 Spe
 - Pluck
-- Leer
-- Fury Attack
+- Scary Face
+- Steel Wing
 - Sand Attack
 
+Timburr @ Oran Berry
+Ability: Guts
+Level: 21
+Hardy Nature
+IVs: 24 HP / 22 Atk / 24 Def / 17 SpA / 11 SpD / 14 Spe
+- Wake-Up Slap
+- Leer
+- Rock Throw
+- Low Kick
+
+Sandshrew-Alola
+Ability: Slush Rush
+Level: 21
+Lonely Nature
+IVs: 26 HP / 1 Atk / 8 Def / 14 SpA / 1 SpD / 31 Spe
+- Rapid Spin
+- Metal Claw
+- Ice Punch
+- Ice Shard
+
+Lombre
+Ability: Swift Swim
+Level: 21
+Hasty Nature
+IVs: 6 HP / 14 Atk / 9 Def / 27 SpA / 19 SpD / 1 Spe
+- Fake Out
+- Natural Gift
+- Mega Drain
+- Bubble Beam
+
+Monferno
+Ability: Vital Spirit
+Level: 21
+Quirky Nature
+IVs: 31 HP / 31 Atk / 23 Def / 3 SpA / 3 SpD / 31 Spe
+- Low Sweep
+- Leer
+- Flame Wheel
+- Mach Punch
+
+Herdier
+Ability: Intimidate
+Level: 21
+Gentle Nature
+IVs: 15 HP / 19 Atk / 0 Def / 11 SpA / 31 SpD / 26 Spe
+- Take Down
+- Covet
+- Baby-Doll Eyes
+- Bite
+
+Flaaffy
+Ability: Static
+Level: 21
+Lax Nature
+IVs: 23 HP / 31 Atk / 8 Def / 12 SpA / 16 SpD / 25 Spe
+- Shock Wave
+- Thunder Wave
+- Thunder Punch
+- Cotton Spore

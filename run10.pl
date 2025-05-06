@@ -295,4 +295,138 @@ test(tuber_hailey, [nondet]) :-
     % Flaaffy can then be handled by Growlithe/Monferno/Lombre
     % ACTUAL: Flaaffy comes out before Nidorina, but we steer just fine.
 
+test(museum_grunts, [nondet]) :-
+    box(OldBox),
+    Sandshrew = #{ability:"Slush Rush",ivs:_{atk:1,def:8,hp:26,spa:14,spd:1,spe:31},level:17,moves:["Rapid Spin","Metal Claw","Ice Punch","Ice Shard"],name:"Sandshrew-Alola",nature:"Lonely"},
+    Chewtle = #{ability:"Strong Jaw",ivs:_{atk:17,def:14,hp:5,spa:26,spd:15,spe:15},level:17,moves:["Tackle","Water Pulse","Bite","Ice Fang"],name:"Chewtle",nature:"Modest"},
+    Box = [Sandshrew, Chewtle|OldBox],
+    opponent('Team Aqua Grunt Museum #1', Grunt1),
+    opponent('Team Aqua Grunt Museum #2', Grunt2),
+    find_line_less_naive(Box, Grunt1, Line),
+    find_line_less_naive(Box, Grunt2, Line2),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    maplist([X,Y]>>get_dict(name,X,Y), Line2, Names2),
+    assertion(Names == ["Sandshrew-Alola", "Herdier", "Lombre"]),
+    assertion(Names2 == ["Herdier", "Herdier", "Sandshrew-Alola"]).
+    % Team 1 lineup looks fine, though Herdier I want to save for 2.
+    % Team 2 lineup is abysmal; Sandshrew is infinitely better vs Mareanie and not good enough vs Whirlipede.
+    % Ill switch Monferno in vs Whirlipede (perhaps taking a big rollout on Sandshrew and finishing with Ice Shard if really needed).
+    % Skrelp is kinda tough, Ill use Chewtle with Vivillon as backup, and hope not to need anyone else.
+    % Never-melt Ice is a consideration on Sandshrew, makes Mareanie go quicker
+    % Mareanie is actually a huge problem: it will pretty consistently Soak Sandshrew forcing a switch.
+    % What works is to preemptively switch Sandshrew, taking Soak and baiting a poison type move on another pokemon
+    % Then switch back to Sandshrew. We have a lot of HP on Lombre/Chewtle/Vivillon to play with and the latter can chip as well.
+    % Eventually either Soak runs out of PP or we hit an Ice Punch, freezing, and finish
+
 :- end_tests(run10_dewford).
+
+run10box4 :-
+    retractall(box(_)),
+    Box = [
+        #{ability:"Intimidate",ivs:_{atk:29,def:18,hp:5,spa:2,spd:16,spe:24},level:21,moves:["Ember","Bite","Covet","Fire Fang"],name:"Growlithe",nature:"Mild"},
+        #{ability:"Cotton Down",ivs:_{atk:20,def:10,hp:5,spa:15,spd:1,spe:5},level:21,moves:["Round","Leaf Tornado","Rapid Spin","Magical Leaf"],name:"Eldegoss",nature:"Relaxed"},
+        #{ability:"Oblivious",ivs:_{atk:26,def:21,hp:5,spa:5,spd:25,spe:27},level:21,moves:["Charm","Brine","Aurora Beam","Rollout"],name:"Sealeo",nature:"Hardy"},
+        #{ability:"Strong Jaw",ivs:_{atk:17,def:14,hp:5,spa:26,spd:15,spe:15},level:21,moves:["Headbutt","Water Pulse","Bite","Ice Fang"],name:"Chewtle",nature:"Modest"},
+        #{ability:"Rough Skin",ivs:_{atk:26,def:20,hp:5,spa:28,spd:14,spe:26},level:21,moves:["Water Pulse","Bite","Poison Fang","Aqua Jet"],name:"Carvanha",nature:"Modest"},
+        #{ability:"Shield Dust",ivs:_{atk:25,def:3,hp:18,spa:26,spd:20,spe:10},level:21,moves:["Air Cutter","Struggle Bug","Stun Spore","Protect"],name:"Vivillon",nature:"Hardy"},
+        #{ability:"Swift Swim",ivs:_{atk:26,def:9,hp:5,spa:18,spd:22,spe:4},level:21,moves:["Pound","Water Gun","Air Cutter","Water Pulse"],name:"Lumineon",nature:"Timid"},
+        #{ability:"Unnerve",ivs:_{atk:4,def:5,hp:13,spa:24,spd:13,spe:30},level:21,moves:["Pluck","Scary Face","Steel Wing","Sand Attack"],name:"Corvisquire",nature:"Bashful"},
+        #{ability:"Guts",ivs:_17120{atk:22,def:24,hp:24,spa:17,spd:11,spe:14},level:21,moves:["Wake-Up Slap","Leer","Rock Throw","Low Kick"],name:"Timburr",nature:"Hardy"},
+        #{ability:"Slush Rush",ivs:_{atk:1,def:8,hp:26,spa:14,spd:1,spe:31},level:21,moves:["Rapid Spin","Metal Claw","Ice Punch","Ice Shard"],name:"Sandshrew-Alola",nature:"Lonely"},
+        #{ability:"Swift Swim",ivs:_{atk:14,def:9,hp:6,spa:27,spd:19,spe:1},level:21,moves:["Fake Out","Natural Gift","Mega Drain","Bubble Beam"],name:"Lombre",nature:"Hasty"},
+        #{ability:"Vital Spirit",ivs:_{atk:31,def:23,hp:31,spa:3,spd:3,spe:31},level:21,moves:["Low Sweep","Leer","Flame Wheel","Mach Punch"],name:"Monferno",nature:"Quirky"},
+        #{ability:"Intimidate",ivs:_{atk:19,def:0,hp:15,spa:11,spd:31,spe:26},level:21,moves:["Take Down","Covet","Baby-Doll Eyes","Bite"],name:"Herdier",nature:"Gentle"},
+        % Flaaffy, caught after defeating Camper Gavi
+        #{ability:"Static",ivs:_{atk:31,def:8,hp:23,spa:12,spd:16,spe:25},level:21,moves:["Shock Wave","Thunder Wave","Thunder Punch","Cotton Spore"],name:"Flaaffy",nature:"Lax"}
+    ],
+    assertz(box(Box)).
+
+:- begin_tests(run10_slateport, [setup(run10box4)]).
+
+test(camper_gavi, [nondet]) :-
+    box(Box),
+    opponent('Camper Gavi', Gavi),
+    find_line_less_naive(Box, Gavi, Line),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    assertion(Names == ["Monferno", "Sealeo", "Sandshrew-Alola", "Sandshrew-Alola", "Lumineon"]),
+    Gavi = [Bibarel, Ponyta, Eelektrik, _Sunflora, _Dustox],
+    get_pokemon_by_name("Monferno", Box, Monferno),
+    lines_1v1(Monferno, Bibarel, Lines),
+    assertion(Lines = [[res(_, "Low Sweep", _, "Aqua Jet"), res(_, "Low Sweep", _, none)]]),
+    % TODO: second turn currently gives Low Sweep, because it doesnt know enough about priority
+    %assertion(Lines = [[res(_, "Low Sweep", _, "Aqua Jet"), res(_, "Mach Punch", _, none)]]),
+    % This is the only valid line. Bibarel sees it is potentially dead to fast Low Sweep,
+    % and so it will attempt to chip with a priority move. Assuming we low-roll, we finish with Mach Punch.
+    % Bibarel will go for Aqua Jet again, but since Mach Punch also has prio we dont take more damage than needed.
+    Gavi = [Bibarel|PostBibarelGavi],
+    post_ko_switch_ins_after_damage(Monferno, Bibarel, ["Aqua Jet"], PostBibarelGavi, Switchins),
+    assertion(Switchins == [Ponyta, Eelektrik]).
+    % In order of low, high, lowcrit, highcrit, its actually Ponyta, Eelektrik, Eelektrik, Ponyta to come out.
+    % This is due to outdamaging considering percentages of current HP! Interesting.
+    % Lumineon destroys Ponyta. Eldegoss takes on Eelektrik with Lombre backup. Vivillon deals with Sunflora and Dustox
+
+test(battle_girl_laura, [nondet]) :-
+    box(Box),
+    opponent('Battle Girl Laura', Laura),
+    find_line_less_naive(Box, Laura, Line),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    assertion(Names == ["Vivillon", "Vivillon", "Corvisquire"]).
+    % Right pokemon, wrong order. Corvisquire wants to Pluck the sitrus berry on Stufful.
+    % Vivillon can switch in afterwards and clean up. Both get Cheri berries vs Body Slam para
+
+test(sailor_brenden, [nondet]) :-
+    box(Box),
+    opponent('Sailor Brenden', Brenden),
+    find_line_less_naive(Box, Brenden, Line),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    assertion(Names == ["Vivillon", "Vivillon"]).
+    % Again, Pluck makes this easier. Corvisquire can solo Heracross and can eat Farfetchds berry.
+    % We want to lead with smth that can ensure a kill on the switch, dealing 30-50% damage so Corvisquire heals.
+    % Flaaffy with Shock Wave is perfect, even baiting a lower damage move. Note no items, due to Knock Off.
+    % ACTUAL: lucky Pin Missile means Monferno has to come in to finish with Mach Punch. Heracross is fast!
+
+test(battle_girl_lilith, [nondet]) :-
+    box(Box),
+    opponent('Battle Girl Lilith', Lilith),
+    find_line_less_naive(Box, Lilith, Line),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    assertion(Names == ["Vivillon", "Vivillon", "Monferno"]).
+    % Vivillon is great but we need to be careful; we will eat a FakeOut and cant OHKO Mankey due to sash.
+    % Still, leading Struggle Bug on Mankey we will be fine. Monferno is indeed free vs Ledian.
+    % Pivot through Herdier for Intimidate + bait a nonstatus move.
+    % ACTUAL: Makuhita used Bullet Punch instead of Fake Out?
+
+test(black_belt_takao, [nondet]) :-
+    box(Box),
+    opponent('Black Belt Takao', Takao),
+    find_line_less_naive(Box, Takao, Line),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    assertion(Names == ["Vivillon", "Vivillon", "Timburr"]).
+    % Or Monferno last really, same thing. Easy fight.
+
+test(black_belt_cristian, [nondet]) :-
+    box(Box),
+    opponent('Black Belt Cristian', Cristian),
+    find_line_less_naive(Box, Cristian, Line),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    assertion(Names == ["Lumineon", "Eldegoss", "Vivillon"]).
+    % Pretty solid plan. Need some pivots but 3 mons more to take. Monferno/Corvisquire will do.
+
+test(battle_girl_jocelyn, [nondet]) :-
+    box(Box),
+    opponent('Battle Girl Jocelyn', Jocelyn),
+    find_line_less_naive(Box, Jocelyn, Line),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    assertion(Names == ["Timburr", "Eldegoss", "Sealeo", "Herdier"]).
+    % Monferno will be better vs Kecleon because Timburr is slower and Kecleon will no longer be Normal typed.
+    % Eldegoss is great vs Golett. Lumineon is much safer than Sealeo vs Pignite. Herdier is amazing.
+
+test(leader_brawly, [nondet]) :-
+    box(Box),
+    opponent('Leader Brawly', Brawly),
+    find_line_less_naive(Box, Brawly, Line),
+    maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
+    assertion(Names == ["Vivillon", "Eldegoss", "Vivillon", "Lumineon", "Eldegoss", "Monferno"]).
+    % Its a start. Corvisquire again comes out first to Pluck a berry, it being slower is actually good here.
+
+:- end_tests(run10_slateport).

@@ -28,12 +28,12 @@ get_pokemon_by_name(Name, List, Pokemon) :-
     member(Pokemon, List),
     Pokemon.name = Name.
 
+% NOTE: looks at _current HP_ and calculates a percentage of _that_
 damageRolls(Attacker, Defender, Data) :-
     maplist(damageRoll(Attacker, Defender), Attacker.moves, Data).
     
 damageRoll(Attacker, Defender, Move, Range) :-
     calculate(Attacker, Defender, Move, Data),
-    %writeln(Data.damage),
     % nature is included in stats
     DefenderMaxHP = Data.defender.originalCurHP,
     (Data.damage = [Min|_] ->
@@ -53,12 +53,6 @@ highRoll(Attacker, Defender, Crit, Move, High) :-
 lowRoll(Attacker, Defender, Crit, Move, Low) :-
     calculate_http(Attacker, Defender, Move, Crit, Out),
     ( Out.damage = [Low|_] -> true ; Low=Out.damage).
-
-% backtracks over all highest damage moves on a tie
-highest_damage_move(Attacker, Defender, Move) :-
-    damageRolls(Attacker, Defender, Data),
-    member(Move-[_,High], Data),
-    include({High}/[_-[Low,_]]>>(Low > High), Data, []).
 
 calculate(Attacker, Defender, Move, Out) :-
     calculate_http(Attacker, Defender, Move, false, Out).
@@ -123,6 +117,7 @@ dead_to_crit(Defender, Attacker, MovesThatCritKill) :-
     zip_unzip(Attacker.moves, Damages, Moves),
     include([_-N]>>(N >= MaxHP), Moves, MovesThatCritKill).
 
+% outdamaging for switchin purposes consideres percentages of current HP, hence use of damageRolls
 outdamages(Pokemon, Opponent) :-
     damageRolls(Pokemon, Opponent, PokRolls),
     damageRolls(Opponent, Pokemon, OppRolls),
@@ -146,6 +141,34 @@ post_ko_switch_in(Player, OppTeam, Switchins) :-
 
 switchin_pair(Player, Opponent, Score-Opponent) :-
     switchin_score(Opponent, Player, Score).
+
+%post_ko_switch_ins_after_damage(Monferno, Bibarel, ["Aqua Jet"], PostBibarelGavi, Switchins),
+post_ko_switch_ins_after_damage(Winner, Loser, LoserMoves, Party, Switches) :-
+    % TODO: LoserMoves is considered to have exactly one move in it atm
+    LoserMoves = [Move],
+    switchins_after_damage_rolls(Winner, Loser, Move, Party, Switches).
+
+% low/high roll both normal and crit, and see who would come out.
+% if all four are the same mon, we have a pretty strong guarantee it will be that one
+switchins_after_damage_rolls(Winner, Loser, Move, Party, Switches) :-
+    lowRoll(Loser, Winner, false, Move, Low),
+    highRoll(Loser, Winner, false, Move, High),
+    lowRoll(Loser, Winner, true, Move, LowCrit),
+    highRoll(Loser, Winner, true, Move, HighCrit),
+    calculate(Loser, Winner, Move, Data),
+    DmgLow is Data.defender.originalCurHP - Low,
+    LowDmgd = Winner.put(_{curHP: DmgLow}),
+    post_ko_switch_in(LowDmgd, Party, [NextLow|_]),
+    DmgHigh is Data.defender.originalCurHP - High,
+    HighDmgd = Winner.put(_{curHP: DmgHigh}),
+    post_ko_switch_in(HighDmgd, Party, [NextHigh|_]),
+    DmgLowCrit is Data.defender.originalCurHP - LowCrit,
+    LowCritDmgd = Winner.put(_{curHP: DmgLowCrit}),
+    post_ko_switch_in(LowCritDmgd, Party, [NextLowCrit|_]),
+    DmgHighCrit is Data.defender.originalCurHP - HighCrit,
+    HighCritDmgd = Winner.put(_{curHP: DmgHighCrit}),
+    post_ko_switch_in(HighCritDmgd, Party, [NextHighCrit|_]),
+    sort([NextLow, NextHigh, NextLowCrit, NextHighCrit], Switches).
 
 % score of Pokemon switching in when Opponent is already out
 switchin_score(Pokemon, Opponent, 5) :-
@@ -255,14 +278,40 @@ pivot_score(Versus, From, To, P, Score) :-
     highRoll(Versus, To, false, NewBait, NewBaitHighDmg),
     Score is BaitHighDmg + NewBaitHighDmg.
 
+fast_kill_possible(Pokemon, Opponent) :-
+    member(Move, Pokemon.moves),
+    fast_kill_possible(Pokemon, Opponent, Move).
+
+player_moves(Pokemon, Opponent, Moves) :-
+    findall(M, highest_damage_move(Pokemon, Opponent, M), Moves).
+
+ai_moves(Pokemon, Opponent, Moves) :-
+    priority_moves(Pokemon, Prio),
+    ((fast_kill_possible(Opponent, Pokemon), Prio = [_|_]) ->
+        Moves = Prio
+    ;
+        findall(M, highest_damage_move(Pokemon, Opponent, M), Moves)
+    ).
+
+% backtracks over all highest damage moves on a tie
+highest_damage_move(Attacker, Defender, Move) :-
+    damageRolls(Attacker, Defender, Data),
+    member(Move-[_,High], Data),
+    include({High}/[_-[Low,_]]>>(Low > High), Data, []).
+
+priority_moves(Pokemon, Moves) :-
+    Prio = ["Quick Attack", "Aqua Jet", "Mach Punch"],  % todo: and more
+    include({Prio}/[X]>>(member(X,Prio)), Pokemon.moves, Moves).
+
 % Two pokemon enter, only one leaves. No switches considered.
+% Pokemon is player-controlled, Opponent is an AI
 lines_1v1(Pokemon, Opponent, Lines) :-
     findall(Line, line_1v1(Pokemon, Opponent, Line), Lines).
 
 line_1v1(Pokemon, Opponent, Line) :-
     % Todo: only plausible moves
-    findall(M, highest_damage_move(Pokemon, Opponent, M), PokemonMoves),
-    findall(M, highest_damage_move(Opponent, Pokemon, M), OpponentMoves),
+    player_moves(Pokemon, Opponent, PokemonMoves),
+    ai_moves(Opponent, Pokemon, OpponentMoves),
     member(Move, PokemonMoves),
     member(OppMove, OpponentMoves),
     move_1v1(Pokemon, Opponent, Move, OppMove, Res),
