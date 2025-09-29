@@ -25,6 +25,14 @@ byIndex(>, T1, T2) :- T1.index > T2.index.
 print_box :- box(Box), member(P, Box), format("~w = ~W,", [P.name, P, [quoted(true)]]), nl, fail. %"
 
 get_pokemon_by_name(Name, List, Pokemon) :-
+    get_by_name_from_list(List, Name, Pokemon).
+
+get_pokemon_by_name(Names, List, Pokemon) :-
+    Names = [_|_],
+    maplist(get_by_name_from_list(List), Names, Pokemon).
+
+get_by_name_from_list(List, Name, Pokemon) :-
+    string(Name),
     member(Pokemon, List),
     Pokemon.name = Name.
 
@@ -370,6 +378,36 @@ resolve_dmg(_Pokemon, Opponent, Data, Damage, NewOpponent) :-
 sturdy(Defender, Data) :-
     Defender.ability = "Sturdy",
     Data.defender.stats.hp = Data.defender.originalCurHP.
+
+% assumes winner is in first position in results
+clear_winner(Lines) :-
+    maplist(line_winner, Lines).
+
+line_winner(Line) :-
+    last(Line, res(_,_,Opponent,Move)),
+    ( get_dict(curHP, Opponent, 0) ; Move = none ).
+
+line_winner(Line) :-
+    last(Line, res(Pokemon,Move,Opponent,_)),
+    get_dict(curHP, Opponent, HP),
+    HP > 0,
+    calculate(Pokemon, Opponent, Move, Data),
+    Data.attacker.stats.spe < Data.defender.stats.spe,   % pokemon is slower than opponent
+    lowRoll(Pokemon, Opponent, false, Move, Low),
+    HP =< Low.
+
+resolve_last(Line, Pokemon, Opponent) :-
+    last(Line, res(OldPokemon,Move,OldOpponent,OppMove)),
+    move_1v1(OldPokemon, OldOpponent, Move, OppMove, res(Pokemon, _, Opponent, _)).
+
+% we assume this is a clear_winner set of lines, meaning we only calculate damage taken
+lines2pivots(Lines, Team, Pivots) :-
+    maplist(line2pivot(Team), Lines, Dupes),
+    sort(Dupes, Pivots).
+
+line2pivot(Team, Line, Pivot) :-
+    resolve_last(Line, Pokemon, _),
+    post_ko_switch_in(Pokemon, Team, [Pivot|_]).
 
 print_lines([]).
 print_lines([L|T]) :-
