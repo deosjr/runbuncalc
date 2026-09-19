@@ -20,16 +20,28 @@ test(youngster_calvin, [nondet]) :-
     opponent('Youngster Calvin', Calvin),
     find_line_less_naive(Box, Calvin, Line),
     maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
-    assertion(Names == ["Houndour", "Skrelp", "Houndour"]).
+    assertion(Names == ["Houndour", "Skrelp", "Houndour"]),
     % the switch to Skrelp takes extra damage for no reason, Houndour should sweep.
+    find_line_sticky(Box, Calvin, Sticky),
+    maplist([X,Y]>>get_dict(name,X,Y), Sticky, StickyNames),
+    assertion(StickyNames == ["Houndour", "Houndour", "Houndour"]).
 
 test(bug_catcher_rick, [nondet]) :-
     box(Box),
     opponent('Bug Catcher Rick', Rick),
     find_line_less_naive(Box, Rick, Line),
     maplist([X,Y]>>get_dict(name,X,Y), Line, Names),
-    assertion(Names == ["Houndour", "Skrelp", "Skrelp"]).
+    assertion(Names == ["Houndour", "Skrelp", "Skrelp"]),
     % I dont understand the fascination with Skrelp. Again Houndour just sweeps.
+    % Skrelp only wins the tiebreak on Pineco because it takes a few percent less
+    % from a Pineco nobody can OHKO through Sturdy, and the switch is never charged for.
+    find_line_sticky(Box, Rick, Sticky),
+    maplist([X,Y]>>get_dict(name,X,Y), Sticky, StickyNames),
+    assertion(StickyNames == ["Houndour", "Houndour", "Houndour"]),
+    % and it knows what staying in costs: Houndour enters Pineco at 36 and Sizzlipede at 32
+    Sticky = [_|Switched],
+    maplist([X,Y]>>get_dict(curHP,X,Y), Switched, HPs),
+    assertion(HPs == [36, 32]).
 
 test(youngster_allen, [nondet]) :-
     box(Box),

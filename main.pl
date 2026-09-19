@@ -257,6 +257,77 @@ find_line_less_naive(Party, [Lead|Rest], [Switch|Line]) :-
     nuzlocke_switchin(Lead, Party, [Switch|_]),
     find_line_less_naive(Party, Rest, Line).
 
+% find_line_less_naive/3 answers every opponent mon in isolation: whoever is
+% already out never gets to stay in, and switching is free. Against Bug Catcher
+% Rick that gives [Houndour, Skrelp, Skrelp] while Houndour in fact just sweeps
+% -- Skrelp only wins the tiebreak because it takes a few percent less from a
+% Pineco that nobody can OHKO anyway (Sturdy), and the switch itself is not charged for.
+%
+% find_line_sticky/3 keeps whoever is out for as long as it still wins the next
+% matchup outright, charges a switch the free hit it takes coming in, and carries
+% the remaining HP forward. The dicts it returns therefore have a curHP.
+find_line_sticky(Party, OppTeam, Line) :-
+    sticky_line(Party, OppTeam, none, Line).
+
+sticky_line(_, [], _, []).
+sticky_line(Party, [Opp|Rest], Current, [Out|Line]) :-
+    (Current == none ->
+        % the lead is sent out before the fight starts, so it takes no free hit
+        nuzlocke_switchin(Opp, Party, [Out|_])
+    ; holds_up(Current, Opp) ->
+        Out = Current
+    ;
+        nuzlocke_switchin(Opp, Party, [Fresh|_]),
+        switch_in(Fresh, Opp, Out)
+    ),
+    % if we cannot even clearly win after switching we have no honest HP estimate,
+    % so carry on with what the switchin was left at
+    (after_fight(Out, Opp, Survivor) -> true ; Survivor = Out),
+    sticky_line(Party, Rest, Survivor, Line).
+
+% staying in is free, switching is not: the incoming mon eats the opponent's
+% best move on the way in. This is the cost find_line_less_naive never charges.
+switch_in(Pokemon, Opponent, Damaged) :-
+    once(highest_damage_move(Opponent, Pokemon, Move)),
+    calculate(Opponent, Pokemon, Move, Data),
+    highRoll(Opponent, Pokemon, false, Move, Damage),
+    resolve_dmg(Opponent, Pokemon, Data, Damage, Damaged).
+
+% winning on worst-case rolls is not enough to justify staying in: Houndour beats
+% Youngster Allen's Psyduck from 22hp on paper, but only by eating 81% Bubble Beams.
+holds_up(Pokemon, Opponent) :-
+    lines_1v1(Pokemon, Opponent, Lines),
+    clear_winner(Lines),
+    survives_crit(Pokemon, Opponent).
+
+% dead_to_crit/3 measures against max HP, which says nothing once we are chipped.
+% this asks the same question at the HP we actually have right now.
+survives_crit(Pokemon, Opponent) :-
+    forall(member(Move, Opponent.moves),
+        (
+            calculate(Opponent, Pokemon, Move, Data),
+            highRoll(Opponent, Pokemon, true, Move, Damage),
+            Damage < Data.defender.originalCurHP
+        )).
+
+% worst case over every line, ie we lowroll and the AI highrolls throughout
+after_fight(Pokemon, Opponent, Survivor) :-
+    lines_1v1(Pokemon, Opponent, Lines),
+    clear_winner(Lines),
+    maplist(line_survivor, Lines, Survivors),
+    maplist([P,HP-P]>>get_dict(curHP, P, HP), Survivors, Pairs),
+    keysort(Pairs, [_-Survivor|_]).
+
+% clear_winner also accepts a line that ends with the opponent still standing
+% but dead to our next hit; it gets one more attack off before that happens
+line_survivor(Line, Survivor) :-
+    last(Line, res(Pokemon, _, Opponent, _)),
+    (get_dict(curHP, Opponent, 0) ->
+        Survivor = Pokemon
+    ;
+        switch_in(Pokemon, Opponent, Survivor)
+    ).
+
 % find the best option to get To out, starting point is From vs Versus.
 % for now we guarantee a single pivot pokemon that takes least damage from move baited by From
 % and baits one of the lowest damaging moves onto To
@@ -380,7 +451,10 @@ sturdy(Defender, Data) :-
     Data.defender.stats.hp = Data.defender.originalCurHP.
 
 % assumes winner is in first position in results
+% an empty list of lines means move_1v1 failed everywhere (eg on an unhandled speed tie),
+% which must not read as a win
 clear_winner(Lines) :-
+    Lines = [_|_],
     maplist(line_winner, Lines).
 
 line_winner(Line) :-
@@ -442,7 +516,41 @@ parse_move(M) --> "- ", string_without("\n", Move), {string_codes(M, Move)}.
 parse_moves([M]) --> parse_move(M).
 parse_moves([M|T]) --> parse_move(M), "\n", parse_moves(T).
 
+% gen8.json abbreviates IV keys and only lists the stats that are not 31,
+% eg Brawly's Poliwhirl is _{hp:30, sa:30} for Hidden Power Grass and
+% 89 entries carry sp:0 for deliberately slow sets.
+iv_key(hp, hp).
+iv_key(at, atk).
+iv_key(df, def).
+iv_key(sa, spa).
+iv_key(sd, spd).
+iv_key(sp, spe).
+
+trainer_ivs(Trainer, IVs) :-
+    Default = _{atk:31,def:31,hp:31,spa:31,spd:31,spe:31},
+    (get_dict(ivs, Trainer, Given) ->
+        dict_pairs(Given, _, Pairs),
+        foldl(put_iv, Pairs, Default, IVs)
+    ;
+        IVs = Default
+    ).
+
+% fail loudly on an unknown key rather than silently dropping the stat
+put_iv(Key-Value, In, Out) :-
+    (iv_key(Key, Stat) ->
+        put_dict(Stat, In, Value, Out)
+    ;
+        domain_error(trainer_iv_key, Key)
+    ).
+
+% box pokemon are the pok/4 facts with index -1, everything else comes from gen8.json.
+% without this, reloading duplicates every trainer mon, and opponent/2 then fails
+% silently because predsort/3 has no ordering for two mons sharing an index.
+retractTrainerPokemon :-
+    forall((pok(I, T, N, P), I \== -1), retract(pok(I, T, N, P))).
+
 assertTrainerPokemon :-
+    retractTrainerPokemon,
     open("gen8.json", read, Stream),
     % cant use json_read_dict because Vivillion has multiple 'Bug Maniac Jeffrey' keys...
     % same with Magikarp having multiple Fisherman Darian entries
@@ -453,7 +561,8 @@ assertTrainerPokemon :-
                 member(index=I, T),
                 atom_json_term(A, json(T), []),
                 atom_json_dict(A, D, []),
-                WithName = D.put(#{name:Pokemon, ivs:_{atk:31,def:31,hp:31,spa:31,spd:31,spe:31}}),
+                trainer_ivs(D, IVs),
+                WithName = D.put(#{name:Pokemon, ivs:IVs}),
                 assertz(pok(I, Trainer, Pokemon, WithName))
             )
         )
@@ -461,7 +570,7 @@ assertTrainerPokemon :-
 
 assertExportedPokemon :-
     phrase_from_file(parse_export(Pokemon), "export.txt"),
-    retractall(pok(-1, 'You', _, _)),
+    retractall(pok(-1, you, _, _)),
     forall(member(P, Pokemon),
         (
             assertz(pok(-1, you, P.name, P))
