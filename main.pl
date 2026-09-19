@@ -6,7 +6,9 @@
 :- use_module(library(tabling)).
 
 :- dynamic pok/4.
-:- table calculate/4.
+% table the oracle itself, not calculate/4: highRoll/5 and lowRoll/5 go straight
+% to calculate_http/5, so tabling one level up left every roll an uncached request
+:- table calculate_http/5.
 
 :- initialization(assertTrainerPokemon).
 :- initialization(assertExportedPokemon).
@@ -271,19 +273,36 @@ find_line_sticky(Party, OppTeam, Line) :-
 
 sticky_line(_, [], _, []).
 sticky_line(Party, [Opp|Rest], Current, [Out|Line]) :-
-    (Current == none ->
-        % the lead is sent out before the fight starts, so it takes no free hit
-        nuzlocke_switchin(Opp, Party, [Out|_])
-    ; holds_up(Current, Opp) ->
+    (Current \== none, holds_up(Current, Opp) ->
+        % staying in is free, so an incumbent that still holds up keeps the slot
         Out = Current
     ;
-        nuzlocke_switchin(Opp, Party, [Fresh|_]),
-        switch_in(Fresh, Opp, Out)
+        nuzlocke_switchin(Opp, Party, Ranked),
+        % every mon that comes in faces the same test the incumbent had to pass.
+        % if the box has nobody safe we still have to send something, so fall
+        % back on the scorer's first pick -- audit_line/3 will say where that hurts
+        % survives_crit/2 is eight oracle calls and holds_up/2 is thousands, so
+        % screen on the cheap test first. Sound, because holds_up checks the same
+        % thing at the lowest HP of the fight, which is never above the entry HP.
+        (member(Fresh, Ranked), entrant(Current, Opp, Fresh, E),
+         survives_crit(E, Opp), holds_up(E, Opp) ->
+            Out = E
+        ;
+            Ranked = [First|_],
+            entrant(Current, Opp, First, Out)
+        )
     ),
-    % if we cannot even clearly win after switching we have no honest HP estimate,
-    % so carry on with what the switchin was left at
+    % if we cannot even clearly win we have no honest HP estimate,
+    % so carry on with whatever the entrant was left at
     (after_fight(Out, Opp, Survivor) -> true ; Survivor = Out),
     sticky_line(Party, Rest, Survivor, Line).
+
+% a candidate as it arrives: the lead is already out when the fight starts,
+% anything else eats a free hit on the way in
+entrant(none, _, Pokemon, Pokemon).
+entrant(Current, Opponent, Pokemon, Entered) :-
+    Current \== none,
+    switch_in(Pokemon, Opponent, Entered).
 
 % staying in is free, switching is not: the incoming mon eats the opponent's
 % best move on the way in. This is the cost find_line_less_naive never charges.
@@ -293,40 +312,75 @@ switch_in(Pokemon, Opponent, Damaged) :-
     highRoll(Opponent, Pokemon, false, Move, Damage),
     resolve_dmg(Opponent, Pokemon, Data, Damage, Damaged).
 
-% winning on worst-case rolls is not enough to justify staying in: Houndour beats
-% Youngster Allen's Psyduck from 22hp on paper, but only by eating 81% Bubble Beams.
+% winning on worst-case rolls is not enough to justify standing there: Houndour
+% beats Youngster Allen's Psyduck from 22hp on paper, but only by eating 81%
+% Bubble Beams. Our HP only drops as a fight goes on, so it is not enough to check
+% the moment we come in either -- every turn the opponent is still alive to throw
+% a crit has to survive one.
 holds_up(Pokemon, Opponent) :-
-    lines_1v1(Pokemon, Opponent, Lines),
-    clear_winner(Lines),
-    survives_crit(Pokemon, Opponent).
+    worst_case(Pokemon, Opponent, crit_safe, _).
 
-% dead_to_crit/3 measures against max HP, which says nothing once we are chipped.
-% this asks the same question at the HP we actually have right now.
-survives_crit(Pokemon, Opponent) :-
-    forall(member(Move, Opponent.moves),
-        (
-            calculate(Opponent, Pokemon, Move, Data),
-            highRoll(Opponent, Pokemon, true, Move, Damage),
-            Damage < Data.defender.originalCurHP
-        )).
+% lines_1v1/3 enumerates every plausible move pairing on both sides, which is
+% exponential in the length of the fight -- Grotle vs Hakamo-o is 1024 lines. But
+% holds_up/2 and after_fight/3 only ever want the worst corner of that, so walk
+% straight to it: we use our best move and lowroll it, the AI uses its most
+% damaging move and highrolls it. Linear in turns instead of exponential.
+% (This ignores ai_moves/3 picking priority for a revenge kill, which is a
+% simplification, though not one that flatters us.)
+worst_case(Pokemon, Opponent, Safety, Survivor) :-
+    worst_case(Pokemon, Opponent, Safety, 0, Survivor).
 
-% worst case over every line, ie we lowroll and the AI highrolls throughout
-after_fight(Pokemon, Opponent, Survivor) :-
-    lines_1v1(Pokemon, Opponent, Lines),
-    clear_winner(Lines),
-    maplist(line_survivor, Lines, Survivors),
-    maplist([P,HP-P]>>get_dict(curHP, P, HP), Survivors, Pairs),
-    keysort(Pairs, [_-Survivor|_]).
-
-% clear_winner also accepts a line that ends with the opponent still standing
-% but dead to our next hit; it gets one more attack off before that happens
-line_survivor(Line, Survivor) :-
-    last(Line, res(Pokemon, _, Opponent, _)),
-    (get_dict(curHP, Opponent, 0) ->
-        Survivor = Pokemon
+worst_case(Pokemon, Opponent, Safety, Turn, Survivor) :-
+    Turn < 25,     % nothing here runs that long; a stall is not a win
+    % crits matter at the HP we stand at facing a living opponent, so test here
+    % rather than only on the way in
+    (Safety == crit_safe -> survives_crit(Pokemon, Opponent) ; true),
+    once(highest_damage_move(Pokemon, Opponent, Move)),
+    once(highest_damage_move(Opponent, Pokemon, OppMove)),
+    move_1v1(Pokemon, Opponent, Move, OppMove, res(NewPokemon, _, NewOpponent, _)),
+    (get_dict(curHP, NewOpponent, 0) ->
+        Survivor = NewPokemon
     ;
-        switch_in(Pokemon, Opponent, Survivor)
+        \+ get_dict(curHP, NewPokemon, 0),
+        \+ stalled(Pokemon, NewPokemon, Opponent, NewOpponent),
+        Next is Turn + 1,
+        worst_case(NewPokemon, NewOpponent, Safety, Next, Survivor)
     ).
+
+survives_crit(Pokemon, Opponent) :-
+    lethal_crits(Opponent, Pokemon, []).
+
+% moves of Attacker that outright kill Defender on a crit at the HP Defender has
+% right now. dead_to_crit/3 asks this against max HP, which says nothing once we
+% are chipped, and chipped is exactly when it matters.
+lethal_crits(Attacker, Defender, Moves) :-
+    findall(Move,
+        (
+            member(Move, Attacker.moves),
+            calculate(Attacker, Defender, Move, Data),
+            highRoll(Attacker, Defender, true, Move, Damage),
+            Damage >= Data.defender.originalCurHP
+        ),
+        Moves).
+
+% find_line_sticky prefers entrants that hold up but cannot invent one the box
+% does not have, so check a line before trusting it. Reports, per slot, the
+% opponent moves that kill us outright on a crit as we stand there.
+audit_line(Line, OppTeam, Unsafe) :-
+    findall(PName-OName-Moves,
+        (
+            nth1(I, Line, P),
+            nth1(I, OppTeam, O),
+            lethal_crits(O, P, Moves),
+            Moves \== [],
+            get_dict(name, P, PName),
+            get_dict(name, O, OName)
+        ),
+        Unsafe).
+
+% what we are left with on the same adversarial line, whether or not it was safe
+after_fight(Pokemon, Opponent, Survivor) :-
+    worst_case(Pokemon, Opponent, ignore, Survivor).
 
 % find the best option to get To out, starting point is From vs Versus.
 % for now we guarantee a single pivot pokemon that takes least damage from move baited by From
@@ -384,6 +438,8 @@ priority_moves(Pokemon, Moves) :-
 
 % Two pokemon enter, only one leaves. No switches considered.
 % Pokemon is player-controlled, Opponent is an AI
+% tabled because holds_up/2 and after_fight/3 both want the same set of lines
+:- table lines_1v1/3.
 lines_1v1(Pokemon, Opponent, Lines) :-
     findall(Line, line_1v1(Pokemon, Opponent, Line), Lines).
 
@@ -398,9 +454,20 @@ line_1v1(Pokemon, Opponent, Line) :-
     ( (NewPokemon.curHP == 0 ; NewOpp.curHP == 0) ->
         Line = [Res]
     ;
+        % a turn in which neither side loses HP repeats forever: immunities
+        % (Golett takes nothing from Normal or Fighting), status-only movesets.
+        % That is a stall, not a win, so the line simply does not exist.
+        \+ stalled(Pokemon, NewPokemon, Opponent, NewOpp),
         line_1v1(NewPokemon, NewOpp, More),
         Line = [Res|More]
     ).
+
+% only decidable once both sides carry a curHP, ie from the second turn onwards
+stalled(Pokemon, NewPokemon, Opponent, NewOpponent) :-
+    get_dict(curHP, Pokemon, HP),
+    get_dict(curHP, NewPokemon, HP),
+    get_dict(curHP, Opponent, OppHP),
+    get_dict(curHP, NewOpponent, OppHP).
 
 move_1v1(Pokemon, Opponent, Move, OppMove, Resolution) :-
     % we are still calculating safe
